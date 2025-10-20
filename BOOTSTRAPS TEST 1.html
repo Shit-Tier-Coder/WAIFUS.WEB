@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LOTSA WAIFUS|ZANGIEGG SITE</title>
+	<link rel="icon" href="/favicon2.ico?v=2" sizes="any">
+	<link rel="apple-touch-icon" href="/projects/WAIFUS.WEB/apple-touch-icon.png">
+	<link rel="manifest" href="/projects/WAIFUS.WEB/manifest.json">
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<style>
+		 .orbit-gallery {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            margin: 150px auto;
+            transform: rotate(25deg);
+        }
+
+        .orbit-item {
+            position: absolute;
+            width: 180px;
+            height: 220px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            overflow: hidden;
+            border: 4px solid #ff6bcd;
+            box-shadow: 0 6px 20px rgba(255, 107, 205, 0.4);
+            top: 50%;
+            left: 50%;
+            
+            transform: 
+                translate(-50%, -50%) 
+                rotate(var(--angle)) 
+                translateX(300px)
+                translateY(calc(150px * sin(var(--angle))))
+                rotate(calc(-1 * var(--angle)));
+        }
+
+        .orbit-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .orbit-item:hover {
+            transform: 
+                translate(-50%, -50%) 
+                rotate(var(--angle)) 
+                translateX(300px)
+                translateY(calc(150px * sin(var(--angle))))
+                rotate(calc(-1 * var(--angle)))
+                scale(1.15);
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+	</style>
+	
+	</head>
+
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+
+<body>
+
+
+ <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Lotsa Waifus</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Elliptical Gallery -->
+    <div class="container-fluid">
+        <div class="orbit-gallery">
+            <div class="orbit-item" style="--angle: 0deg;">
+                <img src="waifu1.jpg" class="img-fluid" alt="Waifu 1">
+            </div>
+            <div class="orbit-item" style="--angle: 60deg;">
+                <img src="waifu2.jpg" class="img-fluid" alt="Waifu 2">
+            </div>
+            <div class="orbit-item" style="--angle: 120deg;">
+                <img src="waifu3.jpg" class="img-fluid" alt="Waifu 3">
+            </div>
+            <div class="orbit-item" style="--angle: 180deg;">
+                <img src="waifu4.jpg" class="img-fluid" alt="Waifu 4">
+            </div>
+            <div class="orbit-item" style="--angle: 240deg;">
+                <img src="waifu5.jpg" class="img-fluid" alt="Waifu 5">
+            </div>
+            <div class="orbit-item" style="--angle: 300deg;">
+                <img src="waifu6.jpg" class="img-fluid" alt="Waifu 6">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	
+
+</body>
+</html>
