@@ -22,7 +22,6 @@
 
 		.custom-font {
     	font-family: 'Chewy', cursive;
-    	/* or */
     	font-family: 'Fredoka One', cursive;
 		}
 
@@ -111,9 +110,168 @@
 		}
 
 		.tall-container:hover img {
-		    transform: scale(1.1); /* Zoom the image slightly */
-		    transition: transform 0.4s ease;
+		    transform: scale(1.1); 
+		    transition: transform 0.5s ease;
 		}
+
+		.image-overlay {
+		    position: absolute;
+		    bottom: 0;
+		    left: 0;
+		    right: 0;
+		    height: 10rem;
+		    background: linear-gradient(transparent, rgba(7, 59, 78, 1));
+		    display: flex;
+		    align-items: flex-end;
+		    justify-content: center;
+		    z-index: 2;
+		    color: white;
+		    font-family: 'Freedoka One' cursive;
+			font-size: 1.1rem;
+			padding-bottom: 0.6rem;}
+
+		.tall-container:hover .image-overlay {
+    	display: none; /* Hides overlay on hover */
+		}
+
+		/* === LARGE DESKTOPS (1920px and up) === */
+@media (min-width: 1920px) {
+    .tall-container {
+        width: 200px;
+        height: 450px;
+    }
+    .HEADR {
+        width: 45rem;
+    }
+}
+
+/* === MEDIUM DESKTOPS (1200px - 1919px) === */
+/* Your current setup works well here */
+
+/* === SMALL DESKTOPS & LAPTOPS (992px - 1199px) === */
+@media (max-width: 1199px) {
+    .tall-container {
+        width: 160px;
+        height: 380px;
+    }
+    .HEADR {
+        width: 35rem;
+        padding: 25px 70px;
+    }
+    #headerTitle {
+        font-size: 4rem;
+    }
+}
+
+/* === TABLETS (768px - 991px) === */
+@media (max-width: 991px) {
+    .tall-container {
+        width: 140px;
+        height: 340px;
+        border: 0.8rem solid #FFD166;
+    }
+    .HEADR {
+        width: 30rem;
+        padding: 20px 60px;
+    }
+    #headerTitle {
+        font-size: 3.5rem;
+    }
+    .gallery-background {
+        height: 200px;
+    }
+}
+
+/* === MOBILE (767px and below) - YOUR SPECIFIC REQUEST === */
+@media (max-width: 767px) {
+    .tall-gallery .row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .tall-gallery .col-auto {
+        flex: 0 0 50%; /* 2 per row */
+        max-width: 50%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .tall-container {
+        width: 140px;
+        height: 320px;
+        border: 0.6rem solid #FFD166;
+    }
+    
+    .HEADR {
+        width: 25rem;
+        padding: 15px 40px;
+        margin-top: 10px;
+    }
+    
+    #headerTitle {
+        font-size: 2.8rem;
+    }
+    
+    .gallery-background {
+        height: 180px;
+        width: 90%;
+    }
+    
+    .image-overlay {
+        height: 8rem;
+        font-size: 1rem;
+    }
+    
+    .tall-container:hover {
+        transform: scale(1.1) translateY(-15px); /* Less dramatic on mobile */
+    }
+}
+
+/* === SMALL MOBILE (575px and below) === */
+@media (max-width: 575px) {
+    .tall-gallery .col-auto {
+        flex: 0 0 100%; /* 1 per row on very small screens */
+        max-width: 100%;
+    }
+    
+    .tall-container {
+        width: 160px;
+        height: 350px;
+    }
+    
+    .HEADR {
+        width: 20rem;
+        padding: 12px 30px;
+    }
+    
+    #headerTitle {
+        font-size: 2.2rem;
+    }
+    
+    .gallery-background {
+        height: 150px;
+    }
+}
+
+/* === ASPECT RATIO ADJUSTMENTS === */
+/* For very wide screens (ultrawide) */
+@media (min-aspect-ratio: 2/1) {
+    .tall-container {
+        width: 150px;
+        height: 370px;
+    }
+}
+
+/* For taller screens (like your 3:2) */
+@media (max-aspect-ratio: 4/3) {
+    .tall-container {
+        width: 170px;
+        height: 390px;
+    }
+}
+
+		
 
 		
 
@@ -174,31 +332,49 @@
 			<div class="col-auto">
 				<div class="tall-container">
 					<img src="WAIFUS-IMG/COZY 1200x800.avif" alt="Waifu 1">
+					<div class="image-overlay">
+        				<div class="overlay-text">MERMAY</div>
+    				</div>
 				</div>
 			</div>
 			<div class="col-auto">
 				<div class="tall-container">
 					<img src="WAIFUS-IMG/OCTO 1200x900.avif" alt="Waifu 2">
-				</div>
+					<div class="image-overlay">
+        				<div class="overlay-text">DRAWTOBER</div>
+    				</div>
+    			</div>
 			</div>
 			<div class="col-auto">
 				<div class="tall-container">
 					<img src="WAIFUS-IMG/MOTHWOMAN 1200x856.avif" alt="Waifu 3">
+					<div class="image-overlay">
+        				<div class="overlay-text">CREATUANUARY</div>
+    				</div>
 				</div>
 			</div>
 			<div class="col-auto">
 				<div class="tall-container">
 					<img src="WAIFUS-IMG/BRAINPOWER 1200x900.avif" alt="Waifu 4">
+					<div class="image-overlay">
+        				<div class="overlay-text">PERSONAL</div>
+    				</div>
 				</div>
 			</div>
 			<div class="col-auto">
 				<div class="tall-container">
 					<img src="WAIFUS-IMG/PET 1200x900.avif" alt="Waifu 5">
+					<div class="image-overlay">
+        				<div class="overlay-text">STUDIES</div>
+    				</div>
 				</div>
 			</div>
 			<div class="col-auto">
 				<div class="tall-container">
 					<img src="WAIFUS-IMG/KIWIRLS 1200x900.avif" alt="Waifu 6">
+					<div class="image-overlay">
+        				<div class="overlay-text">SKETCH</div>
+    				</div>
 				</div>
 			</div>
 		</div>
