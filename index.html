@@ -15,6 +15,27 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 	<style>
+
+		* {box-sizing: border-box;}
+
+		main {display: flex; flex-direction: column; margin: 0 auto;}
+
+		header {display: flex; justify-content: center;
+    	 margin: 80px 0 40px 0;}
+
+    	 .HEADR {
+    		/*border-radius: 40% /90% 90%;*/
+    		border-radius: 45% 55% 45% 55% / 40% 60% 40% 60%;
+    		padding: 30px 80px;
+    		width: 40rem;
+    		transform: rotate(-2deg);
+    		background-color: pink;
+    		text-align: center;}
+
+    	#headerTitle { font-family: 'Chewy', cursive;
+   		 font-size: 4rem; transform: rotate(2deg);}
+
+
 		.tall-gallery {
 			min-height: 100vh;
 			padding: 50px 0;
@@ -52,21 +73,7 @@
     	-webkit-background-clip: text;
     	-webkit-text-fill-color: transparent;}
 
-    	.HEADR {
-    		border-radius: 80% /60% 40%;
-    		padding: 30px 80px;
-    		transform: rotate(-2deg);
-    		background-color: pink;
-    	}
-
-    	#headerTitle {font-family: 'Fredoka One', cursive;
-    		transform: rotate(2deg);}
-
-    	#headerTest { font-family: 'Chewy', cursive;
-   		 font-size: 4rem; transform: rotate(2deg);}
-
-
-	</style>
+    </style>
 </head>
 
 <!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
@@ -76,13 +83,13 @@
 
 <body>
 
-<div class="HEADR">
-	<h1 id="headerTitle">LOTSA-WAIFUS</h1>
-</div>
+<main>
 
-<div class="HEADR">
-	<h2 id="headerTest">LOTSA-WAIFUS</h2>
-</div>
+<header>
+	<div class="HEADR">
+		<h1 id="headerTitle">LOTSA-WAIFUS</h1>
+	</div>
+</header>
 
 
 <div class="container-fluid tall-gallery">
@@ -119,6 +126,8 @@
 			</div>
 		</div>
 	</div>
+
+</main>
 
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
