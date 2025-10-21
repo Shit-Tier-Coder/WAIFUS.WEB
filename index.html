@@ -20,16 +20,35 @@
 
 		main {display: flex; flex-direction: column; margin: 0 auto;}
 
+		.custom-font {
+    	font-family: 'Chewy', cursive;
+    	/* or */
+    	font-family: 'Fredoka One', cursive;
+		}
+
+		.nav-link:hover {
+    	transform: scale(1.1);
+    	transition: transform 0.2s ease;
+		}
+
+		.gradient-text {
+    	background: linear-gradient(45deg, #063D4C, #ff9ad9, #ff6bcd);
+    	-webkit-background-clip: text;
+    	-webkit-text-fill-color: transparent;}
+
+    	.navbar-brand {color: white;}
+
 		header {display: flex; justify-content: center;
-    	 margin: 80px 0 40px 0;}
+    	 margin: 80px 0 10px 0;}
 
     	 .HEADR {
-    		/*border-radius: 40% /90% 90%;*/
     		border-radius: 45% 55% 45% 55% / 40% 60% 40% 60%;
     		padding: 30px 80px;
+    		box-shadow: 2rem 3rem 1px #073D4C;
     		width: 40rem;
     		transform: rotate(-2deg);
-    		background-color: pink;
+    		background-color: #EF476F;
+    		color: #FFD23F;
     		text-align: center;}
 
     	#headerTitle { font-family: 'Chewy', cursive;
@@ -38,22 +57,34 @@
 
 		.tall-gallery {
 			min-height: 100vh;
-			padding: 50px 0;
 			display: flex;
 			align-items: center;
     		justify-content: center;
     		padding: 20px 0;
+    		position: relative;
+			}
+
+		.gallery-background {
+		    background: linear-gradient(#118AB2, #06D6A0);
+		    width: 96%;
+		    height: 240px;
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		    z-index: -1; 
+		    border-radius: 20px;
 			}
 
 	
 		.tall-container {
-			width: 160px;    /* Narrow width */
+			width: 180px;    /* Narrow width */
 			height: 400px;   /* Much taller than wide */
 			border-radius: 20px;
 			overflow: hidden;
-			border: 3px solid #ff6bcd;
+			border: 1rem solid #FFD166;
 			box-shadow: 0 8px 25px rgba(255, 107, 205, 0.3);
-			margin: 0 15px;  /* Spacing between containers */
+			gap: 1rem;
 			transition: transform 0.3s ease;
 		}
 		
@@ -68,10 +99,7 @@
 			object-fit: cover;
 		}
 
-		.gradient-text {
-    	background: linear-gradient(45deg, #ff6bcd, #ff9ad9, #ff6bcd);
-    	-webkit-background-clip: text;
-    	-webkit-text-fill-color: transparent;}
+		
 
     </style>
 </head>
@@ -85,16 +113,47 @@
 
 <main>
 
+	<!-- NAVBAR NAVBAR NAVBAR -->
+	<!-- NAVBAR NAVBAR NAVBAR -->
+
+<nav class="navbar navbar-expand-lg fixed-top" 
+		style="background: linear-gradient(45deg, #073B4C, #118AB2);">
+    <div class="container">
+        <a class="navbar-brand custom-font" href="#">LOTSA WAIFUS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link custom-font" href="#">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-font" href="#">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-font" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HEADER HEADER HEADER -->
+<!-- HEADER HEADER HEADER -->
+
 <header>
 	<div class="HEADR">
 		<h1 id="headerTitle">LOTSA-WAIFUS</h1>
 	</div>
 </header>
 
-<h2>DICK</h2>
 
+<!-- GALLERY GALLERY GALLERY -->
+<!-- GALLERY GALLERY GALLERY -->
 
-<div class="container-fluid tall-gallery">
+<div id="galleryCont" class="container-fluid tall-gallery">
+	 <div class="gallery-background"></div>
 		<div class="row justify-content-center align-items-center">
 			<div class="col-auto">
 				<div class="tall-container">
