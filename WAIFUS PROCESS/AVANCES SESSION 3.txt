@@ -1,0 +1,3 @@
+WORKFLOW con autoupload a Infinity Free desde Local + Github Desktop.
+Añadido contenido de ilustración personal.
+Diseño de página home (galería de inicio) con animaciones.
