@@ -39,7 +39,8 @@
     	.navbar-brand {color: white;}
 
 		header {display: flex; justify-content: center;
-    	 margin: 80px 0 10px 0;}
+    	 	margin: 40px 0 10px 0; position: relative;
+    		z-index: 1031;}
 
     	 .HEADR {
     		border-radius: 45% 55% 45% 55% / 40% 60% 40% 60%;
@@ -49,19 +50,22 @@
     		transform: rotate(-2deg);
     		background-color: #EF476F;
     		color: #FFD23F;
-    		text-align: center;}
+    		text-align: center;
+    	 	margin-top: -12px;}
 
     	#headerTitle { font-family: 'Chewy', cursive;
-   		 font-size: 4rem; transform: rotate(2deg);}
+   		 font-size: 5rem; transform: rotate(2deg);}
 
 
 		.tall-gallery {
+			margin-top: -110px;
 			min-height: 100vh;
 			display: flex;
 			align-items: center;
     		justify-content: center;
     		padding: 20px 0;
     		position: relative;
+    		z-index: 1;
 			}
 
 		.gallery-background {
@@ -78,8 +82,8 @@
 
 	
 		.tall-container {
-			width: 180px;    /* Narrow width */
-			height: 400px;   /* Much taller than wide */
+			width: 180px;    
+			height: 410px;   
 			border-radius: 20px;
 			overflow: hidden;
 			border: 1rem solid #FFD166;
