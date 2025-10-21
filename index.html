@@ -51,7 +51,9 @@
     		background-color: #EF476F;
     		color: #FFD23F;
     		text-align: center;
-    	 	margin-top: -12px;}
+    	 	margin-top: -12px;
+    	 	z-index: 1031;
+    	 	isolation: auto;}
 
     	#headerTitle { font-family: 'Chewy', cursive;
    		 font-size: 5rem; transform: rotate(2deg);}
@@ -89,18 +91,26 @@
 			border: 1rem solid #FFD166;
 			box-shadow: 0 8px 25px rgba(255, 107, 205, 0.3);
 			gap: 1rem;
-			transition: transform 0.3s ease;
+			transition: all 0.4s ease;
+			position: relative;
+			z-index: 1;
 		}
 		
 		.tall-container:hover {
-			transform: scale(1.05);
-			z-index: 10;
+			transform: scale(1.15) translateY(-30px);
+			border: none;
+			z-index: 9999;
 		}
 		
 		.tall-container img {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+		}
+
+		.tall-container:hover img {
+		    transform: scale(1.1); /* Zoom the image slightly */
+		    transition: transform 0.4s ease;
 		}
 
 		
