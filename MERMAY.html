@@ -20,11 +20,11 @@
 		body {background: linear-gradient(to right, #9FFFCB, white);}
 
 		main {display: flex; flex-direction: column; margin: 0 auto;
-			min-height: 100vh; justify-content: space-between;}
+			min-height: 100vh; justify-content: space-between;
+			padding-top: 80px;}
 
 		.custom-font {
     	font-family: 'Chewy', cursive;
-    	font-family: 'Fredoka One', cursive;
 		}
 
 		.nav-link:hover {
@@ -32,44 +32,28 @@
     	transition: transform 0.3s ease;
 		}
 
-		.gradient-text {
-    	background: linear-gradient(45deg, #004E64, #ff9ad9, #25A18E);
-    	-webkit-background-clip: text;
-    	-webkit-text-fill-color: transparent;}
+		.navbar-brand {color: white;}
 
-    	.navbar-brand {color: white;}
-
-		header {display: flex; justify-content: center;
-    	 	margin: 40px 0 10px 0; position: relative;
-    		z-index: 1040;}
-
-    	.HEADR {
-    		border-radius: 45% 55% 45% 55% / 40% 60% 40% 60%;
-    		padding: 12px 40px;
-    		box-shadow: 2rem 3rem 1px #004E64;
-    		width: 28rem;
-    		transform: rotate(-2deg);
-    		background-color: #00A5CF;
-    		color: white;
-    		text-align: center;
-    	 	margin-top: -24px;
-    	 	position: relative;
-    	 	z-index: 1041;
-    	 	border: 0.4rem solid white;}
-
-    	#headerTitle { font-family: 'Chewy', cursive;
-   		 font-size: 3.2rem; transform: rotate(2deg);}
-
+		/* Navbar H1 Title */
+		.navbar-title {
+			font-family: 'Chewy', cursive;
+			font-size: 1.8rem;
+			color: white;
+			margin: 0;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+		}
 
 		/* Featured Image Display */
 		.featured-image {
-			height: 300px;
+			height: 440px;
 		    width: 500px;
 		    margin: 0 auto 30px;
 		    border-radius: 20px;
 		    overflow: hidden;
 		    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-		     z-index: 4000;
+		    z-index: 4000;
 		}
 
 		.featured-image img {
@@ -115,22 +99,14 @@
 	</style>
 </head>
 
-<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
-<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
-<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
-<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
-
 <body>
-
 	<main>
-
-	<!-- NAVBAR NAVBAR NAVBAR -->
-	<!-- NAVBAR NAVBAR NAVBAR -->
-
+		<!-- NAVBAR WITH INTEGRATED H1 -->
 		<nav class="navbar navbar-expand-lg fixed-top" 
 				style="background: linear-gradient(45deg, #073B4C, #118AB2);">
-		    <div class="container">
-		        <a class="navbar-brand custom-font" href="#">LOTSA WAIFUS</a>
+		    <div class="container position-relative">
+		        <a class="navbar-brand custom-font" href="index.html">LOTSA WAIFUS</a>
+		        <h1 class="navbar-title custom-font">MERMAY</h1>
 		        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 		            <span class="navbar-toggler-icon"></span>
 		        </button>
@@ -150,20 +126,6 @@
 		    </div>
 		</nav>
 
-<!-- HEADER HEADER HEADER -->
-<!-- HEADER HEADER HEADER -->
-
-	<header>
-		<div class="HEADR">
-			<h1 id="headerTitle">MERMAY</h1>
-		</div>
-	</header>
-
-
-<!-- CARRO CARRO CARRO -->
-<!-- CARRO CARRO CARRO -->
-
-
 		<!-- Featured Image Display -->
 		<div class="featured-image">
 			<img id="featuredImg" src="WAIFUS-IMG/COZY 1200x800.avif" alt="Featured Waifu">
@@ -175,8 +137,7 @@
 				<div class="thumbnail-item active" onclick="changeFeatured('WAIFUS-IMG/COZY 1200x800.avif', '50% 14%')">
 					<img src="WAIFUS-IMG/COZY 1200x800.avif" alt="Waifu 1">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/OCTO 1200x900.avif',
-				'50% 33%')">
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/OCTO 1200x900.avif', '50% 33%')">
 					<img src="WAIFUS-IMG/OCTO 1200x900.avif" alt="Waifu 2">
 				</div>
 				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/MOTHWOMAN 1200x856.avif', '50% 46%')">
@@ -208,9 +169,5 @@
     	event.currentTarget.classList.add('active');
 		}
 	</script>
-</body>
-</html>
-	</main>
-
 </body>
 </html>
