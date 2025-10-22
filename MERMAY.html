@@ -17,9 +17,10 @@
 	<style>
 		* {box-sizing: border-box;}
 
-		body {background: linear-gradient(to right, #25A18E, #9FFFCB);}
+		body {background: linear-gradient(to right, #9FFFCB, white);}
 
-		main {display: flex; flex-direction: column; margin: 0 auto;}
+		main {display: flex; flex-direction: column; margin: 0 auto;
+			min-height: 100vh; justify-content: space-between;}
 
 		.custom-font {
     	font-family: 'Chewy', cursive;
@@ -42,13 +43,32 @@
     	 	margin: 40px 0 10px 0; position: relative;
     		z-index: 1040;}
 
+    	.HEADR {
+    		border-radius: 45% 55% 45% 55% / 40% 60% 40% 60%;
+    		padding: 24px 48px;
+    		box-shadow: 2rem 3rem 1px #004E64;
+    		width: 32rem;
+    		transform: rotate(-2deg);
+    		background-color: #00A5CF;
+    		color: white;
+    		text-align: center;
+    	 	margin-top: -20px;
+    	 	position: relative;
+    	 	z-index: 1041;
+    	 	border: 0.4rem solid white;}
+
+    	#headerTitle { font-family: 'Chewy', cursive;
+   		 font-size: 4rem; transform: rotate(2deg);}
+
+
 		/* Featured Image Display */
 		.featured-image {
-		    max-width: 600px;
+		    max-width: 350px;
 		    margin: 0 auto 30px;
 		    border-radius: 20px;
 		    overflow: hidden;
 		    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+		     z-index: 4000;
 		}
 
 		.featured-image img {
@@ -59,24 +79,24 @@
 
 		/* Thumbnail Carousel */
 		.thumbnail-carousel {
-		    max-width: 800px;
+		    max-width: 900px;
 		    margin: 0 auto;
 		}
 
 		.thumbnail-item {
-		    width: 120px;
-		    height: 120px;
+		    width: 90px;
+		    height: 140px;
 		    border-radius: 10px;
 		    overflow: hidden;
-		    margin: 0 10px;
+		    margin: 0 8px;
 		    cursor: pointer;
-		    border: 3px solid transparent;
+		    border: 2px solid transparent;
 		    transition: all 0.3s ease;
 		}
 
 		.thumbnail-item.active {
 		    border-color: #ff6bcd;
-		    transform: scale(1.1);
+		    transform: scale(1.2);
 		}
 
 		.thumbnail-item:hover {
@@ -98,7 +118,7 @@
 <!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
 
 <body>
-	
+
 	<main>
 
 	<!-- NAVBAR NAVBAR NAVBAR -->
@@ -130,9 +150,11 @@
 <!-- HEADER HEADER HEADER -->
 <!-- HEADER HEADER HEADER -->
 
-		<header>
-			<h1>MERMAY</h1>
-		</header>
+	<header>
+		<div class="HEADR">
+			<h1 id="headerTitle">MERMAY</h1>
+		</div>
+	</header>
 
 
 		<!-- Featured Image Display -->
