@@ -45,25 +45,26 @@
 
     	.HEADR {
     		border-radius: 45% 55% 45% 55% / 40% 60% 40% 60%;
-    		padding: 24px 48px;
+    		padding: 12px 40px;
     		box-shadow: 2rem 3rem 1px #004E64;
-    		width: 32rem;
+    		width: 28rem;
     		transform: rotate(-2deg);
     		background-color: #00A5CF;
     		color: white;
     		text-align: center;
-    	 	margin-top: -20px;
+    	 	margin-top: -24px;
     	 	position: relative;
     	 	z-index: 1041;
     	 	border: 0.4rem solid white;}
 
     	#headerTitle { font-family: 'Chewy', cursive;
-   		 font-size: 4rem; transform: rotate(2deg);}
+   		 font-size: 3.2rem; transform: rotate(2deg);}
 
 
 		/* Featured Image Display */
 		.featured-image {
-		    max-width: 350px;
+			height: 400px;
+		    width: 400px;
 		    margin: 0 auto 30px;
 		    border-radius: 20px;
 		    overflow: hidden;
@@ -73,8 +74,10 @@
 
 		.featured-image img {
 		    width: 100%;
-		    height: auto;
+		    height: 100%;
 		    display: block;
+		    object-fit: cover;
+		    object-position: 50% 14%;
 		}
 
 		/* Thumbnail Carousel */
@@ -157,6 +160,10 @@
 	</header>
 
 
+<!-- CARRO CARRO CARRO -->
+<!-- CARRO CARRO CARRO -->
+
+
 		<!-- Featured Image Display -->
 		<div class="featured-image">
 			<img id="featuredImg" src="WAIFUS-IMG/COZY 1200x800.avif" alt="Featured Waifu">
@@ -165,22 +172,23 @@
 		<!-- Thumbnail Carousel -->
 		<div class="thumbnail-carousel">
 			<div class="d-flex justify-content-center flex-wrap gap-3">
-				<div class="thumbnail-item active" onclick="changeFeatured('WAIFUS-IMG/COZY 1200x800.avif')">
+				<div class="thumbnail-item active" onclick="changeFeatured('WAIFUS-IMG/COZY 1200x800.avif', '50% 14%')">
 					<img src="WAIFUS-IMG/COZY 1200x800.avif" alt="Waifu 1">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/OCTO 1200x900.avif')">
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/OCTO 1200x900.avif',
+				'50% 14%')">
 					<img src="WAIFUS-IMG/OCTO 1200x900.avif" alt="Waifu 2">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/MOTHWOMAN 1200x856.avif')">
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/MOTHWOMAN 1200x856.avif', '50% 72%')">
 					<img src="WAIFUS-IMG/MOTHWOMAN 1200x856.avif" alt="Waifu 3">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/BRAINPOWER 1200x900.avif')">
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/BRAINPOWER 1200x900.avif', '50% 44%')">
 					<img src="WAIFUS-IMG/BRAINPOWER 1200x900.avif" alt="Waifu 4">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/PET 1200x900.avif')">
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/PET 1200x900.avif', '50% 44%')">
 					<img src="WAIFUS-IMG/PET 1200x900.avif" alt="Waifu 5">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/KIWIRLS 1200x900.avif')">
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/KIWIRLS 1200x900.avif', '50% 66%')">
 					<img src="WAIFUS-IMG/KIWIRLS 1200x900.avif" alt="Waifu 6">
 				</div>
 			</div>
@@ -188,15 +196,16 @@
 	</main>
 
 	<script>
-		function changeFeatured(imageSrc) {
-			// Update featured image
-			document.getElementById('featuredImg').src = imageSrc;
-			
-			// Update active thumbnail
-			document.querySelectorAll('.thumbnail-item').forEach(item => {
-				item.classList.remove('active');
-			});
-			event.currentTarget.classList.add('active');
+		function changeFeatured(imageSrc, cropPosition = '50% 14%') {
+    	const featuredImg = document.getElementById('featuredImg');
+    	featuredImg.src = imageSrc;
+    	featuredImg.style.objectPosition = cropPosition;
+    
+    	// Update active thumbnail
+    	document.querySelectorAll('.thumbnail-item').forEach(item => {
+        item.classList.remove('active');
+    	});
+    	event.currentTarget.classList.add('active');
 		}
 	</script>
 </body>
