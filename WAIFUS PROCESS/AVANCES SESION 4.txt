@@ -1,0 +1,8 @@
+-Diseñado sub-página/sub-galería para Artwork relacionado con el desafío de redes sociales "Mermay"
+
+-Carousell
+
+-Ajuste del espacio vertical con Z-Index sobreponiendo elementos, ajuste
+individual del eje Y por imagen para mostrar el trabajo lo mejor posible en una imagen recortada.
+
+-Eliminación del Header para ahorrar espacio, incorporación del H1 al navbar en su lugar, y comienzo del rediseño.
