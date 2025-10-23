@@ -1,0 +1,11 @@
+-Creado placeholder para Sub Galería "estudios" (estudios de color a partir de fotografía)
+
+-Estructura básica con tono más serio simplificado (provisional)
+
+-Nuevas imágenes a múltiples escalas.
+
+-Media Query para trabajar en el monitor de clase (compatible con 16:9)
+
+-Carusell y Lightbox funcional, con back to home en navbar, feature on click, 
+lightbox en click del feature, controles de zoom in y out con right click y right click manteniendo Shift.
+Display por defecto vertical con margenes y zoom máximo hasta resolución original (o pulsa 1 para mostrar original)
