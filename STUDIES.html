@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LOTSA-WAIFUS|STUDIES</title>
+	<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="manifest" href="manifest.json">
+	<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bubblegum+Sans&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<style>
+		* {box-sizing: border-box;}
+
+body {background: linear-gradient(to right, #9FFFCB, white);}
+
+main {display: flex; flex-direction: column; margin: 0 auto;
+	min-height: 100vh; justify-content: space-around;
+	padding-top: 50px;}
+
+.custom-font {
+	font-family: 'Chewy', cursive;
+}
+
+.nav-link:hover {
+	transform: scale(1.1);
+	transition: transform 0.3s ease;
+}
+
+.navbar-brand {color: white;}
+
+/* Navbar H1 Title */
+.navbar-title {
+	font-family: 'Chewy', cursive;
+	font-size: 1.8rem;
+	color: white;
+	margin: 0;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Featured Image Display */
+.featured-image {
+	height: 500px;
+	width: 500px;
+	margin: 0 auto;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+	z-index: 4000;
+}
+
+.featured-image img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	object-position: 50% 14%;
+	transition: all 0.4 ease;
+}
+
+/* Thumbnail Carousel */
+.thumbnail-carousel {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.thumbnail-item {
+	width: 90px;
+	height: 120px;
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 0 8px;
+	cursor: pointer;
+	border: 2px solid transparent;
+	transition: all 0.4s ease;
+}
+
+.thumbnail-item.active {
+	border-color: #ff6bcd;
+	transform: scale(1.4);
+}
+
+.thumbnail-item:hover {
+	transform: scale(1.2);
+	border-color: #9FFFCB;
+}
+
+.thumbnail-item.active, 
+.thumbnail-item.active:hover {
+	border-color: #ff6bcd;
+	transform: scale(1.4);
+}
+
+.thumbnail-item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Lightbox Styles */
+.lightbox {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 9999;
+	justify-content: center;
+	align-items: center;
+}
+
+.lightbox-image {
+	max-width: 90%;
+	max-height: 90%;
+	object-fit: contain;
+	border-radius: 10px;
+	transition: transform 0.3s ease;
+	cursor: zoom-in; /* Default: plus sign */
+	transform-origin: center center;
+}
+
+.lightbox-image.zoom-out {
+	cursor: zoom-out; /* Minus sign when shift is held */
+}
+
+.lightbox-close {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	color: white;
+	font-size: 40px;
+	font-weight: bold;
+	cursor: pointer;
+	z-index: 10000;
+}
+
+.lightbox-close:hover {
+	color: #ff6bcd;
+}
+
+.lightbox-caption {
+	position: absolute;
+	bottom: 20px;
+	color: white;
+	text-align: center;
+	font-family: 'Chewy', cursive;
+}
+
+.featured-image {
+	cursor: zoom-in; /* Shows it's clickable */
+}
+	</style>
+</head>
+
+<body>
+	<main>
+		<!-- NAVBAR WITH INTEGRATED H1 -->
+		<nav class="navbar navbar-expand-lg fixed-top" 
+				style="background: linear-gradient(45deg, #073B4C, #118AB2);">
+		    <div class="container position-relative">
+		        <a class="navbar-brand custom-font" href="index.html">LOTSA WAIFUS</a>
+		        <h1 class="navbar-title custom-font">STUDIES</h1>
+		        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+		            <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <div class="collapse navbar-collapse" id="navbarNav">
+		            <ul class="navbar-nav ms-auto">
+		                <li class="nav-item">
+		                    <a class="nav-link custom-font" href="#">Gallery</a>
+		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link custom-font" href="#">Shop</a>
+		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link custom-font" href="#">About</a>
+		                </li>
+		            </ul>
+		        </div>
+		    </div>
+		</nav>
+
+		<!-- Featured Image Display -->
+		<div class="featured-image">
+			<img id="featuredImg" src="WAIFUS-IMG/COZY 1200x800.avif" alt="Featured Waifu">
+		</div>
+
+		<!-- Thumbnail Carousel -->
+		<div class="thumbnail-carousel">
+			<div class="d-flex justify-content-center flex-wrap gap-3">
+				<div class="thumbnail-item active" 
+					onclick="changeFeatured('WAIFUS-IMG/W2-M.avif', '50% 14%')"
+					data-highres="WAIFUS-IMG/W2.avif">
+					<img src="WAIFUS-IMG/W2-S.avif" alt="Waifu 1">
+				</div>
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/OCTO 1200x900.avif', '50% 33%')">
+					<img src="WAIFUS-IMG/OCTO 1200x900.avif" alt="Waifu 2">
+				</div>
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/MOTHWOMAN 1200x856.avif', '50% 46%')">
+					<img src="WAIFUS-IMG/MOTHWOMAN 1200x856.avif" alt="Waifu 3">
+				</div>
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/BRAINPOWER 1200x900.avif', '50% 44%')">
+					<img src="WAIFUS-IMG/BRAINPOWER 1200x900.avif" alt="Waifu 4">
+				</div>
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/PET 1200x900.avif', '50% 26%')">
+					<img src="WAIFUS-IMG/PET 1200x900.avif" alt="Waifu 5">
+				</div>
+				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/DIAMOND 1200x900.avif', '50% 32%')">
+					<img src="WAIFUS-IMG/DIAMOND 1200x900.avif" alt="Waifu 6">
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Lightbox Modal -->
+	<div id="lightbox" class="lightbox">
+		<span class="lightbox-close">&times;</span>
+		<img class="lightbox-image" id="lightboxImg">
+		<div class="lightbox-caption" id="lightboxCaption"></div>
+	</div>
+
+	<script>
+		function changeFeatured(imageSrc, cropPosition = '50% 14%') {
+		    const featuredImg = document.getElementById('featuredImg');
+		    featuredImg.src = imageSrc;
+		    featuredImg.style.objectPosition = cropPosition;
+		    
+		    // Update active thumbnail
+		    document.querySelectorAll('.thumbnail-item').forEach(item => {
+		        item.classList.remove('active');
+		    });
+		    event.currentTarget.classList.add('active');
+		}
+
+		// Lightbox functionality
+		const lightbox = document.getElementById('lightbox');
+		const lightboxImg = document.getElementById('lightboxImg');
+		const lightboxCaption = document.getElementById('lightboxCaption');
+
+		let currentScale = 1;
+		const MAX_ZOOM = 1.1;
+		const MIN_ZOOM = 0.5;
+
+		// Click featured image to open lightbox
+		 
+		document.getElementById('featuredImg').addEventListener('click', function() {
+		    // Get the high-res image from the active thumbnail's data-highres attribute
+		    const activeThumb = document.querySelector('.thumbnail-item.active');
+		    const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
+		    
+		    lightboxImg.src = highResSrc; // Use high-res version for lightbox
+		    
+		    // Reset zoom state when opening
+		    currentScale = 1;
+		    lightboxImg.style.transform = 'scale(1)';
+		    lightboxImg.classList.remove('zoom-out');
+		    
+		    lightbox.style.display = 'flex';
+		    document.body.style.overflow = 'hidden';
+		});
+
+		// Close lightbox when clicking X button
+		document.querySelector('.lightbox-close').addEventListener('click', function() {
+		    lightbox.style.display = 'none';
+		    document.body.style.overflow = 'auto';
+		});
+
+		// Close lightbox when clicking background
+		lightbox.addEventListener('click', function(e) {
+		    if (e.target === lightbox) {
+		        lightbox.style.display = 'none';
+		        document.body.style.overflow = 'auto';
+		    }
+		});
+
+		// Close with Escape key
+		document.addEventListener('keydown', function(e) {
+		    if (e.key === 'Escape') {
+		        lightbox.style.display = 'none';
+		        document.body.style.overflow = 'auto';
+		    }
+		});
+
+		// Update cursor based on Shift key in real-time
+		document.addEventListener('keydown', function(e) {
+		    if (e.key === 'Shift') {
+		        lightboxImg.classList.add('zoom-out');
+		    }
+		});
+
+		document.addEventListener('keyup', function(e) {
+		    if (e.key === 'Shift') {
+		        lightboxImg.classList.remove('zoom-out');
+		    }
+		});
+
+		// REGULAR LEFT-CLICK ZOOM
+		lightboxImg.addEventListener('click', function(e) {
+		    e.stopPropagation(); // Don't close lightbox when clicking image
+		    
+		    if (e.shiftKey) {
+		        // Shift + Left-click = ZOOM OUT
+		        if (currentScale > MIN_ZOOM) {
+		            currentScale -= 0.1;
+		            if (currentScale < MIN_ZOOM) currentScale = MIN_ZOOM;
+		            lightboxImg.style.transform = `scale(${currentScale})`;
+		        }
+		    } else {
+		        // Regular Left-click = ZOOM IN
+		        if (currentScale < MAX_ZOOM) {
+		            currentScale += 0.1;
+		            if (currentScale > MAX_ZOOM) currentScale = MAX_ZOOM;
+		            lightboxImg.style.transform = `scale(${currentScale})`;
+		        }
+		    }
+		});
+	</script>
+</body>
+</html>
