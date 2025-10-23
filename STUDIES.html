@@ -17,149 +17,187 @@
 	<style>
 		* {box-sizing: border-box;}
 
-body {background: linear-gradient(to right, #9FFFCB, white);}
+	body {
+	    background: linear-gradient(to right, #e3f2fd, #f3e5f5); 
+	}
 
-main {display: flex; flex-direction: column; margin: 0 auto;
-	min-height: 100vh; justify-content: space-around;
-	padding-top: 50px;}
+	main {display: flex; flex-direction: column; margin: 0 auto;
+		min-height: 100vh; justify-content: space-around;
+		padding-top: 50px;}
 
-.custom-font {
-	font-family: 'Chewy', cursive;
-}
 
-.nav-link:hover {
-	transform: scale(1.1);
-	transition: transform 0.3s ease;
-}
+	.navbar {
+	    background: linear-gradient(45deg, #37474f, #546e7a) !important; /* Darker, more serious */
+	}
 
-.navbar-brand {color: white;}
+	.nav-link:hover {
+		transform: scale(1.1);
+		transition: transform 0.3s ease;
+	}
 
-/* Navbar H1 Title */
-.navbar-title {
-	font-family: 'Chewy', cursive;
-	font-size: 1.8rem;
-	color: white;
-	margin: 0;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-}
+	.navbar-brand {color: white;}
 
-/* Featured Image Display */
-.featured-image {
-	height: 500px;
-	width: 500px;
-	margin: 0 auto;
-	border-radius: 20px;
-	overflow: hidden;
-	box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-	z-index: 4000;
-}
+	/* Navbar H1 Title */
+	.navbar-title {
+		font-size: 1.8rem;
+		color: white;
+		margin: 0;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 
-.featured-image img {
-	width: 100%;
-	height: 100%;
-	display: block;
-	object-fit: cover;
-	object-position: 50% 14%;
-	transition: all 0.4 ease;
-}
+	/* Featured Image Display */
+	.featured-image {
+	    height: 500px;
+	    width: 500px;
+	    margin: 0 auto;
+	    border-radius: 12px; /* Slightly less rounded */
+	    overflow: hidden;
+	    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Softer shadow */
+	    border: 1px solid #e0e0e0; /* Subtle border */
+	    z-index: 4000;
+	}
 
-/* Thumbnail Carousel */
-.thumbnail-carousel {
-	max-width: 900px;
-	margin: 0 auto;
-}
+	.featured-image img {
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
+		object-position: 50% 14%;
+		transition: all 0.4 ease;
+	}
 
-.thumbnail-item {
-	width: 90px;
-	height: 120px;
-	border-radius: 10px;
-	overflow: hidden;
-	margin: 0 8px;
-	cursor: pointer;
-	border: 2px solid transparent;
-	transition: all 0.4s ease;
-}
+	/* Thumbnail Carousel */
+	.thumbnail-carousel {
+		max-width: 900px;
+		margin: 0 auto;
+	}
 
-.thumbnail-item.active {
-	border-color: #ff6bcd;
-	transform: scale(1.4);
-}
+	.thumbnail-item {
+	    width: 90px;
+	    height: 120px;
+	    border-radius: 8px; /* Less bubbly */
+	    overflow: hidden;
+	    margin: 0 8px;
+	    cursor: pointer;
+	    border: 2px solid transparent;
+	    transition: all 0.3s ease;
+	}
 
-.thumbnail-item:hover {
-	transform: scale(1.2);
-	border-color: #9FFFCB;
-}
 
-.thumbnail-item.active, 
-.thumbnail-item.active:hover {
-	border-color: #ff6bcd;
-	transform: scale(1.4);
-}
+	.thumbnail-item.active {
+	    border-color: #5c6bc0; /* Muted purple instead of pink */
+	    transform: scale(1.3);
+	}
 
-.thumbnail-item img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
+	.thumbnail-item:hover {
+	    transform: scale(1.15);
+	    border-color: #90a4ae; /* Muted teal */
+	}
 
-/* Lightbox Styles */
-.lightbox {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.9);
-	z-index: 9999;
-	justify-content: center;
-	align-items: center;
-}
+	.thumbnail-item.active, 
+	.thumbnail-item.active:hover {
+		border-color: #ff6bcd;
+		transform: scale(1.4);
+	}
 
-.lightbox-image {
-	max-width: 90%;
-	max-height: 90%;
-	object-fit: contain;
-	border-radius: 10px;
-	transition: transform 0.3s ease;
-	cursor: zoom-in; /* Default: plus sign */
-	transform-origin: center center;
-}
+	.thumbnail-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 
-.lightbox-image.zoom-out {
-	cursor: zoom-out; /* Minus sign when shift is held */
-}
+	/* Lightbox Styles */
+	.lightbox {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.85); /* Less intense overlay */
+		z-index: 9999;
+		justify-content: center;
+		align-items: center;
+	}
 
-.lightbox-close {
-	position: absolute;
-	top: 20px;
-	right: 30px;
-	color: white;
-	font-size: 40px;
-	font-weight: bold;
-	cursor: pointer;
-	z-index: 10000;
-}
+	.lightbox-image {
+		max-width: 90%;
+		max-height: 90%;
+		object-fit: contain;
+		border-radius: 8px;
+	    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+		transition: transform 0.3s ease;
+		cursor: zoom-in; /* Default: plus sign */
+		transform-origin: center center;
+	}
 
-.lightbox-close:hover {
-	color: #ff6bcd;
-}
+	.lightbox-image.zoom-out {
+		cursor: zoom-out; /* Minus sign when shift is held */
+	}
 
-.lightbox-caption {
-	position: absolute;
-	bottom: 20px;
-	color: white;
-	text-align: center;
-	font-family: 'Chewy', cursive;
-}
+	.lightbox-close {
+		position: absolute;
+		top: 20px;
+		right: 30px;
+		color: white;
+		font-size: 40px;
+		font-weight: bold;
+		cursor: pointer;
+		z-index: 10000;
+	}
 
-.featured-image {
-	cursor: zoom-in; /* Shows it's clickable */
-}
+	.lightbox-close:hover {
+		color: #ff6bcd;
+	}
+
+	.lightbox-caption {
+		position: absolute;
+		bottom: 20px;
+		color: white;
+		text-align: center;
+		font-family: 'Chewy', cursive;
+	}
+
+	.featured-image {
+		cursor: zoom-in; /* Shows it's clickable */
+	}
+
+			@media screen and (min-device-width: 1366px) and (min-device-height: 768px) {
+				body::before {
+		        content: "MEDIA QUERY ACTIVE! 1366x633 detected";
+		        position: fixed;
+		        top: 10px;
+		        left: 10px;
+		        background: red;
+		        color: white;
+		        padding: 10px;
+		        z-index: 99999;
+		        font-family: monospace;
+		    }
+		    
+		    main {
+		        justify-content: flex-start;
+		        padding-top: 70px;
+		        gap: 20px;
+		    }
+		    
+		    .featured-image {
+		        height: 380px;
+		        width: 380px;
+		    }
+
+		    .thumbnail-item {
+		    	height: 100px;
+		    }
+		}
 	</style>
 </head>
+
+<!-- BODYBODYBODY --><!-- BODYBODYBODY -->
+<!-- BODYBODYBODY --><!-- BODYBODYBODY -->
+<!-- BODYBODYBODY --><!-- BODYBODYBODY -->
 
 <body>
 	<main>
@@ -187,6 +225,9 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 		        </div>
 		    </div>
 		</nav>
+
+		<!-- CARRO CARRO CARRO -->
+		<!-- CARRO CARRO CARRO -->
 
 		<!-- Featured Image Display -->
 		<div class="featured-image">
@@ -330,6 +371,7 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 		        }
 		    }
 		});
+
 	</script>
 </body>
 </html>
