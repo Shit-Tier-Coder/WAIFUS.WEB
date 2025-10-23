@@ -25,6 +25,9 @@
 		min-height: 100vh; justify-content: space-around;
 		padding-top: 50px;}
 
+	.custom-font { 
+    font-family: 'Fredoka One', cursive;
+	}
 
 	.navbar {
 	    background: linear-gradient(45deg, #37474f, #546e7a) !important; /* Darker, more serious */
@@ -87,18 +90,18 @@
 
 
 	.thumbnail-item.active {
-	    border-color: #5c6bc0; /* Muted purple instead of pink */
+	    border-color: #5c6bc0; 
 	    transform: scale(1.3);
 	}
 
 	.thumbnail-item:hover {
 	    transform: scale(1.15);
-	    border-color: #90a4ae; /* Muted teal */
+	    border-color: #90a4ae; 
 	}
 
 	.thumbnail-item.active, 
 	.thumbnail-item.active:hover {
-		border-color: #ff6bcd;
+		border-color: #5c6bc0;
 		transform: scale(1.4);
 	}
 
@@ -164,9 +167,11 @@
 		cursor: zoom-in; /* Shows it's clickable */
 	}
 
-			@media screen and (min-device-width: 1366px) and (min-device-height: 768px) {
-				body::before {
-		        content: "MEDIA QUERY ACTIVE! 1366x633 detected";
+			@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
+				{
+    			body::before {
+        		content: "16:9 Aspect Ratio Detected";
+    			}
 		        position: fixed;
 		        top: 10px;
 		        left: 10px;
@@ -189,7 +194,27 @@
 			        margin: 0 auto;
 			    }
 
-			    .thumbnail-carousel {margin: 0 auto;}
+			     .featured-image img[src*="STUDY-13-M"] {
+        		object-position: 50% 20% !important;
+    			}
+
+    			 .featured-image img[src*="STUDY-16-M"] {
+        		object-position: 50% 6% !important;
+    			}
+
+    			 .featured-image img[src*="STUDY-17-M"] {
+        		object-position: 50% 6% !important;
+    			}
+
+    			 .featured-image img[src*="J1-M"] {
+        		object-position: 50% 8% !important;
+    			}
+
+    			.featured-image img[src*="W2-M"] {
+        		object-position: 50% 6% !important;
+    			}
+
+				.thumbnail-carousel {margin: 0 auto;}
 
 			    .thumbnail-item {
 			    	height: 100px;
@@ -257,33 +282,41 @@
 		<!-- Thumbnail Carousel -->
 		<div class="thumbnail-carousel">
 			<div class="d-flex justify-content-center flex-wrap gap-3">
-				<div class="thumbnail-item active" 
-					onclick="changeFeatured('WAIFUS-IMG/STUDIES-IMG/2021 STUDY-13-M.avif', '50% 14%')"
-					data-highres="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-13.avif">
-					<img src="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-13-S.avif" alt="Waifu 1">
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-13-M.avif"
+				     data-crop="50% 14%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-13.avif">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-13-S.avif" alt="Waifu 1">
 				</div>
 				<div class="thumbnail-item" 
-					onclick="changeFeatured('WAIFUS-IMG/STUDIES-IMG/2021 STUDY-16-M.avif', '50% 22%')"
-					data-highres="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-16.avif">
-					<img src="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-16-S.avif" alt="Waifu 2">
+				     data-image="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-16-M.avif"
+				     data-crop="50% 22%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-16.avif">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-16-S.avif" alt="Waifu 1">
 				</div>
 				<div class="thumbnail-item" 
-					onclick="changeFeatured('WAIFUS-IMG/STUDIES-IMG/2021 STUDY-17-M.avif', '50% 22%')"
-					data-highres="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-17.avif">
-					<img src="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-17-S.avif" alt="Waifu 3">
+				     data-image="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-17-M.avif"
+				     data-crop="50% 22%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-17.avif">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/2021 STUDY-17-S.avif" alt="Waifu 1">
 				</div>
 				<div class="thumbnail-item" 
-				onclick="changeFeatured('WAIFUS-IMG/STUDIES-IMG/J1-M.avif', '50% 18%')"
-				data-highres="WAIFUS-IMG/STUDIES-IMG/J1.avif">
-					<img src="WAIFUS-IMG/STUDIES-IMG/J1-S.avif" alt="Waifu 4">
+				     data-image="WAIFUS-IMG/STUDIES-IMG/J1-M.avif"
+				     data-crop="50% 14%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/J1.avif">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/J1.avif" alt="Waifu 1">
 				</div>
 				<div class="thumbnail-item" 
-				onclick="changeFeatured('WAIFUS-IMG/STUDIES-IMG/W2-M.avif', '50% 18%')"
-				data-highres="WAIFUS-IMG/STUDIES-IMG/W2.avif">
-					<img src="WAIFUS-IMG/STUDIES-IMG/W2-S.avif" alt="Waifu 5">
+				     data-image="WAIFUS-IMG/STUDIES-IMG/W2-M.avif"
+				     data-crop="50% 18%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/W2.avif">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/W2-S.avif" alt="Waifu 1">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/DIAMOND 1200x900.avif', '50% 32%')">
-					<img src="WAIFUS-IMG/DIAMOND 1200x900.avif" alt="Waifu 6">
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/DRAWTOBR-IMG/JAPMAID-M.avif"
+				     data-crop="50% 32%"
+				     data-highres="WAIFUS-IMG/DRAWTOBR-IMG/JAPMAID.avif">
+				    <img src="WAIFUS-IMG/DRAWTOBR-IMG/JAPMAID-S.avif" alt="Waifu 1">
 				</div>
 			</div>
 		</div>
@@ -297,101 +330,185 @@
 	</div>
 
 	<script>
-		function changeFeatured(imageSrc, cropPosition = '50% 14%') {
-		    const featuredImg = document.getElementById('featuredImg');
-		    featuredImg.src = imageSrc;
-		    featuredImg.style.objectPosition = cropPosition;
-		    
-		    // Update active thumbnail
-		    document.querySelectorAll('.thumbnail-item').forEach(item => {
-		        item.classList.remove('active');
-		    });
-		    event.currentTarget.classList.add('active');
-		}
+// Thumbnail click functionality
+document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+        const imageSrc = this.getAttribute('data-image');
+        const cropPosition = this.getAttribute('data-crop') || '50% 14%';
+        
+        const featuredImg = document.getElementById('featuredImg');
+        featuredImg.src = imageSrc;
+        featuredImg.style.objectPosition = cropPosition;
+        
+        // Update active thumbnail
+        document.querySelectorAll('.thumbnail-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        this.classList.add('active');
+    });
+});
 
-		// Lightbox functionality
-		const lightbox = document.getElementById('lightbox');
-		const lightboxImg = document.getElementById('lightboxImg');
-		const lightboxCaption = document.getElementById('lightboxCaption');
+// Set first thumbnail as active by default on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const firstThumb = document.querySelector('.thumbnail-item');
+    if (firstThumb) {
+        firstThumb.classList.add('active');
+    }
+});
 
-		let currentScale = 1;
-		const MAX_ZOOM = 1.1;
-		const MIN_ZOOM = 0.5;
+// Lightbox functionality
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
 
-		// Click featured image to open lightbox
-		 
-		document.getElementById('featuredImg').addEventListener('click', function() {
-		    // Get the high-res image from the active thumbnail's data-highres attribute
-		    const activeThumb = document.querySelector('.thumbnail-item.active');
-		    const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
-		    
-		    lightboxImg.src = highResSrc; // Use high-res version for lightbox
-		    
-		    // Reset zoom state when opening
-		    currentScale = 1;
-		    lightboxImg.style.transform = 'scale(1)';
-		    lightboxImg.classList.remove('zoom-out');
-		    
-		    lightbox.style.display = 'flex';
-		    document.body.style.overflow = 'hidden';
-		});
+let currentZoomLevel = 1;
+const MAX_ZOOM = 1.0; // 100% = ACTUAL PIXELS (what we were getting as initial)
+const MIN_ZOOM = 0.1;
 
-		// Close lightbox when clicking X button
-		document.querySelector('.lightbox-close').addEventListener('click', function() {
-		    lightbox.style.display = 'none';
-		    document.body.style.overflow = 'auto';
-		});
+function setZoomLevel(zoomLevel) {
+    const imgNaturalWidth = lightboxImg.naturalWidth;
+    const imgNaturalHeight = lightboxImg.naturalHeight;
+    
+    // Calculate actual display dimensions based on zoom level
+    const displayWidth = imgNaturalWidth * zoomLevel;
+    const displayHeight = imgNaturalHeight * zoomLevel;
+    
+    // Set the actual dimensions (not using scale())
+    lightboxImg.style.width = displayWidth + 'px';
+    lightboxImg.style.height = displayHeight + 'px';
+    lightboxImg.style.maxWidth = 'none';
+    lightboxImg.style.maxHeight = 'none';
+    
+    currentZoomLevel = zoomLevel;
+    
+    console.log(`🔍 Zoom: ${(zoomLevel * 100).toFixed(0)}% | Display: ${Math.round(displayWidth)}x${Math.round(displayHeight)}px`);
+    
+    if (zoomLevel === 1.0) {
+        console.log("🎯 MAX ZOOM - VIEWING AT 100% - ACTUAL PIXEL RESOLUTION");
+    }
+}
 
-		// Close lightbox when clicking background
-		lightbox.addEventListener('click', function(e) {
-		    if (e.target === lightbox) {
-		        lightbox.style.display = 'none';
-		        document.body.style.overflow = 'auto';
-		    }
-		});
+function getFitToScreenZoom() {
+    const imgNaturalWidth = lightboxImg.naturalWidth;
+    const imgNaturalHeight = lightboxImg.naturalHeight;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Calculate zoom to fit image VERTICALLY with 10% margin
+    const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
+    
+    // Also check horizontal fit to ensure it doesn't overflow
+    const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
+    
+    // Use the SMALLER zoom to ensure the entire image fits on screen
+    let zoom = Math.min(verticalZoom, horizontalZoom);
+    
+    console.log(`📏 Fit calculation: Vertical=${(verticalZoom * 100).toFixed(1)}%, Horizontal=${(horizontalZoom * 100).toFixed(1)}%`);
+    
+    return zoom;
+}
 
-		// Close with Escape key
-		document.addEventListener('keydown', function(e) {
-		    if (e.key === 'Escape') {
-		        lightbox.style.display = 'none';
-		        document.body.style.overflow = 'auto';
-		    }
-		});
+function closeLightbox() {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    // Reset image styles for next open
+    lightboxImg.style.width = '';
+    lightboxImg.style.height = '';
+    lightboxImg.style.maxWidth = '';
+    lightboxImg.style.maxHeight = '';
+}
 
-		// Update cursor based on Shift key in real-time
-		document.addEventListener('keydown', function(e) {
-		    if (e.key === 'Shift') {
-		        lightboxImg.classList.add('zoom-out');
-		    }
-		});
+// Click featured image to open lightbox
+document.getElementById('featuredImg').addEventListener('click', function() {
+    // Get the high-res image from the active thumbnail's data-highres attribute
+    const activeThumb = document.querySelector('.thumbnail-item.active');
+    const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
+    
+    lightboxImg.src = highResSrc; 
+    
+    lightboxImg.onload = function() {
+        const fitZoom = getFitToScreenZoom();
+        
+        console.log(`🖼️ Image: ${lightboxImg.naturalWidth}x${lightboxImg.naturalHeight}px`);
+        console.log(`🖥️  Viewport: ${window.innerWidth}x${window.innerHeight}px`);
+        console.log(`🔍 Initial view: ${(fitZoom * 100).toFixed(1)}% (fit to screen)`);
+        console.log(`🎯 Max zoom (100%): ${lightboxImg.naturalWidth}x${lightboxImg.naturalHeight}px`);
+        
+        setZoomLevel(fitZoom);
+    };
 
-		document.addEventListener('keyup', function(e) {
-		    if (e.key === 'Shift') {
-		        lightboxImg.classList.remove('zoom-out');
-		    }
-		});
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+});
 
-		// REGULAR LEFT-CLICK ZOOM
-		lightboxImg.addEventListener('click', function(e) {
-		    e.stopPropagation(); // Don't close lightbox when clicking image
-		    
-		    if (e.shiftKey) {
-		        // Shift + Left-click = ZOOM OUT
-		        if (currentScale > MIN_ZOOM) {
-		            currentScale -= 0.1;
-		            if (currentScale < MIN_ZOOM) currentScale = MIN_ZOOM;
-		            lightboxImg.style.transform = `scale(${currentScale})`;
-		        }
-		    } else {
-		        // Regular Left-click = ZOOM IN
-		        if (currentScale < MAX_ZOOM) {
-		            currentScale += 0.1;
-		            if (currentScale > MAX_ZOOM) currentScale = MAX_ZOOM;
-		            lightboxImg.style.transform = `scale(${currentScale})`;
-		        }
-		    }
-		});
+// Close lightbox when clicking X button
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
 
+// Close lightbox when clicking background
+lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) {
+        closeLightbox();
+    }
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+
+// Update cursor based on Shift key in real-time
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Shift') {
+        lightboxImg.classList.add('zoom-out');
+    }
+});
+
+document.addEventListener('keyup', function(e) {
+    if (e.key === 'Shift') {
+        lightboxImg.classList.remove('zoom-out');
+    }
+});
+
+// REGULAR LEFT-CLICK ZOOM
+lightboxImg.addEventListener('click', function(e) {
+    e.stopPropagation(); // Don't close lightbox when clicking image
+    
+    if (e.shiftKey) {
+        // Shift + Left-click = ZOOM OUT
+        const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
+        setZoomLevel(newZoom);
+        console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
+    } else {
+        // Regular Left-click = ZOOM IN (up to 100% actual pixels)
+        const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
+        setZoomLevel(newZoom);
+        console.log(`🔍 Zoomed IN to ${(newZoom * 100).toFixed(0)}%`);
+        
+        if (newZoom === 1.0) {
+            console.log("🎯 MAX ZOOM REACHED - ACTUAL PIXEL RESOLUTION!");
+        }
+    }
+});
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    if (lightbox.style.display === 'flex') {
+        if (e.key === '1') {
+            // Press '1' to jump directly to 100% (max zoom)
+            setZoomLevel(1.0);
+            console.log("🎯 Jumped to 100% - ACTUAL PIXELS");
+            e.preventDefault();
+        } else if (e.key === '0') {
+            // Press '0' to jump to fit screen (initial view)
+            const fitZoom = getFitToScreenZoom();
+            setZoomLevel(fitZoom);
+            console.log("🖼️ Jumped to fit screen");
+            e.preventDefault();
+        }
+    }
+});
 	</script>
 </body>
 </html>
