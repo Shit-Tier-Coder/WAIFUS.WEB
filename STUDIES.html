@@ -167,7 +167,44 @@
 		cursor: zoom-in; /* Shows it's clickable */
 	}
 
-			@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
+    .controls-footer {
+    display: none;
+    position: fixed;
+    left: 40px; /* Simple left margin */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for element height */
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 320px;
+    line-height: 2.6rem;
+    z-index: 10000;
+}
+
+.controls-footer.visible {
+    display: block;
+}
+
+.controls-footer.hidden {
+    display: none;
+}
+
+.controls-footer .controls-line {
+    margin: 2px 0;
+}
+
+/* Keyboard key style */
+kbd {
+    background: #555;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    border: 1px solid #777;
+    margin: 0 2px;
+}
+
+@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
     main {
         justify-content: space-around;
         padding-top: 70px;
@@ -229,34 +266,9 @@
     }
 }
 
-/* Controls Footer */
-.controls-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px 0;
-    font-size: 0.8rem;
-    z-index: 1000;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
 
-.controls-footer.hidden {
-    opacity: 0;
-    transform: translateY(100%);
-    pointer-events: none;
-}
+/* Controls Footer - Lightbox Only */
 
-/* Keyboard key style */
-kbd {
-    background: #333;
-    padding: 1px 4px;
-    border-radius: 3px;
-    font-size: 0.7rem;
-    border: 1px solid #555;
-}
 	</style>
 </head>
 
@@ -351,276 +363,289 @@ kbd {
 
 	<!-- Controls Footer -->
 	<div id="controlsFooter" class="controls-footer">
-	    <div class="container text-center">
-	        <small class="text-muted">
-	            🖱️ <strong>Lightbox Controls:</strong> 
-	            Hold click = pan • Shift+click = zoom out • 
-	            1/0 = 100%/fit • +/- = zoom • <kbd>H</kbd> = hide this
-	        </small>
-	    </div>
-	</div>
+    <div class="controls-line"><kbd>RIGHT CLICK</kbd> = ZOOM</div>
+    <div class="controls-line"><kbd>SHIFT + CLICK</kbd> = ZOOM OUT</div>
+    <div class="controls-line"><kbd>HOLD+DRAG</kbd> = PAN</div>
+    <div class="controls-line"><kbd>1</kbd>/<kbd>0</kbd> = 100%/fit</div>
+    <div class="controls-line"><kbd>+</kbd>/<kbd>-</kbd> = ZOOM</div>
+    <div class="controls-line"><kbd>H</kbd> = HIDE HELP</div>
+    </div>
 
 	<script>
-// Thumbnail click functionality
-document.querySelectorAll('.thumbnail-item').forEach(thumb => {
-    thumb.addEventListener('click', function() {
-        const imageSrc = this.getAttribute('data-image');
-        const cropPosition = this.getAttribute('data-crop') || '50% 14%';
-        
-        const featuredImg = document.getElementById('featuredImg');
-        featuredImg.src = imageSrc;
-        featuredImg.style.objectPosition = cropPosition;
-        
-        // Update active thumbnail
-        document.querySelectorAll('.thumbnail-item').forEach(item => {
-            item.classList.remove('active');
+    // Thumbnail click functionality
+        document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                const imageSrc = this.getAttribute('data-image');
+                const cropPosition = this.getAttribute('data-crop') || '50% 14%';
+                
+                const featuredImg = document.getElementById('featuredImg');
+                featuredImg.src = imageSrc;
+                featuredImg.style.objectPosition = cropPosition;
+                
+                // Update active thumbnail
+                document.querySelectorAll('.thumbnail-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
         });
-        this.classList.add('active');
-    });
-});
 
-// Set first thumbnail as active by default on page load
-document.addEventListener('DOMContentLoaded', function() {
-    const firstThumb = document.querySelector('.thumbnail-item');
-    if (firstThumb) {
-        firstThumb.classList.add('active');
-    }
-});
+    // Set first thumbnail as active by default on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstThumb = document.querySelector('.thumbnail-item');
+            if (firstThumb) {
+                firstThumb.classList.add('active');
+            }
+        });
 
-// Lightbox functionality
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCaption = document.getElementById('lightboxCaption');
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
 
-let currentZoomLevel = 1;
-const MAX_ZOOM = 1.0;
-const MIN_ZOOM = 0.1;
+        let currentZoomLevel = 1;
+        const MAX_ZOOM = 1.0;
+        const MIN_ZOOM = 0.1;
 
-// Lightbox drag-to-pan functionality
-let isDragging = false;
-let dragStartX, dragStartY;
-let currentTranslateX = 0;
-let currentTranslateY = 0;
+        // Lightbox drag-to-pan functionality
+        let isDragging = false;
+        let dragStartX, dragStartY;
+        let currentTranslateX = 0;
+        let currentTranslateY = 0;
 
-function setZoomLevel(zoomLevel) {
-    const imgNaturalWidth = lightboxImg.naturalWidth;
-    const imgNaturalHeight = lightboxImg.naturalHeight;
-    
-    const displayWidth = imgNaturalWidth * zoomLevel;
-    const displayHeight = imgNaturalHeight * zoomLevel;
-    
-    lightboxImg.style.width = displayWidth + 'px';
-    lightboxImg.style.height = displayHeight + 'px';
-    lightboxImg.style.maxWidth = 'none';
-    lightboxImg.style.maxHeight = 'none';
-    
-    // Reset position on zoom
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-    lightboxImg.style.transform = 'translate(0px, 0px)';
-    
-    currentZoomLevel = zoomLevel;
-    
-    console.log(`🔍 Zoom: ${(zoomLevel * 100).toFixed(0)}%`);
-    
-    updateLightboxCursor();
-}
-
-function getFitToScreenZoom() {
-    const imgNaturalWidth = lightboxImg.naturalWidth;
-    const imgNaturalHeight = lightboxImg.naturalHeight;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
-    const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
-    
-    return Math.min(verticalZoom, horizontalZoom);
-}
-
-function updateLightboxCursor() {
-    if (isDragging) {
-        lightboxImg.style.cursor = 'grabbing';
-    } else if (lightboxImg.classList.contains('zoom-out')) {
-        lightboxImg.style.cursor = 'zoom-out';
-    } else {
-        lightboxImg.style.cursor = 'zoom-in';
-    }
-}
-
-function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-    lightboxImg.style.width = '';
-    lightboxImg.style.height = '';
-    lightboxImg.style.maxWidth = '';
-    lightboxImg.style.maxHeight = '';
-    lightboxImg.style.transform = '';
-    lightboxImg.style.cursor = 'zoom-in';
-    
-    isDragging = false;
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-}
-
-// SIMPLE CLICK ZOOM - This should definitely work
-lightboxImg.addEventListener('click', function(e) {
-    // If we were dragging, don't zoom
-    if (isDragging) {
-        isDragging = false;
-        updateLightboxCursor();
-        return;
-    }
-    
-    e.stopPropagation();
-    
-    if (e.shiftKey) {
-        // Shift + Click = ZOOM OUT
-        const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
-        setZoomLevel(newZoom);
-        console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
-    } else {
-        // Regular Click = ZOOM IN
-        const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
-        setZoomLevel(newZoom);
-        console.log(`🔍 Zoomed IN to ${(newZoom * 100).toFixed(0)}%`);
-    }
-});
-
-// DRAG FUNCTIONALITY
-lightboxImg.addEventListener('mousedown', function(e) {
-    if (e.button === 0) { // Left click only
-        isDragging = true;
-        dragStartX = e.clientX - currentTranslateX;
-        dragStartY = e.clientY - currentTranslateY;
-        lightboxImg.style.cursor = 'grabbing';
-        e.preventDefault();
-    }
-});
-
-lightboxImg.addEventListener('mousemove', function(e) {
-    if (!isDragging) return;
-    
-    currentTranslateX = e.clientX - dragStartX;
-    currentTranslateY = e.clientY - dragStartY;
-    
-    lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-});
-
-lightboxImg.addEventListener('mouseup', function(e) {
-    if (e.button === 0) {
-        isDragging = false;
-        updateLightboxCursor();
-    }
-});
-
-lightboxImg.addEventListener('mouseleave', function() {
-    isDragging = false;
-    updateLightboxCursor();
-});
-
-// Click featured image to open lightbox
-document.getElementById('featuredImg').addEventListener('click', function() {
-    const activeThumb = document.querySelector('.thumbnail-item.active');
-    const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
-    
-    lightboxImg.src = highResSrc; 
-    
-    lightboxImg.onload = function() {
-        const fitZoom = getFitToScreenZoom();
-        setZoomLevel(fitZoom);
-    };
-
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-});
-
-// Close lightbox when clicking X button
-document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-
-// Close lightbox when clicking background
-lightbox.addEventListener('click', function(e) {
-    if (e.target === lightbox) {
-        closeLightbox();
-    }
-});
-
-// Close with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeLightbox();
-    }
-});
-
-// Update cursor based on Shift key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.add('zoom-out');
-        updateLightboxCursor();
-    }
-});
-
-document.addEventListener('keyup', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.remove('zoom-out');
-        updateLightboxCursor();
-    }
-});
-
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    if (lightbox.style.display === 'flex') {
-        if (e.key === '1') {
-            setZoomLevel(1.0);
-            e.preventDefault();
-        } else if (e.key === '0') {
-            const fitZoom = getFitToScreenZoom();
-            setZoomLevel(fitZoom);
-            e.preventDefault();
-        } else if (e.key === '+' || e.key === '=') {
-            const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
-            setZoomLevel(newZoom);
-            e.preventDefault();
-        } else if (e.key === '-' || e.key === '_') {
-            const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
-            setZoomLevel(newZoom);
-            e.preventDefault();
-        } else if (e.key === 'h' || e.key === 'H') {
-            toggleControls();
-            e.preventDefault();
+        function setZoomLevel(zoomLevel) {
+            const imgNaturalWidth = lightboxImg.naturalWidth;
+            const imgNaturalHeight = lightboxImg.naturalHeight;
+            
+            const displayWidth = imgNaturalWidth * zoomLevel;
+            const displayHeight = imgNaturalHeight * zoomLevel;
+            
+            lightboxImg.style.width = displayWidth + 'px';
+            lightboxImg.style.height = displayHeight + 'px';
+            lightboxImg.style.maxWidth = 'none';
+            lightboxImg.style.maxHeight = 'none';
+            
+            // Reset position on zoom
+            currentTranslateX = 0;
+            currentTranslateY = 0;
+            lightboxImg.style.transform = 'translate(0px, 0px)';
+            
+            currentZoomLevel = zoomLevel;
+            
+            console.log(`🔍 Zoom: ${(zoomLevel * 100).toFixed(0)}%`);
+            
+            updateLightboxCursor();
         }
-    } else {
-        if (e.key === 'h' || e.key === 'H') {
-            toggleControls();
-            e.preventDefault();
+
+        function getFitToScreenZoom() {
+            const imgNaturalWidth = lightboxImg.naturalWidth;
+            const imgNaturalHeight = lightboxImg.naturalHeight;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
+            const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
+            
+            return Math.min(verticalZoom, horizontalZoom);
         }
-    }
-});
 
-// Controls Footer
-let controlsVisible = true;
+        function updateLightboxCursor() {
+            if (isDragging) {
+                lightboxImg.style.cursor = 'grabbing';
+            } else if (lightboxImg.classList.contains('zoom-out')) {
+                lightboxImg.style.cursor = 'zoom-out';
+            } else {
+                lightboxImg.style.cursor = 'zoom-in';
+            }
+        }
 
-function toggleControls() {
-    const controlsFooter = document.getElementById('controlsFooter');
-    controlsVisible = !controlsVisible;
-    
-    if (controlsVisible) {
-        controlsFooter.classList.remove('hidden');
-    } else {
-        controlsFooter.classList.add('hidden');
-    }
-    
-    localStorage.setItem('controlsVisible', controlsVisible);
-}
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Reset image styles
+            lightboxImg.style.width = '';
+            lightboxImg.style.height = '';
+            lightboxImg.style.maxWidth = '';
+            lightboxImg.style.maxHeight = '';
+            lightboxImg.style.transform = '';
+            lightboxImg.style.cursor = 'zoom-in';
+            
+            // Reset drag state
+            isDragging = false;
+            currentTranslateX = 0;
+            currentTranslateY = 0;
+            
+            // Hide controls when lightbox closes
+            document.getElementById('controlsFooter').classList.remove('visible');
+        }
 
-// Load saved preference
-document.addEventListener('DOMContentLoaded', function() {
-    const savedVisibility = localStorage.getItem('controlsVisible');
-    if (savedVisibility === 'false') {
-        controlsVisible = false;
-        document.getElementById('controlsFooter').classList.add('hidden');
-    }
-});
+        // SIMPLE CLICK ZOOM
+        lightboxImg.addEventListener('click', function(e) {
+            // If we were dragging, don't zoom
+            if (isDragging) {
+                isDragging = false;
+                updateLightboxCursor();
+                return;
+            }
+            
+            e.stopPropagation();
+            
+            if (e.shiftKey) {
+                // Shift + Click = ZOOM OUT
+                const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
+                setZoomLevel(newZoom);
+                console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
+            } else {
+                // Regular Click = ZOOM IN
+                const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
+                setZoomLevel(newZoom);
+                console.log(`🔍 Zoomed IN to ${(newZoom * 100).toFixed(0)}%`);
+            }
+        });
+
+        // DRAG FUNCTIONALITY
+        lightboxImg.addEventListener('mousedown', function(e) {
+            if (e.button === 0) { // Left click only
+                isDragging = true;
+                dragStartX = e.clientX - currentTranslateX;
+                dragStartY = e.clientY - currentTranslateY;
+                lightboxImg.style.cursor = 'grabbing';
+                e.preventDefault();
+            }
+        });
+
+        lightboxImg.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            
+            currentTranslateX = e.clientX - dragStartX;
+            currentTranslateY = e.clientY - dragStartY;
+            
+            lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+        });
+
+        lightboxImg.addEventListener('mouseup', function(e) {
+            if (e.button === 0) {
+                isDragging = false;
+                updateLightboxCursor();
+            }
+        });
+
+        lightboxImg.addEventListener('mouseleave', function() {
+            isDragging = false;
+            updateLightboxCursor();
+        });
+
+        // Click featured image to open lightbox
+        document.getElementById('featuredImg').addEventListener('click', function() {
+            const activeThumb = document.querySelector('.thumbnail-item.active');
+            const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
+            
+            lightboxImg.src = highResSrc; 
+            
+            lightboxImg.onload = function() {
+                const fitZoom = getFitToScreenZoom();
+                setZoomLevel(fitZoom);
+                
+                // Show controls when lightbox opens (if not hidden by user)
+                if (localStorage.getItem('controlsVisible') !== 'false') {
+                    document.getElementById('controlsFooter').classList.add('visible');
+                    controlsVisible = true;
+                }
+            };
+
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close lightbox when clicking X button
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+
+        // Close lightbox when clicking background
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Update cursor based on Shift key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Shift') {
+                lightboxImg.classList.add('zoom-out');
+                updateLightboxCursor();
+            }
+        });
+
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'Shift') {
+                lightboxImg.classList.remove('zoom-out');
+                updateLightboxCursor();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === '1') {
+                    setZoomLevel(1.0);
+                    e.preventDefault();
+                } else if (e.key === '0') {
+                    const fitZoom = getFitToScreenZoom();
+                    setZoomLevel(fitZoom);
+                    e.preventDefault();
+                } else if (e.key === '+' || e.key === '=') {
+                    const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
+                    setZoomLevel(newZoom);
+                    e.preventDefault();
+                } else if (e.key === '-' || e.key === '_') {
+                    const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
+                    setZoomLevel(newZoom);
+                    e.preventDefault();
+                } else if (e.key === 'h' || e.key === 'H') {
+                    toggleControls();
+                    e.preventDefault();
+                }
+            } else {
+                if (e.key === 'h' || e.key === 'H') {
+                    toggleControls();
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // Controls Footer
+        let controlsVisible = true;
+
+        function toggleControls() {
+            const controlsFooter = document.getElementById('controlsFooter');
+            controlsVisible = !controlsVisible;
+            
+            if (controlsVisible) {
+                controlsFooter.classList.add('visible');
+                controlsFooter.classList.remove('hidden');
+            } else {
+                controlsFooter.classList.add('hidden');
+                controlsFooter.classList.remove('visible');
+            }
+            
+            localStorage.setItem('controlsVisible', controlsVisible);
+        }
+
+        // Load saved preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedVisibility = localStorage.getItem('controlsVisible');
+            if (savedVisibility === 'false') {
+                controlsVisible = false;
+                document.getElementById('controlsFooter').classList.add('hidden');
+            }
+        });
 	</script>
 </body>
 </html>
