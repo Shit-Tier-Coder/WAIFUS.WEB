@@ -11,11 +11,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bubblegum+Sans&display=swap" rel="stylesheet">
 	<!-- CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 	<!-- JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 	<style>
-		* {box-sizing: border-box;}
+	* {box-sizing: border-box;}
 
 	body {
 	    background: linear-gradient(to right, #e3f2fd, #f3e5f5); 
@@ -23,14 +24,15 @@
 
 	main {display: flex; flex-direction: column; margin: 0 auto;
 		min-height: 100vh; justify-content: space-around;
-		padding-top: 50px;}
+		padding-top: 50px; position: relative;overflow: visible !important; 
+	}
 
 	.custom-font { 
     font-family: 'Fredoka One', cursive;
 	}
 
 	.navbar {
-	    background: linear-gradient(45deg, #37474f, #546e7a) !important; /* Darker, more serious */
+	    background: linear-gradient(45deg, #37474f, #546e7a) !important;
 	}
 
 	.nav-link:hover {
@@ -51,6 +53,15 @@
 	}
 
 	/* Featured Image Display */
+
+	.featured-image-container {
+	    position: relative;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    margin: 0 auto;
+	    max-width: 600px;
+	}
 	.featured-image {
 	    height: 500px;
 	    width: 500px;
@@ -180,88 +191,78 @@
     max-width: 320px;
     line-height: 2.6rem;
     z-index: 10000;
-}
+	}
 
-.controls-footer.visible {
-    display: block;
-}
+	.controls-footer.visible {
+	    display: block;
+	}
 
-.controls-footer.hidden {
-    display: none;
-}
+	.controls-footer.hidden {
+	    display: none;
+	}
 
-.controls-footer .controls-line {
-    margin: 2px 0;
-}
+	.controls-footer .controls-line {
+	    margin: 2px 0;
+	}
 
-/* Keyboard key style */
-kbd {
-    background: #555;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 1.1rem;
-    border: 1px solid #777;
-    margin: 0 2px;
-}
+	/* Keyboard key style */
+	kbd {
+	    background: #555;
+	    padding: 2px 6px;
+	    border-radius: 4px;
+	    font-size: 1.1rem;
+	    border: 1px solid #777;
+	    margin: 0 2px;
+	}
 
-/* Gallery Navigation Arrows */
-.gallery-nav {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
+	/* Gallery Navigation Arrows */
+	.gallery-nav {
+	    position: relative;
+	    width: 100%;
+	    max-width: 600px;
+	    margin: 0 auto;
+	}
 
-.gallery-nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    font-size: 32px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    opacity: 0.8;
-}
+	.gallery-nav-arrow {
+	    position: absolute;
+	    top: 50%;
+	    transform: translateY(-50%);
+	    background: slategray; !important;
+	    border: none;
+	    font-size: 46px;
+	    width: 60px; /* Slightly larger */
+	    height: 60px;
+	    border-radius: 50%;
+	    cursor: pointer;
+	    z-index: 10000; /* Higher z-index */
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    transition: all 0.3s ease;
+	    opacity: 1 !important; /* Force visibility */
+	    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow for contrast */
+	    font-weight: bold;
+	}
 
-.gallery-nav-arrow:hover {
-    background: rgba(0, 0, 0, 0.9);
-    opacity: 1;
-    transform: translateY(-50%) scale(1.1);
-}
 
-.gallery-prev {
-    left: -70px; /* Position left of the featured image */
-}
+	.gallery-nav-arrow:hover {
+	    background: black; !important;
+	    color: white; !important;
+	    transform: translateY(-50%) scale(1.15);
+	    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+	}
 
-.gallery-next {
-    right: -70px; /* Position right of the featured image */
-}
+	.gallery-prev {
+	    left: -80px; /* Further out */
+	}
 
-/* Adjust for smaller screens */
-@media (max-width: 768px) {
-    .gallery-nav-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
-    }
-    
-    .gallery-prev {
-        left: -50px;
-    }
-    
-    .gallery-next {
-        right: -50px;
-    }
-}
+	.gallery-next {
+	    right: -80px; /* Further out */
+	}
+
+/*16/9 16/9 16/9*/
+/*16/9 16/9 16/9*/
+/*16/9 16/9 16/9*/
 
 @media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
     main {
@@ -336,8 +337,6 @@ kbd {
 }
 
 
-/* Controls Footer - Lightbox Only */
-
 	</style>
 </head>
 
@@ -372,18 +371,9 @@ kbd {
 		    </div>
 		</nav>
 
-		<!-- CARRO CARRO CARRO -->
-		<!-- CARRO CARRO CARRO -->
 
-		
-
-
-    <!-- NAVBAR WITH INTEGRATED H1 -->
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top" 
-            style="background: linear-gradient(45deg, #073B4C, #118AB2);">
-        <!-- ... your existing navbar ... -->
-    </nav>
+	<!-- CARRO CARRO CARRO -->
+	<!-- CARRO CARRO CARRO -->
 
     <!-- Featured Image Container with Navigation -->
     <div class="featured-image-container">
@@ -402,37 +392,37 @@ kbd {
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif"
 				     data-crop="50% 14%"
 				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY2.avif">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY2-S.avif" alt="Waifu 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY2-S.avif" alt="Copic markers portrait study 1">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY3-M.avif"
 				     data-crop="50% 22%"
 				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY3.avif">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY3-S.avif" alt="Waifu 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY3-S.avif" alt="Copic markers portrait study 2">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY4-M.avif"
 				     data-crop="50% 22%"
 				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY4.avif">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY4-S.avif" alt="Waifu 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY4-S.avif" alt="Copic markers portrait study 3">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY5-M.avif"
 				     data-crop="50% 14%"
 				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY5.avif">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY5-S.avif" alt="Waifu 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY5-S.avif" alt="Copic markers portrait study 4">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY6-M.avif"
 				     data-crop="50% 18%"
 				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY6.avif">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY6-S.avif" alt="Waifu 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY6-S.avif" alt="Copic markers figure study 1">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY7-M.avif"
 				     data-crop="50% 32%"
 				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY7.avif">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY7-S.avif" alt="Waifu 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY7-S.avif" alt="Copic markers figure study 2">
 				</div>
 			</div>
 		</div>
@@ -450,15 +440,15 @@ kbd {
 	<div id="controlsFooter" class="controls-footer">
     <div class="controls-line"><kbd>RIGHT CLICK</kbd> = ZOOM</div>
     <div class="controls-line"><kbd>SHIFT + CLICK</kbd> = ZOOM OUT</div>
-    <div class="controls-line"><kbd>HOLD+DRAG</kbd> = PAN</div>
-    <div class="controls-line"><kbd>1</kbd>/<kbd>0</kbd> = 100%/fit</div>
-    <div class="controls-line"><kbd>+</kbd>/<kbd>-</kbd> = ZOOM</div>
+    <div class="controls-line"><kbd>HOLD + DRAG</kbd> = PAN</div>
+    <div class="controls-line"><kbd>1</kbd> /<kbd>0</kbd> = 100%/fit</div>
+    <div class="controls-line"><kbd>+</kbd> /<kbd>-</kbd> = ZOOM</div>
     <div class="controls-line"><kbd>H</kbd> = HIDE HELP</div>
     </div>
 
 	<script>
     // Thumbnail click functionality with double-click support
-document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+	document.querySelectorAll('.thumbnail-item').forEach(thumb => {
     let clickTimer = null;
     
     thumb.addEventListener('click', function() {
