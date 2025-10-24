@@ -190,7 +190,7 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 
 		<!-- Featured Image Display -->
 		<div class="featured-image">
-			<img id="featuredImg" src="WAIFUS-IMG/COZY 1200x800.avif" alt="Featured Waifu">
+			<img id="featuredImg" src="WAIFUS-IMG/COZY.avif" alt="Featured Waifu">
 		</div>
 
 		<!-- Thumbnail Carousel -->
@@ -226,59 +226,160 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 	</div>
 
 	<script>
-function changeFeatured(imageSrc, cropPosition = '50% 14%') {
-    const featuredImg = document.getElementById('featuredImg');
-    featuredImg.src = imageSrc;
-    featuredImg.style.objectPosition = cropPosition;
-    
-    // Update active thumbnail
-    document.querySelectorAll('.thumbnail-item').forEach(item => {
-        item.classList.remove('active');
+// Thumbnail click functionality
+document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+        const imageSrc = this.getAttribute('data-image');
+        const cropPosition = this.getAttribute('data-crop') || '50% 14%';
+        
+        const featuredImg = document.getElementById('featuredImg');
+        featuredImg.src = imageSrc;
+        featuredImg.style.objectPosition = cropPosition;
+        
+        // Update active thumbnail
+        document.querySelectorAll('.thumbnail-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        this.classList.add('active');
     });
-    event.currentTarget.classList.add('active');
-}
+});
+
+// Set first thumbnail as active by default on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const firstThumb = document.querySelector('.thumbnail-item');
+    if (firstThumb) {
+        firstThumb.classList.add('active');
+    }
+});
 
 // Lightbox functionality
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
 
-let currentScale = 1;
-const MAX_ZOOM = 1.1;
-const MIN_ZOOM = 0.5;
+let currentZoomLevel = 1;
+const MAX_ZOOM = 1.0; // 100% = ACTUAL PIXELS
+const MIN_ZOOM = 0.1;
+
+// Lightbox drag-to-pan functionality
+let isDragging = false;
+let startX, startY;
+let currentTranslateX = 0;
+let currentTranslateY = 0;
+
+function setZoomLevel(zoomLevel) {
+    const imgNaturalWidth = lightboxImg.naturalWidth;
+    const imgNaturalHeight = lightboxImg.naturalHeight;
+    
+    // Calculate actual display dimensions based on zoom level
+    const displayWidth = imgNaturalWidth * zoomLevel;
+    const displayHeight = imgNaturalHeight * zoomLevel;
+    
+    // Set the actual dimensions (not using scale())
+    lightboxImg.style.width = displayWidth + 'px';
+    lightboxImg.style.height = displayHeight + 'px';
+    lightboxImg.style.maxWidth = 'none';
+    lightboxImg.style.maxHeight = 'none';
+    
+    // Reset position on zoom
+    currentTranslateX = 0;
+    currentTranslateY = 0;
+    lightboxImg.style.transform = 'translate(0px, 0px)';
+    
+    currentZoomLevel = zoomLevel;
+    
+    console.log(`🔍 Zoom: ${(zoomLevel * 100).toFixed(0)}% | Display: ${Math.round(displayWidth)}x${Math.round(displayHeight)}px`);
+    
+    if (zoomLevel === 1.0) {
+        console.log("🎯 MAX ZOOM - VIEWING AT 100% - ACTUAL PIXEL RESOLUTION");
+    }
+    
+    // Update cursor based on zoom level
+    updateLightboxCursor();
+}
+
+function getFitToScreenZoom() {
+    const imgNaturalWidth = lightboxImg.naturalWidth;
+    const imgNaturalHeight = lightboxImg.naturalHeight;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Calculate zoom to fit image VERTICALLY with 10% margin
+    const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
+    
+    // Also check horizontal fit to ensure it doesn't overflow
+    const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
+    
+    // Use the SMALLER zoom to ensure the entire image fits on screen
+    let zoom = Math.min(verticalZoom, horizontalZoom);
+    
+    return zoom;
+}
+
+function updateLightboxCursor() {
+    if (isDragging) {
+        lightboxImg.style.cursor = 'grabbing';
+    } else if (lightboxImg.classList.contains('zoom-out')) {
+        lightboxImg.style.cursor = 'zoom-out';
+    } else {
+        lightboxImg.style.cursor = 'zoom-in'; // Default lens icon
+    }
+}
+
+function closeLightbox() {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    // Reset image styles for next open
+    lightboxImg.style.width = '';
+    lightboxImg.style.height = '';
+    lightboxImg.style.maxWidth = '';
+    lightboxImg.style.maxHeight = '';
+    lightboxImg.style.transform = '';
+    lightboxImg.style.cursor = 'zoom-in';
+    
+    // Reset drag state
+    isDragging = false;
+    currentTranslateX = 0;
+    currentTranslateY = 0;
+}
 
 // Click featured image to open lightbox
 document.getElementById('featuredImg').addEventListener('click', function() {
-    lightboxImg.src = this.src;
+    // Get the high-res image from the active thumbnail's data-highres attribute
+    const activeThumb = document.querySelector('.thumbnail-item.active');
+    const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
     
-    // Reset zoom state when opening
-    currentScale = 1;
-    lightboxImg.style.transform = 'scale(1)';
-    lightboxImg.classList.remove('zoom-out');
+    lightboxImg.src = highResSrc; 
     
+    lightboxImg.onload = function() {
+        const fitZoom = getFitToScreenZoom();
+        
+        console.log(`🖼️ Image: ${lightboxImg.naturalWidth}x${lightboxImg.naturalHeight}px`);
+        console.log(`🖥️  Viewport: ${window.innerWidth}x${window.innerHeight}px`);
+        console.log(`🔍 Initial view: ${(fitZoom * 100).toFixed(1)}% (fit to screen)`);
+        console.log(`🎯 Max zoom (100%): ${lightboxImg.naturalWidth}x${lightboxImg.naturalHeight}px`);
+        
+        setZoomLevel(fitZoom);
+    };
+
     lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 });
 
 // Close lightbox when clicking X button
-document.querySelector('.lightbox-close').addEventListener('click', function() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
 
 // Close lightbox when clicking background
 lightbox.addEventListener('click', function(e) {
     if (e.target === lightbox) {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        closeLightbox();
     }
 });
 
 // Close with Escape key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        closeLightbox();
     }
 });
 
@@ -286,32 +387,100 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Shift') {
         lightboxImg.classList.add('zoom-out');
+        updateLightboxCursor();
     }
 });
 
 document.addEventListener('keyup', function(e) {
     if (e.key === 'Shift') {
         lightboxImg.classList.remove('zoom-out');
+        updateLightboxCursor();
     }
 });
 
-// REGULAR LEFT-CLICK ZOOM
-lightboxImg.addEventListener('click', function(e) {
-    e.stopPropagation(); // Don't close lightbox when clicking image
+// LEFT-CLICK HOLD DRAG-TO-PAN FUNCTIONALITY
+lightboxImg.addEventListener('mousedown', function(e) {
+    // Only start dragging on LEFT CLICK (button 0) and if zoomed in
+    if (e.button === 0 && currentZoomLevel > getFitToScreenZoom()) {
+        isDragging = true;
+        startX = e.clientX - currentTranslateX;
+        startY = e.clientY - currentTranslateY;
+        updateLightboxCursor();
+        e.preventDefault();
+    }
+});
+
+lightboxImg.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
     
-    if (e.shiftKey) {
-        // Shift + Left-click = ZOOM OUT
-        if (currentScale > MIN_ZOOM) {
-            currentScale -= 0.1;
-            if (currentScale < MIN_ZOOM) currentScale = MIN_ZOOM;
-            lightboxImg.style.transform = `scale(${currentScale})`;
+    e.preventDefault();
+    
+    // Calculate new position
+    currentTranslateX = e.clientX - startX;
+    currentTranslateY = e.clientY - startY;
+    
+    // Apply transform
+    lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+});
+
+lightboxImg.addEventListener('mouseup', function(e) {
+    // Stop dragging on LEFT MOUSE release
+    if (isDragging && e.button === 0) {
+        isDragging = false;
+        updateLightboxCursor();
+    }
+});
+
+lightboxImg.addEventListener('mouseleave', function() {
+    if (isDragging) {
+        isDragging = false;
+        updateLightboxCursor();
+    }
+});
+
+// CLICK ZOOM FUNCTIONALITY (now requires Shift key for all zooming)
+lightboxImg.addEventListener('click', function(e) {
+    // Only handle clicks when NOT dragging and with Shift key
+    if (!isDragging && e.shiftKey) {
+        e.stopPropagation();
+        
+        if (e.shiftKey) {
+            // Shift + Click = ZOOM OUT
+            const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
+            setZoomLevel(newZoom);
+            console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
         }
-    } else {
-        // Regular Left-click = ZOOM IN
-        if (currentScale < MAX_ZOOM) {
-            currentScale += 0.1;
-            if (currentScale > MAX_ZOOM) currentScale = MAX_ZOOM;
-            lightboxImg.style.transform = `scale(${currentScale})`;
+    }
+});
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    if (lightbox.style.display === 'flex') {
+        if (e.key === '1') {
+            // Press '1' to jump directly to 100% (max zoom)
+            setZoomLevel(1.0);
+            console.log("🎯 Jumped to 100% - ACTUAL PIXELS");
+            e.preventDefault();
+        } else if (e.key === '0') {
+            // Press '0' to jump to fit screen (initial view)
+            const fitZoom = getFitToScreenZoom();
+            setZoomLevel(fitZoom);
+            console.log("🖼️ Jumped to fit screen");
+            e.preventDefault();
+        } else if (e.key === 'Shift') {
+            // Shift key already handled above for cursor change
+        } else if (e.key === '+' || e.key === '=') {
+            // + key to zoom in
+            const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
+            setZoomLevel(newZoom);
+            console.log(`🔍 Zoomed IN to ${(newZoom * 100).toFixed(0)}%`);
+            e.preventDefault();
+        } else if (e.key === '-' || e.key === '_') {
+            // - key to zoom out
+            const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
+            setZoomLevel(newZoom);
+            console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
+            e.preventDefault();
         }
     }
 });
