@@ -11,155 +11,54 @@
 	<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bubblegum+Sans&display=swap" rel="stylesheet">
 	<!-- CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="CONTENT/COMMON.css">
 	<!-- JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 	<style>
-		* {box-sizing: border-box;}
 
-body {background: linear-gradient(to right, #9FFFCB, white);}
+		/*BODY BODY BODY*/
+		/*BODY BODY BODY*/
 
-main {display: flex; flex-direction: column; margin: 0 auto;
-	min-height: 100vh; justify-content: space-around;
-	padding-top: 50px;}
+		body {
+    	background: linear-gradient(to right, #e3f2fd, #f3e5f5); 
+		}
 
-.custom-font {
-	font-family: 'Chewy', cursive;
-}
+		.custom-font { 
+    	font-family: 'Chewy', cursive;
+		}
 
-.nav-link:hover {
-	transform: scale(1.1);
-	transition: transform 0.3s ease;
-}
+		/*NAVBAR NAVBAR NAVBAR*/
+		/*NAVBAR NAVBAR NAVBAR*/
 
-.navbar-brand {color: white;}
+		.navbar {
+		    background: linear-gradient(45deg, #37474f, #546e7a) !important;
+		}
 
-/* Navbar H1 Title */
-.navbar-title {
-	font-family: 'Chewy', cursive;
-	font-size: 1.8rem;
-	color: white;
-	margin: 0;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-}
+		.nav-link:hover {
+			transform: scale(1.1);
+			transition: transform 0.3s ease;
+		}
 
-/* Featured Image Display */
-.featured-image {
-	height: 500px;
-	width: 500px;
-	margin: 0 auto;
-	border-radius: 20px;
-	overflow: hidden;
-	box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-	z-index: 4000;
-}
+		.navbar-brand {color: white;}
 
-.featured-image img {
-	width: 100%;
-	height: 100%;
-	display: block;
-	object-fit: cover;
-	object-position: 50% 14%;
-	transition: all 0.4 ease;
-}
+		/* Navbar H1 Title */
+		.navbar-title {
+			font-size: 1.8rem;
+			color: white;
+			margin: 0;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+		}
 
-/* Thumbnail Carousel */
-.thumbnail-carousel {
-	max-width: 900px;
-	margin: 0 auto;
-}
-
-.thumbnail-item {
-	width: 90px;
-	height: 120px;
-	border-radius: 10px;
-	overflow: hidden;
-	margin: 0 8px;
-	cursor: pointer;
-	border: 2px solid transparent;
-	transition: all 0.4s ease;
-}
-
-.thumbnail-item.active {
-	border-color: #ff6bcd;
-	transform: scale(1.4);
-}
-
-.thumbnail-item:hover {
-	transform: scale(1.2);
-	border-color: #9FFFCB;
-}
-
-.thumbnail-item.active, 
-.thumbnail-item.active:hover {
-	border-color: #ff6bcd;
-	transform: scale(1.4);
-}
-
-.thumbnail-item img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-/* Lightbox Styles */
-.lightbox {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.9);
-	z-index: 9999;
-	justify-content: center;
-	align-items: center;
-}
-
-.lightbox-image {
-	max-width: 90%;
-	max-height: 90%;
-	object-fit: contain;
-	border-radius: 10px;
-	transition: transform 0.3s ease;
-	cursor: zoom-in; /* Default: plus sign */
-	transform-origin: center center;
-}
-
-.lightbox-image.zoom-out {
-	cursor: zoom-out; /* Minus sign when shift is held */
-}
-
-.lightbox-close {
-	position: absolute;
-	top: 20px;
-	right: 30px;
-	color: white;
-	font-size: 40px;
-	font-weight: bold;
-	cursor: pointer;
-	z-index: 10000;
-}
-
-.lightbox-close:hover {
-	color: #ff6bcd;
-}
-
-.lightbox-caption {
-	position: absolute;
-	bottom: 20px;
-	color: white;
-	text-align: center;
-	font-family: 'Chewy', cursive;
-}
-
-.featured-image {
-	cursor: zoom-in; /* Shows it's clickable */
-}
+		.featured-image img {object-position: 50% 14%;}
 	</style>
 </head>
+
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
 
 <body>
 	<main>
@@ -188,31 +87,67 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 		    </div>
 		</nav>
 
-		<!-- Featured Image Display -->
-		<div class="featured-image">
-			<img id="featuredImg" src="WAIFUS-IMG/COZY.avif" alt="Featured Waifu">
+		<!-- FEATURE FEATURE FEATURE -->
+		<!-- FEATURE FEATURE FEATURE -->
+
+		<!-- Featured Image Container with Navigation -->
+		<div class="featured-image-container">
+			<button class="gallery-nav-arrow gallery-prev" title="Previous image (←)"><img src="WAIFUS-IMG/ICONS/arrow-left.png" alt="Previous"></button>
+			<button class="gallery-nav-arrow gallery-next" title="Next image (→)"><img src="WAIFUS-IMG/ICONS/arrow-right.png" alt="Next"></button>
+			
+			<div class="featured-image">
+				<img id="featuredImg" src="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif" alt="Featured Mermay">
+				<div class="featured-title" id="featuredTitle">Mermay 1</div>
+			</div>
 		</div>
+
+		<!-- CARRO CARRO CARRO -->
+		<!-- CARRO CARRO CARRO -->
 
 		<!-- Thumbnail Carousel -->
 		<div class="thumbnail-carousel">
 			<div class="d-flex justify-content-center flex-wrap gap-3">
-				<div class="thumbnail-item active" onclick="changeFeatured('WAIFUS-IMG/COZY 1200x800.avif', '50% 14%')">
-					<img src="WAIFUS-IMG/COZY 1200x800.avif" alt="Waifu 1">
+				<div class="thumbnail-item active" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif"
+				     data-crop="50% 14%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY2.avif"
+				     data-title="Mermay 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY2-S.avif" alt="Copic markers portrait study 1">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/OCTO 1200x900.avif', '50% 33%')">
-					<img src="WAIFUS-IMG/OCTO 1200x900.avif" alt="Waifu 2">
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY3-M.avif"
+				     data-crop="50% 22%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY3.avif"
+				     data-title="Mermay 2">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY3-S.avif" alt="Copic markers portrait study 2">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/MOTHWOMAN 1200x856.avif', '50% 46%')">
-					<img src="WAIFUS-IMG/MOTHWOMAN 1200x856.avif" alt="Waifu 3">
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY4-M.avif"
+				     data-crop="50% 22%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY4.avif"
+				     data-title="Mermay 3">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY4-S.avif" alt="Copic markers portrait study 3">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/BRAINPOWER 1200x900.avif', '50% 44%')">
-					<img src="WAIFUS-IMG/BRAINPOWER 1200x900.avif" alt="Waifu 4">
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY5-M.avif"
+				     data-crop="50% 4%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY5.avif"
+				     data-title="Mermay 4">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY5-S.avif" alt="Copic markers portrait study 4">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/PET 1200x900.avif', '50% 26%')">
-					<img src="WAIFUS-IMG/PET 1200x900.avif" alt="Waifu 5">
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY6-M.avif"
+				     data-crop="50% 18%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY6.avif"
+				     data-title="Mermay 5">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY6-S.avif" alt="Copic markers figure study 1">
 				</div>
-				<div class="thumbnail-item" onclick="changeFeatured('WAIFUS-IMG/DIAMOND 1200x900.avif', '50% 32%')">
-					<img src="WAIFUS-IMG/DIAMOND 1200x900.avif" alt="Waifu 6">
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY7-M.avif"
+				     data-crop="50% 32%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY7.avif"
+				     data-title="Mermay 6">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY7-S.avif" alt="Copic markers figure study 2">
 				</div>
 			</div>
 		</div>
@@ -222,268 +157,20 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 	<div id="lightbox" class="lightbox">
 		<span class="lightbox-close">&times;</span>
 		<img class="lightbox-image" id="lightboxImg">
-		<div class="lightbox-caption" id="lightboxCaption"></div>
 	</div>
 
-	<script>
-// Thumbnail click functionality
-document.querySelectorAll('.thumbnail-item').forEach(thumb => {
-    thumb.addEventListener('click', function() {
-        const imageSrc = this.getAttribute('data-image');
-        const cropPosition = this.getAttribute('data-crop') || '50% 14%';
-        
-        const featuredImg = document.getElementById('featuredImg');
-        featuredImg.src = imageSrc;
-        featuredImg.style.objectPosition = cropPosition;
-        
-        // Update active thumbnail
-        document.querySelectorAll('.thumbnail-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        this.classList.add('active');
-    });
-});
+	<!-- Controls Footer -->
+	<div id="controlsFooter" class="controls-footer">
+		<div class="controls-line"><kbd>RIGHT CLICK</kbd> = ZOOM</div>
+		<div class="controls-line"><kbd>SHIFT + CLICK</kbd> = ZOOM OUT</div>
+		<div class="controls-line"><kbd>HOLD + DRAG</kbd> = PAN</div>
+		<div class="controls-line"><kbd>1</kbd> /<kbd>0</kbd> = 100%/fit</div>
+		<div class="controls-line"><kbd>+</kbd> /<kbd>-</kbd> = ZOOM</div>
+		<div class="controls-line"><kbd>H</kbd> = HIDE HELP</div>
+	</div>
 
-// Set first thumbnail as active by default on page load
-document.addEventListener('DOMContentLoaded', function() {
-    const firstThumb = document.querySelector('.thumbnail-item');
-    if (firstThumb) {
-        firstThumb.classList.add('active');
-    }
-});
+	<script src="CONTENT/STUDIES.js"></script>
 
-// Lightbox functionality
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCaption = document.getElementById('lightboxCaption');
-
-let currentZoomLevel = 1;
-const MAX_ZOOM = 1.0; // 100% = ACTUAL PIXELS
-const MIN_ZOOM = 0.1;
-
-// Lightbox drag-to-pan functionality
-let isDragging = false;
-let startX, startY;
-let currentTranslateX = 0;
-let currentTranslateY = 0;
-
-function setZoomLevel(zoomLevel) {
-    const imgNaturalWidth = lightboxImg.naturalWidth;
-    const imgNaturalHeight = lightboxImg.naturalHeight;
-    
-    // Calculate actual display dimensions based on zoom level
-    const displayWidth = imgNaturalWidth * zoomLevel;
-    const displayHeight = imgNaturalHeight * zoomLevel;
-    
-    // Set the actual dimensions (not using scale())
-    lightboxImg.style.width = displayWidth + 'px';
-    lightboxImg.style.height = displayHeight + 'px';
-    lightboxImg.style.maxWidth = 'none';
-    lightboxImg.style.maxHeight = 'none';
-    
-    // Reset position on zoom
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-    lightboxImg.style.transform = 'translate(0px, 0px)';
-    
-    currentZoomLevel = zoomLevel;
-    
-    console.log(`🔍 Zoom: ${(zoomLevel * 100).toFixed(0)}% | Display: ${Math.round(displayWidth)}x${Math.round(displayHeight)}px`);
-    
-    if (zoomLevel === 1.0) {
-        console.log("🎯 MAX ZOOM - VIEWING AT 100% - ACTUAL PIXEL RESOLUTION");
-    }
-    
-    // Update cursor based on zoom level
-    updateLightboxCursor();
-}
-
-function getFitToScreenZoom() {
-    const imgNaturalWidth = lightboxImg.naturalWidth;
-    const imgNaturalHeight = lightboxImg.naturalHeight;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    // Calculate zoom to fit image VERTICALLY with 10% margin
-    const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
-    
-    // Also check horizontal fit to ensure it doesn't overflow
-    const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
-    
-    // Use the SMALLER zoom to ensure the entire image fits on screen
-    let zoom = Math.min(verticalZoom, horizontalZoom);
-    
-    return zoom;
-}
-
-function updateLightboxCursor() {
-    if (isDragging) {
-        lightboxImg.style.cursor = 'grabbing';
-    } else if (lightboxImg.classList.contains('zoom-out')) {
-        lightboxImg.style.cursor = 'zoom-out';
-    } else {
-        lightboxImg.style.cursor = 'zoom-in'; // Default lens icon
-    }
-}
-
-function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-    // Reset image styles for next open
-    lightboxImg.style.width = '';
-    lightboxImg.style.height = '';
-    lightboxImg.style.maxWidth = '';
-    lightboxImg.style.maxHeight = '';
-    lightboxImg.style.transform = '';
-    lightboxImg.style.cursor = 'zoom-in';
-    
-    // Reset drag state
-    isDragging = false;
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-}
-
-// Click featured image to open lightbox
-document.getElementById('featuredImg').addEventListener('click', function() {
-    // Get the high-res image from the active thumbnail's data-highres attribute
-    const activeThumb = document.querySelector('.thumbnail-item.active');
-    const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
-    
-    lightboxImg.src = highResSrc; 
-    
-    lightboxImg.onload = function() {
-        const fitZoom = getFitToScreenZoom();
-        
-        console.log(`🖼️ Image: ${lightboxImg.naturalWidth}x${lightboxImg.naturalHeight}px`);
-        console.log(`🖥️  Viewport: ${window.innerWidth}x${window.innerHeight}px`);
-        console.log(`🔍 Initial view: ${(fitZoom * 100).toFixed(1)}% (fit to screen)`);
-        console.log(`🎯 Max zoom (100%): ${lightboxImg.naturalWidth}x${lightboxImg.naturalHeight}px`);
-        
-        setZoomLevel(fitZoom);
-    };
-
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-});
-
-// Close lightbox when clicking X button
-document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-
-// Close lightbox when clicking background
-lightbox.addEventListener('click', function(e) {
-    if (e.target === lightbox) {
-        closeLightbox();
-    }
-});
-
-// Close with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeLightbox();
-    }
-});
-
-// Update cursor based on Shift key in real-time
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.add('zoom-out');
-        updateLightboxCursor();
-    }
-});
-
-document.addEventListener('keyup', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.remove('zoom-out');
-        updateLightboxCursor();
-    }
-});
-
-// LEFT-CLICK HOLD DRAG-TO-PAN FUNCTIONALITY
-lightboxImg.addEventListener('mousedown', function(e) {
-    // Only start dragging on LEFT CLICK (button 0) and if zoomed in
-    if (e.button === 0 && currentZoomLevel > getFitToScreenZoom()) {
-        isDragging = true;
-        startX = e.clientX - currentTranslateX;
-        startY = e.clientY - currentTranslateY;
-        updateLightboxCursor();
-        e.preventDefault();
-    }
-});
-
-lightboxImg.addEventListener('mousemove', function(e) {
-    if (!isDragging) return;
-    
-    e.preventDefault();
-    
-    // Calculate new position
-    currentTranslateX = e.clientX - startX;
-    currentTranslateY = e.clientY - startY;
-    
-    // Apply transform
-    lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-});
-
-lightboxImg.addEventListener('mouseup', function(e) {
-    // Stop dragging on LEFT MOUSE release
-    if (isDragging && e.button === 0) {
-        isDragging = false;
-        updateLightboxCursor();
-    }
-});
-
-lightboxImg.addEventListener('mouseleave', function() {
-    if (isDragging) {
-        isDragging = false;
-        updateLightboxCursor();
-    }
-});
-
-// CLICK ZOOM FUNCTIONALITY (now requires Shift key for all zooming)
-lightboxImg.addEventListener('click', function(e) {
-    // Only handle clicks when NOT dragging and with Shift key
-    if (!isDragging && e.shiftKey) {
-        e.stopPropagation();
-        
-        if (e.shiftKey) {
-            // Shift + Click = ZOOM OUT
-            const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
-            setZoomLevel(newZoom);
-            console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
-        }
-    }
-});
-
-// Add keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    if (lightbox.style.display === 'flex') {
-        if (e.key === '1') {
-            // Press '1' to jump directly to 100% (max zoom)
-            setZoomLevel(1.0);
-            console.log("🎯 Jumped to 100% - ACTUAL PIXELS");
-            e.preventDefault();
-        } else if (e.key === '0') {
-            // Press '0' to jump to fit screen (initial view)
-            const fitZoom = getFitToScreenZoom();
-            setZoomLevel(fitZoom);
-            console.log("🖼️ Jumped to fit screen");
-            e.preventDefault();
-        } else if (e.key === 'Shift') {
-            // Shift key already handled above for cursor change
-        } else if (e.key === '+' || e.key === '=') {
-            // + key to zoom in
-            const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
-            setZoomLevel(newZoom);
-            console.log(`🔍 Zoomed IN to ${(newZoom * 100).toFixed(0)}%`);
-            e.preventDefault();
-        } else if (e.key === '-' || e.key === '_') {
-            // - key to zoom out
-            const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
-            setZoomLevel(newZoom);
-            console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
-            e.preventDefault();
-        }
-    }
-});
-	</script>
+	
 </body>
 </html>
