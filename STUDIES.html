@@ -11,7 +11,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bubblegum+Sans&display=swap" rel="stylesheet">
 	<!-- CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 	<!-- JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -53,24 +52,25 @@
 	}
 
 	/* Featured Image Display */
-
 	.featured-image-container {
 	    position: relative;
 	    display: flex;
 	    justify-content: center;
 	    align-items: center;
 	    margin: 0 auto;
-	    max-width: 600px;
+	    max-width: 760px;
 	}
 	.featured-image {
 	    height: 500px;
-	    width: 500px;
+	    width: 555px;
 	    margin: 0 auto;
-	    border-radius: 12px; /* Slightly less rounded */
+	    border-radius: 12px;
 	    overflow: hidden;
-	    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Softer shadow */
-	    border: 1px solid #e0e0e0; /* Subtle border */
+	    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+	    border: 1px solid #e0e0e0;
 	    z-index: 4000;
+	    position: relative;
+	    cursor: zoom-in; 
 	}
 
 	.featured-image img {
@@ -82,6 +82,27 @@
 		transition: all 0.4 ease;
 	}
 
+	/* Featured Title Overlay */
+	.featured-title {
+	    position: absolute;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+	    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+	    color: white;
+	    padding: 30px 15px 15px;
+	    font-family: 'Fredoka One', cursive;
+	    font-size: 1.3rem;
+	    text-align: center;
+	    opacity: 0;
+	    transition: opacity 0.3s ease;
+	    pointer-events: none;
+	}
+
+	.featured-image:hover .featured-title {
+	    opacity: 1;
+	}
+
 	/* Thumbnail Carousel */
 	.thumbnail-carousel {
 		max-width: 900px;
@@ -91,14 +112,13 @@
 	.thumbnail-item {
 	    width: 90px;
 	    height: 120px;
-	    border-radius: 8px; /* Less bubbly */
+	    border-radius: 8px;
 	    overflow: hidden;
 	    margin: 0 8px;
 	    cursor: pointer;
 	    border: 2px solid transparent;
 	    transition: all 0.3s ease;
 	}
-
 
 	.thumbnail-item.active {
 	    border-color: #5c6bc0; 
@@ -130,8 +150,8 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0, 0, 0, 0.85); /* Less intense overlay */
-		z-index: 9999;
+		background: rgba(0, 0, 0, 0.95);
+		z-index: 10000;
 		justify-content: center;
 		align-items: center;
 	}
@@ -143,12 +163,13 @@
 		border-radius: 8px;
 	    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
 		transition: transform 0.3s ease;
-		cursor: zoom-in; /* Default: plus sign */
+		cursor: zoom-in;
 		transform-origin: center center;
+		z-index: 10001;
 	}
 
 	.lightbox-image.zoom-out {
-		cursor: zoom-out; /* Minus sign when shift is held */
+		cursor: zoom-out;
 	}
 
 	.lightbox-close {
@@ -159,190 +180,182 @@
 		font-size: 40px;
 		font-weight: bold;
 		cursor: pointer;
-		z-index: 10000;
+		z-index: 10002;
 	}
 
 	.lightbox-close:hover {
 		color: #ff6bcd;
 	}
 
-	.lightbox-caption {
-		position: absolute;
-		bottom: 20px;
-		color: white;
-		text-align: center;
-		font-family: 'Chewy', cursive;
-	}
-
-	.featured-image {
-		cursor: zoom-in; /* Shows it's clickable */
-	}
-
     .controls-footer {
-    display: none;
-    position: fixed;
-    left: 40px; /* Simple left margin */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for element height */
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 320px;
-    line-height: 2.6rem;
-    z-index: 10000;
-	}
+        position: fixed;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.95);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        max-width: 300px;
+        line-height: 2.2rem;
+        z-index: 10003;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        display: none; /* HIDDEN BY DEFAULT ON MAIN PAGE */
+    }
 
-	.controls-footer.visible {
-	    display: block;
-	}
-
-	.controls-footer.hidden {
-	    display: none;
+	.controls-footer.show {
+	    display: block !important; /* SHOW IN LIGHTBOX */
 	}
 
 	.controls-footer .controls-line {
 	    margin: 2px 0;
+        font-family: 'Fredoka One', cursive;
+        font-size: 1rem;
 	}
 
 	/* Keyboard key style */
 	kbd {
-	    background: #555;
-	    padding: 2px 6px;
+	    background: #666;
+	    padding: 3px 6px;
 	    border-radius: 4px;
-	    font-size: 1.1rem;
-	    border: 1px solid #777;
+	    font-size: 1rem;
+	    border: 1px solid #888;
 	    margin: 0 2px;
+        font-family: monospace;
+        color: white;
 	}
 
-	/* Gallery Navigation Arrows */
-	.gallery-nav {
-	    position: relative;
-	    width: 100%;
-	    max-width: 600px;
-	    margin: 0 auto;
-	}
-
+	/* Gallery Navigation Arrows - Only for main gallery */
 	.gallery-nav-arrow {
 	    position: absolute;
 	    top: 50%;
 	    transform: translateY(-50%);
-	    background: slategray; !important;
 	    border: none;
-	    font-size: 46px;
-	    width: 60px; /* Slightly larger */
+	   	width: 60px; 
 	    height: 60px;
 	    border-radius: 50%;
 	    cursor: pointer;
-	    z-index: 10000; /* Higher z-index */
+	    z-index: 5000;
 	    display: flex;
 	    align-items: center;
 	    justify-content: center;
 	    transition: all 0.3s ease;
-	    opacity: 1 !important; /* Force visibility */
-	    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow for contrast */
-	    font-weight: bold;
+	    opacity: 1 !important; 
+	    background: transparent !important;
 	}
 
-
 	.gallery-nav-arrow:hover {
-	    background: black; !important;
-	    color: white; !important;
 	    transform: translateY(-50%) scale(1.15);
-	    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 	}
 
 	.gallery-prev {
-	    left: -80px; /* Further out */
+	    left: -80px;
 	}
 
 	.gallery-next {
-	    right: -80px; /* Further out */
+	    right: -80px;
 	}
 
-/*16/9 16/9 16/9*/
-/*16/9 16/9 16/9*/
-/*16/9 16/9 16/9*/
+	.gallery-nav-arrow img {
+	    width: 24px;
+	    height: 24px;
+	}
 
-@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
-    main {
-        justify-content: space-around;
-        padding-top: 70px;
-        gap: 20px;
+	/* Hide navigation arrows when lightbox is open */
+	.lightbox-open .gallery-nav-arrow {
+	    display: none !important;
+	}
+
+	/* 16:9 Media Query */
+	@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
+	    main {
+	        justify-content: space-around;
+	        padding-top: 70px;
+	        gap: 20px;
+	    }
+
+	    .featured-image-container {
+	        position: relative;
+	        display: flex;
+	        justify-content: center;
+	        align-items: center;
+	        margin: 0 auto;
+	        max-width: 600px;
+	    }
+	    
+	    .featured-image {
+	        height: 390px;
+	        width: 440px;
+	        margin: 0 auto;
+	    }
+
+	    .featured-image img[src*="SDY2-M"] {
+	        object-position: 50% 10% !important;
+	    }
+
+	    .featured-image img[src*="SDY3-M"] {
+	        object-position: 50% 6% !important;
+	    }
+
+	    .featured-image img[src*="SDY4-M"] {
+	        object-position: 50% 8% !important;
+	    }
+
+	    .featured-image img[src*="SDY5-M"] {
+	        object-position: 50% 2% !important;
+	    }
+
+	    .featured-image img[src*="SDY6-M"] {
+	        object-position: 50% 6% !important;
+	    }
+
+	    .featured-image img[src*="SDY7-M"] {
+	        object-position: 50% 6% !important;
+	    }
+
+	    .thumbnail-carousel {
+	        margin: 0 auto;
+	    }
+
+	    .thumbnail-item {
+	        height: 100px;
+	    }
+
+	    .thumbnail-item.active {
+	        border-color: #5c6bc0;
+	        transform: scale(1.2);
+	    }
+
+	    .thumbnail-item:hover {
+	        transform: scale(1.10);
+	        border-color: #90a4ae;
+	    }
+
+	    .thumbnail-item.active, 
+	    .thumbnail-item.active:hover {
+	        border-color: #ff6bcd;
+	        transform: scale(1.2);
+	    }
+
+        /* Adjust controls for 16:9 */
+        .controls-footer {
+            left: 30px;
+            max-width: 280px;
+        }
+	}
+
+    /* Mobile/Tablet adjustments */
+    @media (max-width: 768px) {
+        .controls-footer {
+            left: 10px;
+            max-width: 250px;
+            padding: 10px;
+            font-size: 0.9rem;
+            line-height: 1.8rem;
+        }
     }
-
-    .featured-image-container {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        max-width: 600px;
-    }
-
-    
-    .featured-image {
-        height: 390px;
-        width: 440px;
-        margin: 0 auto;
-    }
-
-    .featured-image img[src*="SDY2-M"] {
-        object-position: 50% 10% !important;
-    }
-
-    .featured-image img[src*="SDY3-M"] {
-        object-position: 50% 6% !important;
-    }
-
-    .featured-image img[src*="SDY4-M"] {
-        object-position: 50% 8% !important;
-    }
-
-    .featured-image img[src*="SDY5-M"] {
-        object-position: 50% 2% !important;
-    }
-
-    .featured-image img[src*="SDY6-M"] {
-        object-position: 50% 6% !important;
-    }
-
-    .featured-image img[src*="SDY7-M"] {
-        object-position: 50% 6% !important;
-    }
-
-    .thumbnail-carousel {
-        margin: 0 auto;
-    }
-
-    .thumbnail-item {
-        height: 100px;
-    }
-
-    .thumbnail-item.active {
-        border-color: #5c6bc0;
-        transform: scale(1.2);
-    }
-
-    .thumbnail-item:hover {
-        transform: scale(1.10);
-        border-color: #90a4ae;
-    }
-
-    .thumbnail-item.active, 
-    .thumbnail-item.active:hover {
-        border-color: #ff6bcd;
-        transform: scale(1.2);
-    }
-}
-
-
 	</style>
 </head>
-
-<!-- BODYBODYBODY --><!-- BODYBODYBODY -->
-<!-- BODYBODYBODY --><!-- BODYBODYBODY -->
-<!-- BODYBODYBODY --><!-- BODYBODYBODY -->
 
 <body>
 	<main>
@@ -371,473 +384,390 @@
 		    </div>
 		</nav>
 
+		<!-- Featured Image Container with Navigation -->
+		<div class="featured-image-container">
+			<button class="gallery-nav-arrow gallery-prev" title="Previous image (←)"><img src="WAIFUS-IMG/ICONS/arrow-left.png" alt="Previous"></button>
+			<button class="gallery-nav-arrow gallery-next" title="Next image (→)"><img src="WAIFUS-IMG/ICONS/arrow-right.png" alt="Next"></button>
+			
+			<div class="featured-image">
+				<img id="featuredImg" src="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif" alt="Featured Waifu">
+				<div class="featured-title" id="featuredTitle">Copic markers portrait study 1</div>
+			</div>
+		</div>
 
-	<!-- CARRO CARRO CARRO -->
-	<!-- CARRO CARRO CARRO -->
-
-    <!-- Featured Image Container with Navigation -->
-    <div class="featured-image-container">
-        <!-- ADD ARROWS INSIDE THE FEATURED IMAGE CONTAINER -->
-        <button class="gallery-nav-arrow gallery-prev" title="Previous image (←)">‹</button>
-        <button class="gallery-nav-arrow gallery-next" title="Next image (→)">›</button>
-        
-        <div class="featured-image">
-            <img id="featuredImg" src="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif" alt="Featured Waifu">
-        </div>
-    </div>
-        <!-- Thumbnail Carousel -->
+		<!-- Thumbnail Carousel -->
 		<div class="thumbnail-carousel">
 			<div class="d-flex justify-content-center flex-wrap gap-3">
-				<div class="thumbnail-item" 
+				<div class="thumbnail-item active" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif"
 				     data-crop="50% 14%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY2.avif">
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY2.avif"
+				     data-title="Copic markers portrait study 1">
 				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY2-S.avif" alt="Copic markers portrait study 1">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY3-M.avif"
 				     data-crop="50% 22%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY3.avif">
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY3.avif"
+				     data-title="Copic markers portrait study 2">
 				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY3-S.avif" alt="Copic markers portrait study 2">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY4-M.avif"
 				     data-crop="50% 22%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY4.avif">
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY4.avif"
+				     data-title="Copic markers portrait study 3">
 				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY4-S.avif" alt="Copic markers portrait study 3">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY5-M.avif"
 				     data-crop="50% 14%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY5.avif">
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY5.avif"
+				     data-title="Copic markers portrait study 4">
 				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY5-S.avif" alt="Copic markers portrait study 4">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY6-M.avif"
 				     data-crop="50% 18%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY6.avif">
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY6.avif"
+				     data-title="Copic markers figure study 1">
 				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY6-S.avif" alt="Copic markers figure study 1">
 				</div>
 				<div class="thumbnail-item" 
 				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY7-M.avif"
 				     data-crop="50% 32%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY7.avif">
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY7.avif"
+				     data-title="Copic markers figure study 2">
 				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY7-S.avif" alt="Copic markers figure study 2">
 				</div>
 			</div>
 		</div>
-
 	</main>
 
 	<!-- Lightbox Modal -->
 	<div id="lightbox" class="lightbox">
 		<span class="lightbox-close">&times;</span>
 		<img class="lightbox-image" id="lightboxImg">
-		<div class="lightbox-caption" id="lightboxCaption"></div>
 	</div>
 
-	<!-- Controls Footer -->
+	<!-- Controls Footer - HIDDEN BY DEFAULT ON MAIN PAGE -->
 	<div id="controlsFooter" class="controls-footer">
-    <div class="controls-line"><kbd>RIGHT CLICK</kbd> = ZOOM</div>
-    <div class="controls-line"><kbd>SHIFT + CLICK</kbd> = ZOOM OUT</div>
-    <div class="controls-line"><kbd>HOLD + DRAG</kbd> = PAN</div>
-    <div class="controls-line"><kbd>1</kbd> /<kbd>0</kbd> = 100%/fit</div>
-    <div class="controls-line"><kbd>+</kbd> /<kbd>-</kbd> = ZOOM</div>
-    <div class="controls-line"><kbd>H</kbd> = HIDE HELP</div>
-    </div>
+		<div class="controls-line"><kbd>RIGHT CLICK</kbd> = ZOOM</div>
+		<div class="controls-line"><kbd>SHIFT + CLICK</kbd> = ZOOM OUT</div>
+		<div class="controls-line"><kbd>HOLD + DRAG</kbd> = PAN</div>
+		<div class="controls-line"><kbd>1</kbd> /<kbd>0</kbd> = 100%/fit</div>
+		<div class="controls-line"><kbd>+</kbd> /<kbd>-</kbd> = ZOOM</div>
+		<div class="controls-line"><kbd>H</kbd> = HIDE HELP</div>
+	</div>
 
 	<script>
-    // Thumbnail click functionality with double-click support
+	// Lightbox functionality
+	const lightbox = document.getElementById('lightbox');
+	const lightboxImg = document.getElementById('lightboxImg');
+	const controlsFooter = document.getElementById('controlsFooter');
+
+	let currentZoomLevel = 1;
+	const MAX_ZOOM = 1.0;
+	const MIN_ZOOM = 0.1;
+	let isDragging = false;
+	let dragStartX, dragStartY;
+	let currentTranslateX = 0;
+	let currentTranslateY = 0;
+	let controlsVisible = true; // CONTROLS VISIBLE BY DEFAULT IN LIGHTBOX
+
+	// Set first thumbnail as active by default
+	document.addEventListener('DOMContentLoaded', function() {
+		const firstThumb = document.querySelector('.thumbnail-item');
+		if (firstThumb) {
+			firstThumb.classList.add('active');
+		}
+		
+		// Initialize controls visibility from localStorage - DEFAULT TO VISIBLE
+		const savedVisibility = localStorage.getItem('controlsVisible');
+		if (savedVisibility === 'false') {
+			controlsVisible = false;
+		} else {
+			controlsVisible = true; // DEFAULT TO VISIBLE
+			localStorage.setItem('controlsVisible', 'true'); // SET DEFAULT
+		}
+	});
+
+	// Change Featured Image Function
+	function changeFeatured(imageSrc, cropPosition = '50% 14%', title = '') {
+		const featuredImg = document.getElementById('featuredImg');
+		const featuredTitle = document.getElementById('featuredTitle');
+		
+		featuredImg.src = imageSrc;
+		featuredImg.style.objectPosition = cropPosition;
+		featuredTitle.textContent = title;
+		
+		// Update active thumbnail
+		document.querySelectorAll('.thumbnail-item').forEach(item => {
+			item.classList.remove('active');
+		});
+		
+		// Find and activate the matching thumbnail
+		const matchingThumb = Array.from(document.querySelectorAll('.thumbnail-item')).find(thumb => 
+			thumb.getAttribute('data-image') === imageSrc
+		);
+		
+		if (matchingThumb) {
+			matchingThumb.classList.add('active');
+		}
+	}
+
+	// Thumbnail click functionality with double-click support
 	document.querySelectorAll('.thumbnail-item').forEach(thumb => {
-    let clickTimer = null;
-    
-    thumb.addEventListener('click', function() {
-        if (clickTimer === null) {
-            // First click - set timer
-            clickTimer = setTimeout(() => {
-                // Single click behavior
-                const imageSrc = this.getAttribute('data-image');
-                const cropPosition = this.getAttribute('data-crop') || '50% 14%';
-                
-                const featuredImg = document.getElementById('featuredImg');
-                featuredImg.src = imageSrc;
-                featuredImg.style.objectPosition = cropPosition;
-                
-                // Update active thumbnail
-                document.querySelectorAll('.thumbnail-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                clickTimer = null;
-            }, 300); // 300ms delay to detect double-click
-        }
-    });
-    
-    thumb.addEventListener('dblclick', function(e) {
-        // Double click - open lightbox
-        e.preventDefault();
-        clearTimeout(clickTimer);
-        clickTimer = null;
-        
-        // Update active thumbnail first
-        document.querySelectorAll('.thumbnail-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        this.classList.add('active');
-        
-        // Open lightbox with this image
-        const featuredImg = document.getElementById('featuredImg');
-        const highResSrc = this.getAttribute('data-highres') || featuredImg.src;
-        
-        lightboxImg.src = highResSrc; 
-        
-        lightboxImg.onload = function() {
-            const fitZoom = getFitToScreenZoom();
-            setZoomLevel(fitZoom);
-            
-            // Show controls if not hidden
-            if (localStorage.getItem('controlsVisible') !== 'false') {
-                document.getElementById('controlsFooter').classList.add('visible');
-                controlsVisible = true;
-            }
-        };
+		let clickTimer = null;
+		
+		thumb.addEventListener('click', function() {
+			if (clickTimer === null) {
+				clickTimer = setTimeout(() => {
+					// Single click behavior
+					const imageSrc = this.getAttribute('data-image');
+					const cropPosition = this.getAttribute('data-crop') || '50% 14%';
+					const title = this.getAttribute('data-title') || this.querySelector('img').alt;
+					
+					changeFeatured(imageSrc, cropPosition, title);
+					clickTimer = null;
+				}, 300);
+			}
+		});
+		
+		thumb.addEventListener('dblclick', function(e) {
+			e.preventDefault();
+			clearTimeout(clickTimer);
+			clickTimer = null;
+			
+			// Update active thumbnail first
+			document.querySelectorAll('.thumbnail-item').forEach(item => {
+				item.classList.remove('active');
+			});
+			this.classList.add('active');
+			
+			// Open lightbox
+			const highResSrc = this.getAttribute('data-highres') || this.getAttribute('data-image');
+			
+			openLightbox(highResSrc);
+		});
+	});
 
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    });
-});
+	// Open lightbox function
+	function openLightbox(imageSrc) {
+		lightboxImg.src = imageSrc;
+		
+		lightboxImg.onload = function() {
+			const fitZoom = getFitToScreenZoom();
+			setZoomLevel(fitZoom);
+		};
 
-// Set first thumbnail as active by default on page load
-document.addEventListener('DOMContentLoaded', function() {
-    const firstThumb = document.querySelector('.thumbnail-item');
-    if (firstThumb) {
-        firstThumb.classList.add('active');
-    }
-});
+		lightbox.style.display = 'flex';
+		document.body.style.overflow = 'hidden';
+		document.body.classList.add('lightbox-open');
+		
+		// SHOW CONTROLS BY DEFAULT WHEN LIGHTBOX OPENS
+		if (controlsVisible) {
+			controlsFooter.classList.add('show');
+		} else {
+			controlsFooter.classList.remove('show');
+		}
+	}
 
-// Lightbox functionality
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCaption = document.getElementById('lightboxCaption');
+	// Lightbox zoom and drag functions
+	function setZoomLevel(zoomLevel) {
+		const imgNaturalWidth = lightboxImg.naturalWidth;
+		const imgNaturalHeight = lightboxImg.naturalHeight;
+		
+		const displayWidth = imgNaturalWidth * zoomLevel;
+		const displayHeight = imgNaturalHeight * zoomLevel;
+		
+		lightboxImg.style.width = displayWidth + 'px';
+		lightboxImg.style.height = displayHeight + 'px';
+		lightboxImg.style.maxWidth = 'none';
+		lightboxImg.style.maxHeight = 'none';
+		
+		currentTranslateX = 0;
+		currentTranslateY = 0;
+		lightboxImg.style.transform = 'translate(0px, 0px)';
+		
+		currentZoomLevel = zoomLevel;
+		updateLightboxCursor();
+	}
 
-let currentZoomLevel = 1;
-const MAX_ZOOM = 1.0;
-const MIN_ZOOM = 0.1;
+	function getFitToScreenZoom() {
+		const imgNaturalWidth = lightboxImg.naturalWidth;
+		const imgNaturalHeight = lightboxImg.naturalHeight;
+		const viewportWidth = window.innerWidth;
+		const viewportHeight = window.innerHeight;
+		
+		const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
+		const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
+		
+		return Math.min(verticalZoom, horizontalZoom);
+	}
 
-// Lightbox drag-to-pan functionality
-let isDragging = false;
-let dragStartX, dragStartY;
-let currentTranslateX = 0;
-let currentTranslateY = 0;
+	function updateLightboxCursor() {
+		if (isDragging) {
+			lightboxImg.style.cursor = 'grabbing';
+		} else if (lightboxImg.classList.contains('zoom-out')) {
+			lightboxImg.style.cursor = 'zoom-out';
+		} else {
+			lightboxImg.style.cursor = 'zoom-in';
+		}
+	}
 
-function setZoomLevel(zoomLevel) {
-    const imgNaturalWidth = lightboxImg.naturalWidth;
-    const imgNaturalHeight = lightboxImg.naturalHeight;
-    
-    const displayWidth = imgNaturalWidth * zoomLevel;
-    const displayHeight = imgNaturalHeight * zoomLevel;
-    
-    lightboxImg.style.width = displayWidth + 'px';
-    lightboxImg.style.height = displayHeight + 'px';
-    lightboxImg.style.maxWidth = 'none';
-    lightboxImg.style.maxHeight = 'none';
-    
-    // Reset position on zoom
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-    lightboxImg.style.transform = 'translate(0px, 0px)';
-    
-    currentZoomLevel = zoomLevel;
-    
-    console.log(`🔍 Zoom: ${(zoomLevel * 100).toFixed(0)}%`);
-    
-    updateLightboxCursor();
-}
+	function closeLightbox() {
+		lightbox.style.display = 'none';
+		document.body.style.overflow = 'auto';
+		document.body.classList.remove('lightbox-open');
+		
+		lightboxImg.style.width = '';
+		lightboxImg.style.height = '';
+		lightboxImg.style.maxWidth = '';
+		lightboxImg.style.maxHeight = '';
+		lightboxImg.style.transform = '';
+		lightboxImg.style.cursor = 'zoom-in';
+		
+		isDragging = false;
+		currentTranslateX = 0;
+		currentTranslateY = 0;
+		
+		// Hide controls when closing lightbox
+		controlsFooter.classList.remove('show');
+	}
 
-function getFitToScreenZoom() {
-    const imgNaturalWidth = lightboxImg.naturalWidth;
-    const imgNaturalHeight = lightboxImg.naturalHeight;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
-    const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
-    
-    return Math.min(verticalZoom, horizontalZoom);
-}
+	// Navigation function - Only for main gallery
+	function navigateThumbnails(direction) {
+		const thumbs = document.querySelectorAll('.thumbnail-item');
+		const currentActive = document.querySelector('.thumbnail-item.active');
+		let currentIndex = Array.from(thumbs).indexOf(currentActive);
+		
+		let newIndex = currentIndex + direction;
+		if (newIndex < 0) newIndex = thumbs.length - 1;
+		if (newIndex >= thumbs.length) newIndex = 0;
+		
+		const newThumb = thumbs[newIndex];
+		const imageSrc = newThumb.getAttribute('data-image');
+		const cropPosition = newThumb.getAttribute('data-crop') || '50% 14%';
+		const title = newThumb.getAttribute('data-title') || newThumb.querySelector('img').alt;
+		
+		changeFeatured(imageSrc, cropPosition, title);
+	}
 
-function updateLightboxCursor() {
-    if (isDragging) {
-        lightboxImg.style.cursor = 'grabbing';
-    } else if (lightboxImg.classList.contains('zoom-out')) {
-        lightboxImg.style.cursor = 'zoom-out';
-    } else {
-        lightboxImg.style.cursor = 'zoom-in';
-    }
-}
+	// Event Listeners
+	document.getElementById('featuredImg').addEventListener('click', function() {
+		const activeThumb = document.querySelector('.thumbnail-item.active');
+		if (activeThumb) {
+			const highResSrc = activeThumb.getAttribute('data-highres') || activeThumb.getAttribute('data-image');
+			openLightbox(highResSrc);
+		}
+	});
 
-function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
-    
-    // Reset image styles
-    lightboxImg.style.width = '';
-    lightboxImg.style.height = '';
-    lightboxImg.style.maxWidth = '';
-    lightboxImg.style.maxHeight = '';
-    lightboxImg.style.transform = '';
-    lightboxImg.style.cursor = 'zoom-in';
-    
-    // Reset drag state
-    isDragging = false;
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-    
-    // Hide controls when lightbox closes
-    document.getElementById('controlsFooter').classList.remove('visible');
-}
+	document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+	lightbox.addEventListener('click', function(e) {
+		if (e.target === lightbox) {
+			closeLightbox();
+		}
+	});
 
-// Navigation function
-function navigateThumbnails(direction) {
-    const thumbs = document.querySelectorAll('.thumbnail-item');
-    const currentActive = document.querySelector('.thumbnail-item.active');
-    let currentIndex = Array.from(thumbs).indexOf(currentActive);
-    
-    // Calculate new index
-    let newIndex = currentIndex + direction;
-    if (newIndex < 0) newIndex = thumbs.length - 1; // Wrap to last
-    if (newIndex >= thumbs.length) newIndex = 0; // Wrap to first
-    
-    // Update active thumbnail and featured image
-    const newThumb = thumbs[newIndex];
-    const imageSrc = newThumb.getAttribute('data-image');
-    const cropPosition = newThumb.getAttribute('data-crop') || '50% 14%';
-    
-    // Update featured image
-    const featuredImg = document.getElementById('featuredImg');
-    featuredImg.src = imageSrc;
-    featuredImg.style.objectPosition = cropPosition;
-    
-    // Update active states
-    thumbs.forEach(thumb => thumb.classList.remove('active'));
-    newThumb.classList.add('active');
-    
-    console.log(`🔄 Navigated to image ${newIndex + 1}/${thumbs.length}`);
-}
+	// Navigation arrows - only for main gallery (not in lightbox)
+	document.querySelector('.gallery-prev').addEventListener('click', function() {
+		navigateThumbnails(-1);
+	});
 
-// SIMPLE CLICK ZOOM
-lightboxImg.addEventListener('click', function(e) {
-    // If we were dragging, don't zoom
-    if (isDragging) {
-        isDragging = false;
-        updateLightboxCursor();
-        return;
-    }
-    
-    e.stopPropagation();
-    
-    if (e.shiftKey) {
-        // Shift + Click = ZOOM OUT
-        const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
-        setZoomLevel(newZoom);
-        console.log(`🔍 Zoomed OUT to ${(newZoom * 100).toFixed(0)}%`);
-    } else {
-        // Regular Click = ZOOM IN
-        const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
-        setZoomLevel(newZoom);
-        console.log(`🔍 Zoomed IN to ${(newZoom * 100).toFixed(0)}%`);
-    }
-});
+	document.querySelector('.gallery-next').addEventListener('click', function() {
+		navigateThumbnails(1);
+	});
 
-// DRAG FUNCTIONALITY
-lightboxImg.addEventListener('mousedown', function(e) {
-    if (e.button === 0) { // Left click only
-        isDragging = true;
-        dragStartX = e.clientX - currentTranslateX;
-        dragStartY = e.clientY - currentTranslateY;
-        lightboxImg.style.cursor = 'grabbing';
-        e.preventDefault();
-    }
-});
+	// Lightbox interaction
+	lightboxImg.addEventListener('click', function(e) {
+		if (isDragging) {
+			isDragging = false;
+			updateLightboxCursor();
+			return;
+		}
+		
+		e.stopPropagation();
+		
+		if (e.shiftKey) {
+			const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
+			setZoomLevel(newZoom);
+		} else {
+			const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
+			setZoomLevel(newZoom);
+		}
+	});
 
-lightboxImg.addEventListener('mousemove', function(e) {
-    if (!isDragging) return;
-    
-    currentTranslateX = e.clientX - dragStartX;
-    currentTranslateY = e.clientY - dragStartY;
-    
-    lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-});
+	lightboxImg.addEventListener('mousedown', function(e) {
+		if (e.button === 0) {
+			isDragging = true;
+			dragStartX = e.clientX - currentTranslateX;
+			dragStartY = e.clientY - currentTranslateY;
+			lightboxImg.style.cursor = 'grabbing';
+			e.preventDefault();
+		}
+	});
 
-lightboxImg.addEventListener('mouseup', function(e) {
-    if (e.button === 0) {
-        isDragging = false;
-        updateLightboxCursor();
-    }
-});
+	lightboxImg.addEventListener('mousemove', function(e) {
+		if (!isDragging) return;
+		
+		currentTranslateX = e.clientX - dragStartX;
+		currentTranslateY = e.clientY - dragStartY;
+		
+		lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+	});
 
-lightboxImg.addEventListener('mouseleave', function() {
-    isDragging = false;
-    updateLightboxCursor();
-});
+	lightboxImg.addEventListener('mouseup', function(e) {
+		if (e.button === 0) {
+			isDragging = false;
+			updateLightboxCursor();
+		}
+	});
 
-// Click featured image to open lightbox
-document.getElementById('featuredImg').addEventListener('click', function() {
-    const activeThumb = document.querySelector('.thumbnail-item.active');
-    const highResSrc = activeThumb.getAttribute('data-highres') || this.src;
-    
-    lightboxImg.src = highResSrc; 
-    
-    lightboxImg.onload = function() {
-        const fitZoom = getFitToScreenZoom();
-        setZoomLevel(fitZoom);
-        
-        // Show controls when lightbox opens (if not hidden by user)
-        if (localStorage.getItem('controlsVisible') !== 'false') {
-            document.getElementById('controlsFooter').classList.add('visible');
-            controlsVisible = true;
-        }
-    };
+	lightboxImg.addEventListener('mouseleave', function() {
+		isDragging = false;
+		updateLightboxCursor();
+	});
 
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-});
+	// Keyboard shortcuts
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Shift') {
+			lightboxImg.classList.add('zoom-out');
+			updateLightboxCursor();
+		}
+		
+		if (lightbox.style.display === 'flex') {
+			if (e.key === 'Escape') closeLightbox();
+			else if (e.key === '1') setZoomLevel(1.0);
+			else if (e.key === '0') setZoomLevel(getFitToScreenZoom());
+			else if (e.key === '+' || e.key === '=') setZoomLevel(Math.min(currentZoomLevel + 0.2, MAX_ZOOM));
+			else if (e.key === '-' || e.key === '_') setZoomLevel(Math.max(currentZoomLevel - 0.2, MIN_ZOOM));
+			else if (e.key === 'h' || e.key === 'H') toggleControls();
+		} else {
+			if (e.key === 'ArrowRight') navigateThumbnails(1);
+			else if (e.key === 'ArrowLeft') navigateThumbnails(-1);
+		}
+	});
 
-// Close lightbox when clicking X button
-document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+	document.addEventListener('keyup', function(e) {
+		if (e.key === 'Shift') {
+			lightboxImg.classList.remove('zoom-out');
+			updateLightboxCursor();
+		}
+	});
 
-// Close lightbox when clicking background
-lightbox.addEventListener('click', function(e) {
-    if (e.target === lightbox) {
-        closeLightbox();
-    }
-});
-
-// Close with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeLightbox();
-    }
-});
-
-// Update cursor based on Shift key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.add('zoom-out');
-        updateLightboxCursor();
-    }
-});
-
-document.addEventListener('keyup', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.remove('zoom-out');
-        updateLightboxCursor();
-    }
-});
-
-// Combined keyboard shortcuts with navigation
-document.addEventListener('keydown', function(e) {
-    if (lightbox.style.display === 'flex') {
-        if (e.key === '1') {
-            setZoomLevel(1.0);
-            e.preventDefault();
-        } else if (e.key === '0') {
-            const fitZoom = getFitToScreenZoom();
-            setZoomLevel(fitZoom);
-            e.preventDefault();
-        } else if (e.key === '+' || e.key === '=') {
-            const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
-            setZoomLevel(newZoom);
-            e.preventDefault();
-        } else if (e.key === '-' || e.key === '_') {
-            const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
-            setZoomLevel(newZoom);
-            e.preventDefault();
-        } else if (e.key === 'h' || e.key === 'H') {
-            toggleControls();
-            e.preventDefault();
-        } else if (e.key === 'ArrowRight') {
-            navigateThumbnails(1); // Next image
-            e.preventDefault();
-        } else if (e.key === 'ArrowLeft') {
-            navigateThumbnails(-1); // Previous image
-            e.preventDefault();
-        }
-    } else {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-            navigateThumbnails(e.key === 'ArrowRight' ? 1 : -1);
-            e.preventDefault();
-        } else if (e.key === 'h' || e.key === 'H') {
-            toggleControls();
-            e.preventDefault();
-        }
-    }
-});
-
-// Gallery navigation arrow functionality
-document.querySelector('.gallery-prev').addEventListener('click', function() {
-    navigateThumbnails(-1);
-});
-
-document.querySelector('.gallery-next').addEventListener('click', function() {
-    navigateThumbnails(1);
-});
-
-// Update the navigateThumbnails function (if needed)
-function navigateThumbnails(direction) {
-    const thumbs = document.querySelectorAll('.thumbnail-item');
-    const currentActive = document.querySelector('.thumbnail-item.active');
-    let currentIndex = Array.from(thumbs).indexOf(currentActive);
-    
-    // Calculate new index
-    let newIndex = currentIndex + direction;
-    if (newIndex < 0) newIndex = thumbs.length - 1; // Wrap to last
-    if (newIndex >= thumbs.length) newIndex = 0; // Wrap to first
-    
-    // Update active thumbnail and featured image
-    const newThumb = thumbs[newIndex];
-    const imageSrc = newThumb.getAttribute('data-image');
-    const cropPosition = newThumb.getAttribute('data-crop') || '50% 14%';
-    
-    // Update featured image
-    const featuredImg = document.getElementById('featuredImg');
-    featuredImg.src = imageSrc;
-    featuredImg.style.objectPosition = cropPosition;
-    
-    // Update active states
-    thumbs.forEach(thumb => thumb.classList.remove('active'));
-    newThumb.classList.add('active');
-    
-    console.log(`🔄 Navigated to image ${newIndex + 1}/${thumbs.length}`);
-}
-
-// Controls Footer
-let controlsVisible = true;
-
-function toggleControls() {
-    const controlsFooter = document.getElementById('controlsFooter');
-    controlsVisible = !controlsVisible;
-    
-    if (controlsVisible) {
-        controlsFooter.classList.add('visible');
-        controlsFooter.classList.remove('hidden');
-    } else {
-        controlsFooter.classList.add('hidden');
-        controlsFooter.classList.remove('visible');
-    }
-    
-    localStorage.setItem('controlsVisible', controlsVisible);
-}
-
-// Load saved preference
-document.addEventListener('DOMContentLoaded', function() {
-    const savedVisibility = localStorage.getItem('controlsVisible');
-    if (savedVisibility === 'false') {
-        controlsVisible = false;
-        document.getElementById('controlsFooter').classList.add('hidden');
-    }
-});
+	// Controls footer - TOGGLE VISIBILITY
+	function toggleControls() {
+		controlsVisible = !controlsVisible;
+		
+		if (controlsVisible) {
+			controlsFooter.classList.add('show');
+		} else {
+			controlsFooter.classList.remove('show');
+		}
+		
+		localStorage.setItem('controlsVisible', controlsVisible);
+	}
 	</script>
 </body>
 </html>
