@@ -1,0 +1,790 @@
+Hi hi, I'll tell you what we were working on:
+
+It's a gallery home page that leads to 6 sub galleries, but were working on the sub-galleries not the main one for now.
+
+The galleries are basically a Carousell with a Featured image, can navigate between features by clicking thumbs or with navigation left/right arrows. Double clicking thumbs or clicking the feature image once opens that image in lightbox at a large resolution.
+
+On lightbox you can zoom with the lens up to the original pixel size of the image (normally around 3000 pixels wide or more displayed pixel per pixel) clicking 1 also displays full image size, holding shift gives the lens a minus sign (-) and while that's active clicking zooms out. Holding left click drags the image around and esc gets out of lightbox.
+
+Controls for lightbox are displayed on a container with text that can be hidden with H.
+
+Right now we were externalizing CSS and JS to external files outside the HTML, figuring out what can be put in a common external because the 6 sub galleries will be mostly identical with some aesthetic changes.
+
+To keep you up to date I'll show you the whole code:
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LOTSA-WAIFUS|STUDIES</title>
+	<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="manifest" href="manifest.json">
+	<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bubblegum+Sans&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="CONTENT/COMMON.css">
+	<!-- JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<style>
+
+		/*NAVBAR NAVBAR NAVBAR*/
+		/*NAVBAR NAVBAR NAVBAR*/
+
+		.navbar {
+		    background: linear-gradient(45deg, #37474f, #546e7a) !important;
+		}
+
+		.nav-link:hover {
+			transform: scale(1.1);
+			transition: transform 0.3s ease;
+		}
+
+		.navbar-brand {color: white;}
+
+		/* Navbar H1 Title */
+		.navbar-title {
+			font-size: 1.8rem;
+			color: white;
+			margin: 0;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	</style>
+</head>
+
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+<!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
+
+<body>
+	<main>
+		<!-- NAVBAR WITH INTEGRATED H1 -->
+		<nav class="navbar navbar-expand-lg fixed-top" 
+				style="background: linear-gradient(45deg, #073B4C, #118AB2);">
+		    <div class="container position-relative">
+		        <a class="navbar-brand custom-font" href="index.html">LOTSA WAIFUS</a>
+		        <h1 class="navbar-title custom-font">STUDIES</h1>
+		        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+		            <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <div class="collapse navbar-collapse" id="navbarNav">
+		            <ul class="navbar-nav ms-auto">
+		                <li class="nav-item">
+		                    <a class="nav-link custom-font" href="#">Gallery</a>
+		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link custom-font" href="#">Shop</a>
+		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link custom-font" href="#">About</a>
+		                </li>
+		            </ul>
+		        </div>
+		    </div>
+		</nav>
+
+		<!-- FEATURE FEATURE FEATURE -->
+		<!-- FEATURE FEATURE FEATURE -->
+
+		<!-- Featured Image Container with Navigation -->
+		<div class="featured-image-container">
+			<button class="gallery-nav-arrow gallery-prev" title="Previous image (←)"><img src="WAIFUS-IMG/ICONS/arrow-left.png" alt="Previous"></button>
+			<button class="gallery-nav-arrow gallery-next" title="Next image (→)"><img src="WAIFUS-IMG/ICONS/arrow-right.png" alt="Next"></button>
+			
+			<div class="featured-image">
+				<img id="featuredImg" src="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif" alt="Featured Waifu">
+				<div class="featured-title" id="featuredTitle">Copic markers portrait study 1</div>
+			</div>
+		</div>
+
+		<!-- CARRO CARRO CARRO -->
+		<!-- CARRO CARRO CARRO -->
+
+		<!-- Thumbnail Carousel -->
+		<div class="thumbnail-carousel">
+			<div class="d-flex justify-content-center flex-wrap gap-3">
+				<div class="thumbnail-item active" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY2-M.avif"
+				     data-crop="50% 14%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY2.avif"
+				     data-title="Copic markers portrait study 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY2-S.avif" alt="Copic markers portrait study 1">
+				</div>
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY3-M.avif"
+				     data-crop="50% 22%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY3.avif"
+				     data-title="Copic markers portrait study 2">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY3-S.avif" alt="Copic markers portrait study 2">
+				</div>
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY4-M.avif"
+				     data-crop="50% 22%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY4.avif"
+				     data-title="Copic markers portrait study 3">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY4-S.avif" alt="Copic markers portrait study 3">
+				</div>
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY5-M.avif"
+				     data-crop="50% 14%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY5.avif"
+				     data-title="Copic markers portrait study 4">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY5-S.avif" alt="Copic markers portrait study 4">
+				</div>
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY6-M.avif"
+				     data-crop="50% 18%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY6.avif"
+				     data-title="Copic markers figure study 1">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY6-S.avif" alt="Copic markers figure study 1">
+				</div>
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY7-M.avif"
+				     data-crop="50% 32%"
+				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY7.avif"
+				     data-title="Copic markers figure study 2">
+				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY7-S.avif" alt="Copic markers figure study 2">
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Lightbox Modal -->
+	<div id="lightbox" class="lightbox">
+		<span class="lightbox-close">&times;</span>
+		<img class="lightbox-image" id="lightboxImg">
+	</div>
+
+	<!-- Controls Footer -->
+	<div id="controlsFooter" class="controls-footer">
+		<div class="controls-line"><kbd>RIGHT CLICK</kbd> = ZOOM</div>
+		<div class="controls-line"><kbd>SHIFT + CLICK</kbd> = ZOOM OUT</div>
+		<div class="controls-line"><kbd>HOLD + DRAG</kbd> = PAN</div>
+		<div class="controls-line"><kbd>1</kbd> /<kbd>0</kbd> = 100%/fit</div>
+		<div class="controls-line"><kbd>+</kbd> /<kbd>-</kbd> = ZOOM</div>
+		<div class="controls-line"><kbd>H</kbd> = HIDE HELP</div>
+	</div>
+
+	<script src="CONTENT/STUDIES.js"></script>
+
+	
+</body>
+</html>
+
+
+/* css/gallery-common.css */
+
+* {box-sizing: border-box;}
+
+body {
+    background: linear-gradient(to right, #e3f2fd, #f3e5f5); 
+}
+
+main {display: flex; flex-direction: column; margin: 0 auto;
+    min-height: 100vh; justify-content: space-around;
+    padding-top: 50px; position: relative;overflow: visible !important; 
+}
+
+.custom-font { 
+    font-family: 'Fredoka One', cursive;
+}
+
+/* Featured Image Display */
+.featured-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 760px;
+}
+.featured-image {
+    height: 500px;
+    width: 555px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 1px solid #e0e0e0;
+    z-index: 4000;
+    position: relative;
+    cursor: zoom-in; 
+}
+
+.featured-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 14%;
+    transition: opacity 0.3s ease;
+}
+
+/* Featured Title Overlay */
+.featured-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 30px 15px 15px;
+    font-family: 'Chewy', cursive;
+    font-size: 1.3rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.featured-image:hover .featured-title {
+    opacity: 1;
+}
+
+/* Thumbnail Carousel */
+.thumbnail-carousel {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.thumbnail-item {
+    width: 90px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-item.active {
+    border-color: #5c6bc0; 
+    transform: scale(1.3);
+}
+
+.thumbnail-item:hover {
+    transform: scale(1.15);
+    border-color: #90a4ae; 
+}
+
+.thumbnail-item.active, 
+.thumbnail-item.active:hover {
+    border-color: #5c6bc0;
+    transform: scale(1.4);
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+    transform-origin: center center;
+    z-index: 10001;
+}
+
+.lightbox-image.zoom-out {
+    cursor: zoom-out;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10002;
+}
+
+.lightbox-close:hover {
+    color: #ff6bcd;
+}
+
+.controls-footer {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 300px;
+    line-height: 2.2rem;
+    z-index: 10003;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: none;
+}
+
+.controls-footer.show {
+    display: block !important;
+}
+
+.controls-footer .controls-line {
+    margin: 2px 0;
+    font-family: 'Chewy', cursive;
+    font-size: 1rem;
+}
+
+/* Keyboard key style */
+kbd {
+    background: #666;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 1px solid #888;
+    margin: 0 2px;
+    font-family: monospace;
+    color: white;
+}
+
+/* Gallery Navigation Arrows - Only for main gallery */
+.gallery-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 1 !important; 
+    background: transparent !important;
+}
+
+.gallery-nav-arrow:hover {
+    transform: translateY(-50%) scale(1.15);
+}
+
+.gallery-prev {
+    left: -80px;
+}
+
+.gallery-next {
+    right: -80px;
+}
+
+.gallery-nav-arrow img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Hide navigation arrows when lightbox is open */
+.lightbox-open .gallery-nav-arrow {
+    display: none !important;
+}
+
+/* 16:9 Media Query */
+@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
+    main {
+        justify-content: space-around;
+        padding-top: 70px;
+        gap: 20px;
+    }
+
+    .featured-image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 600px;
+    }
+    
+    .featured-image {
+        height: 390px;
+        width: 440px;
+        margin: 0 auto;
+    }
+
+    .thumbnail-carousel {
+        margin: 0 auto;
+    }
+
+    .thumbnail-item {
+        height: 100px;
+    }
+
+    .thumbnail-item.active {
+        border-color: #5c6bc0;
+        transform: scale(1.2);
+    }
+
+    .thumbnail-item:hover {
+        transform: scale(1.10);
+        border-color: #90a4ae;
+    }
+
+    .thumbnail-item.active, 
+    .thumbnail-item.active:hover {
+        border-color: #ff6bcd;
+        transform: scale(1.2);
+    }
+
+    .controls-footer {
+        left: 30px;
+        max-width: 280px;
+    }
+}
+
+/* Mobile/Tablet adjustments */
+@media (max-width: 768px) {
+    .controls-footer {
+        left: 10px;
+        max-width: 250px;
+        padding: 10px;
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+    }
+}
+
+// Lightbox functionality
+	const lightbox = document.getElementById('lightbox');
+	const lightboxImg = document.getElementById('lightboxImg');
+	const controlsFooter = document.getElementById('controlsFooter');
+
+	let currentZoomLevel = 1;
+	const MAX_ZOOM = 1.0;
+	const MIN_ZOOM = 0.1;
+	let isDragging = false;
+	let dragStartX, dragStartY;
+	let currentTranslateX = 0;
+	let currentTranslateY = 0;
+	let controlsVisible = true;
+
+	// Set first thumbnail as active by default
+	document.addEventListener('DOMContentLoaded', function() {
+		const firstThumb = document.querySelector('.thumbnail-item');
+		if (firstThumb) {
+			firstThumb.classList.add('active');
+		}
+		
+		// Initialize controls visibility from localStorage
+		const savedVisibility = localStorage.getItem('controlsVisible');
+		if (savedVisibility === 'false') {
+			controlsVisible = false;
+		} else {
+			controlsVisible = true;
+			localStorage.setItem('controlsVisible', 'true');
+		}
+	});
+
+	// Change Featured Image Function
+	function changeFeatured(imageSrc, cropPosition = '50% 14%', title = '') {
+		const featuredImg = document.getElementById('featuredImg');
+		const featuredTitle = document.getElementById('featuredTitle');
+		
+		// Create new image to preload
+		const newImage = new Image();
+		newImage.onload = function() {
+			// Apply crop position BEFORE setting src to prevent animation
+			featuredImg.style.objectPosition = cropPosition;
+			featuredImg.src = imageSrc;
+			featuredTitle.textContent = title;
+		};
+		newImage.src = imageSrc;
+		
+		// Update active thumbnail
+		document.querySelectorAll('.thumbnail-item').forEach(item => {
+			item.classList.remove('active');
+		});
+		
+		// Find and activate the matching thumbnail
+		const matchingThumb = Array.from(document.querySelectorAll('.thumbnail-item')).find(thumb => 
+			thumb.getAttribute('data-image') === imageSrc
+		);
+		
+		if (matchingThumb) {
+			matchingThumb.classList.add('active');
+		}
+	}
+
+	// Thumbnail click functionality
+	document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+		let clickTimer = null;
+		
+		thumb.addEventListener('click', function() {
+			if (clickTimer === null) {
+				clickTimer = setTimeout(() => {
+					// Single click behavior
+					const imageSrc = this.getAttribute('data-image');
+					const cropPosition = this.getAttribute('data-crop') || '50% 14%';
+					const title = this.getAttribute('data-title') || this.querySelector('img').alt;
+					
+					changeFeatured(imageSrc, cropPosition, title);
+					clickTimer = null;
+				}, 150);
+			}
+		});
+		
+		thumb.addEventListener('dblclick', function(e) {
+			e.preventDefault();
+			clearTimeout(clickTimer);
+			clickTimer = null;
+			
+			// Update active thumbnail first
+			document.querySelectorAll('.thumbnail-item').forEach(item => {
+				item.classList.remove('active');
+			});
+			this.classList.add('active');
+			
+			// Open lightbox
+			const highResSrc = this.getAttribute('data-highres') || this.getAttribute('data-image');
+			
+			openLightbox(highResSrc);
+		});
+	});
+
+	// Open lightbox function
+	function openLightbox(imageSrc) {
+		lightboxImg.src = imageSrc;
+		
+		lightboxImg.onload = function() {
+			const fitZoom = getFitToScreenZoom();
+			setZoomLevel(fitZoom);
+		};
+
+		lightbox.style.display = 'flex';
+		document.body.style.overflow = 'hidden';
+		document.body.classList.add('lightbox-open');
+		
+		// Show controls in lightbox
+		if (controlsVisible) {
+			controlsFooter.classList.add('show');
+		} else {
+			controlsFooter.classList.remove('show');
+		}
+	}
+
+	// Lightbox zoom and drag functions
+	function setZoomLevel(zoomLevel) {
+		const imgNaturalWidth = lightboxImg.naturalWidth;
+		const imgNaturalHeight = lightboxImg.naturalHeight;
+		
+		const displayWidth = imgNaturalWidth * zoomLevel;
+		const displayHeight = imgNaturalHeight * zoomLevel;
+		
+		lightboxImg.style.width = displayWidth + 'px';
+		lightboxImg.style.height = displayHeight + 'px';
+		lightboxImg.style.maxWidth = 'none';
+		lightboxImg.style.maxHeight = 'none';
+		
+		currentTranslateX = 0;
+		currentTranslateY = 0;
+		lightboxImg.style.transform = 'translate(0px, 0px)';
+		
+		currentZoomLevel = zoomLevel;
+		updateLightboxCursor();
+	}
+
+	function getFitToScreenZoom() {
+		const imgNaturalWidth = lightboxImg.naturalWidth;
+		const imgNaturalHeight = lightboxImg.naturalHeight;
+		const viewportWidth = window.innerWidth;
+		const viewportHeight = window.innerHeight;
+		
+		const verticalZoom = (viewportHeight * 0.9) / imgNaturalHeight;
+		const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
+		
+		return Math.min(verticalZoom, horizontalZoom);
+	}
+
+	function updateLightboxCursor() {
+		if (isDragging) {
+			lightboxImg.style.cursor = 'grabbing';
+		} else if (lightboxImg.classList.contains('zoom-out')) {
+			lightboxImg.style.cursor = 'zoom-out';
+		} else {
+			lightboxImg.style.cursor = 'zoom-in';
+		}
+	}
+
+	function closeLightbox() {
+		lightbox.style.display = 'none';
+		document.body.style.overflow = 'auto';
+		document.body.classList.remove('lightbox-open');
+		
+		lightboxImg.style.width = '';
+		lightboxImg.style.height = '';
+		lightboxImg.style.maxWidth = '';
+		lightboxImg.style.maxHeight = '';
+		lightboxImg.style.transform = '';
+		lightboxImg.style.cursor = 'zoom-in';
+		
+		isDragging = false;
+		currentTranslateX = 0;
+		currentTranslateY = 0;
+		
+		// Hide controls when closing lightbox
+		controlsFooter.classList.remove('show');
+	}
+
+	// Navigation function - Only for main gallery
+	function navigateThumbnails(direction) {
+		const thumbs = document.querySelectorAll('.thumbnail-item');
+		const currentActive = document.querySelector('.thumbnail-item.active');
+		let currentIndex = Array.from(thumbs).indexOf(currentActive);
+		
+		let newIndex = currentIndex + direction;
+		if (newIndex < 0) newIndex = thumbs.length - 1;
+		if (newIndex >= thumbs.length) newIndex = 0;
+		
+		const newThumb = thumbs[newIndex];
+		const imageSrc = newThumb.getAttribute('data-image');
+		const cropPosition = newThumb.getAttribute('data-crop') || '50% 14%';
+		const title = newThumb.getAttribute('data-title') || newThumb.querySelector('img').alt;
+		
+		changeFeatured(imageSrc, cropPosition, title);
+	}
+
+	// Event Listeners
+	document.getElementById('featuredImg').addEventListener('click', function() {
+		const activeThumb = document.querySelector('.thumbnail-item.active');
+		if (activeThumb) {
+			const highResSrc = activeThumb.getAttribute('data-highres') || activeThumb.getAttribute('data-image');
+			openLightbox(highResSrc);
+		}
+	});
+
+	document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+	lightbox.addEventListener('click', function(e) {
+		if (e.target === lightbox) {
+			closeLightbox();
+		}
+	});
+
+	// Navigation arrows - only for main gallery (not in lightbox)
+	document.querySelector('.gallery-prev').addEventListener('click', function() {
+		navigateThumbnails(-1);
+	});
+
+	document.querySelector('.gallery-next').addEventListener('click', function() {
+		navigateThumbnails(1);
+	});
+
+	// Lightbox interaction
+	lightboxImg.addEventListener('click', function(e) {
+		if (isDragging) {
+			isDragging = false;
+			updateLightboxCursor();
+			return;
+		}
+		
+		e.stopPropagation();
+		
+		if (e.shiftKey) {
+			const newZoom = Math.max(currentZoomLevel - 0.2, MIN_ZOOM);
+			setZoomLevel(newZoom);
+		} else {
+			const newZoom = Math.min(currentZoomLevel + 0.2, MAX_ZOOM);
+			setZoomLevel(newZoom);
+		}
+	});
+
+	lightboxImg.addEventListener('mousedown', function(e) {
+		if (e.button === 0) {
+			isDragging = true;
+			dragStartX = e.clientX - currentTranslateX;
+			dragStartY = e.clientY - currentTranslateY;
+			lightboxImg.style.cursor = 'grabbing';
+			e.preventDefault();
+		}
+	});
+
+	lightboxImg.addEventListener('mousemove', function(e) {
+		if (!isDragging) return;
+		
+		currentTranslateX = e.clientX - dragStartX;
+		currentTranslateY = e.clientY - dragStartY; // FIXED TYPO HERE
+		
+		lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
+	});
+
+	lightboxImg.addEventListener('mouseup', function(e) {
+		if (e.button === 0) {
+			isDragging = false;
+			updateLightboxCursor();
+		}
+	});
+
+	lightboxImg.addEventListener('mouseleave', function() {
+		isDragging = false;
+		updateLightboxCursor();
+	});
+
+	// Keyboard shortcuts
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Shift') {
+			lightboxImg.classList.add('zoom-out');
+			updateLightboxCursor();
+		}
+		
+		if (lightbox.style.display === 'flex') {
+			if (e.key === 'Escape') closeLightbox();
+			else if (e.key === '1') setZoomLevel(1.0);
+			else if (e.key === '0') setZoomLevel(getFitToScreenZoom());
+			else if (e.key === '+' || e.key === '=') setZoomLevel(Math.min(currentZoomLevel + 0.2, MAX_ZOOM));
+			else if (e.key === '-' || e.key === '_') setZoomLevel(Math.max(currentZoomLevel - 0.2, MIN_ZOOM));
+			else if (e.key === 'h' || e.key === 'H') toggleControls();
+		} else {
+			if (e.key === 'ArrowRight') navigateThumbnails(1);
+			else if (e.key === 'ArrowLeft') navigateThumbnails(-1);
+		}
+	});
+
+	document.addEventListener('keyup', function(e) {
+		if (e.key === 'Shift') {
+			lightboxImg.classList.remove('zoom-out');
+			updateLightboxCursor();
+		}
+	});
+
+	// Controls footer
+	function toggleControls() {
+		controlsVisible = !controlsVisible;
+		
+		if (controlsVisible) {
+			controlsFooter.classList.add('show');
+		} else {
+			controlsFooter.classList.remove('show');
+		}
+		
+		localStorage.setItem('controlsVisible', controlsVisible);
+	}
+
+This is mostly to keep you updated for further questions, you don't need to contribute in any way to this reply but suggestions are accepted of course!

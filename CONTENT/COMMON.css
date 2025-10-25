@@ -2,18 +2,12 @@
 
 * {box-sizing: border-box;}
 
-body {
-    background: linear-gradient(to right, #e3f2fd, #f3e5f5); 
-}
 
 main {display: flex; flex-direction: column; margin: 0 auto;
     min-height: 100vh; justify-content: space-around;
     padding-top: 50px; position: relative;overflow: visible !important; 
 }
 
-.custom-font { 
-    font-family: 'Fredoka One', cursive;
-}
 
 /* Featured Image Display */
 .featured-image-container {
@@ -22,11 +16,13 @@ main {display: flex; flex-direction: column; margin: 0 auto;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    max-width: 760px;
+    max-width: 760px;  
+    /*MOVE LATER*/
 }
 .featured-image {
     height: 500px;
     width: 555px;
+    /*MOVE LATER*/
     margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
@@ -43,6 +39,7 @@ main {display: flex; flex-direction: column; margin: 0 auto;
     display: block;
     object-fit: cover;
     object-position: 50% 14%;
+    /*MOVE LATER*/
     transition: opacity 0.3s ease;
 }
 
@@ -55,7 +52,8 @@ main {display: flex; flex-direction: column; margin: 0 auto;
     background: linear-gradient(transparent, rgba(0,0,0,0.8));
     color: white;
     padding: 30px 15px 15px;
-    font-family: 'Chewy', cursive;
+    font-family: 'Fredoka One', cursive;
+    /*MOVE LATER*/
     font-size: 1.3rem;
     text-align: center;
     opacity: 0;
@@ -86,6 +84,7 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 
 .thumbnail-item.active {
     border-color: #5c6bc0; 
+    /*MOVE LATER*/
     transform: scale(1.3);
 }
 
@@ -173,7 +172,8 @@ main {display: flex; flex-direction: column; margin: 0 auto;
 
 .controls-footer .controls-line {
     margin: 2px 0;
-    font-family: 'Chewy', cursive;
+    font-family: 'Fredoka One', cursive;
+    /*MOVE LATER*/
     font-size: 1rem;
 }
 
@@ -207,6 +207,8 @@ kbd {
     opacity: 1 !important; 
     background: transparent !important;
 }
+
+/*MOVE LATER*/
 
 .gallery-nav-arrow:hover {
     transform: translateY(-50%) scale(1.15);
@@ -283,13 +285,4 @@ kbd {
     }
 }
 
-/* Mobile/Tablet adjustments */
-@media (max-width: 768px) {
-    .controls-footer {
-        left: 10px;
-        max-width: 250px;
-        padding: 10px;
-        font-size: 0.9rem;
-        line-height: 1.8rem;
-    }
-}
+
