@@ -11,8 +11,6 @@ let dragStartX, dragStartY;
 let currentTranslateX = 0;
 let currentTranslateY = 0;
 let controlsVisible = true;
-let isAt100Percent = false;
-let mouseHoldTimer = null;
 
 // Set first thumbnail as active by default
 document.addEventListener('DOMContentLoaded', function() {
@@ -120,12 +118,10 @@ function openLightbox(imageSrc) {
 
 // Lightbox zoom and drag functions
 function toggle100Percent() {
-    if (isAt100Percent) {
+    if (currentZoomLevel === 1.0) {
         setZoomLevel(getFitToScreenZoom());
-        isAt100Percent = false;
     } else {
         setZoomLevel(1.0);
-        isAt100Percent = true;
     }
 }
 
@@ -164,7 +160,7 @@ function getFitToScreenZoom() {
 function updateLightboxCursor() {
     if (isDragging) {
         lightboxImg.style.cursor = 'grabbing';
-    } else if (lightboxImg.classList.contains('zoom-out')) {
+    } else if (currentZoomLevel === 1.0) {
         lightboxImg.style.cursor = 'zoom-out';
     } else {
         lightboxImg.style.cursor = 'zoom-in';
@@ -234,7 +230,7 @@ document.querySelector('.gallery-next').addEventListener('click', function() {
     navigateThumbnails(1);
 });
 
-// === COMBINED LIGHTBOX INTERACTION ===
+// === SIMPLE LIGHTBOX INTERACTION ===
 lightboxImg.addEventListener('click', function(e) {
     if (isDragging) {
         isDragging = false;
@@ -247,91 +243,40 @@ lightboxImg.addEventListener('click', function(e) {
 });
 
 lightboxImg.addEventListener('mousedown', function(e) {
-    if (e.button === 0) {
-        if (currentZoomLevel === 1.0) {
-            // At 100% zoom - enable dragging
-            isDragging = true;
-            dragStartX = e.clientX - currentTranslateX;
-            dragStartY = e.clientY - currentTranslateY;
-            lightboxImg.style.cursor = 'grabbing';
-            e.preventDefault();
-        } else {
-            // In default view - start hold timer for lens zoom
-            mouseHoldTimer = setTimeout(() => {
-                applyLensZoom(e.clientX, e.clientY);
-            }, 300);
-        }
-    }
-});
-
-lightboxImg.addEventListener('mouseup', function(e) {
-    if (e.button === 0) {
-        if (isDragging) {
-            isDragging = false;
-            updateLightboxCursor();
-        } else {
-            clearTimeout(mouseHoldTimer);
-            
-            // If we're in temporary zoom mode, revert to fit
-            if (currentZoomLevel === 1.0 && !isAt100Percent) {
-                setZoomLevel(getFitToScreenZoom());
-            }
-        }
+    if (e.button === 0 && currentZoomLevel === 1.0) {
+        // Only allow dragging at 100% zoom
+        isDragging = true;
+        dragStartX = e.clientX - currentTranslateX;
+        dragStartY = e.clientY - currentTranslateY;
+        lightboxImg.style.cursor = 'grabbing';
+        e.preventDefault();
     }
 });
 
 lightboxImg.addEventListener('mousemove', function(e) {
-    // Handle dragging when at 100% zoom
-    if (isDragging && currentZoomLevel === 1.0) {
+    if (isDragging) {
         currentTranslateX = e.clientX - dragStartX;
         currentTranslateY = e.clientY - dragStartY;
         lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
     }
-    // Update lens position if in temporary zoom
-    else if (currentZoomLevel === 1.0 && !isAt100Percent) {
-        updateLensPosition(e.clientX, e.clientY);
+});
+
+lightboxImg.addEventListener('mouseup', function(e) {
+    if (e.button === 0 && isDragging) {
+        isDragging = false;
+        updateLightboxCursor();
     }
 });
 
 lightboxImg.addEventListener('mouseleave', function() {
-    isDragging = false;
-    clearTimeout(mouseHoldTimer);
-    updateLightboxCursor();
+    if (isDragging) {
+        isDragging = false;
+        updateLightboxCursor();
+    }
 });
-
-// LENS HELPER FUNCTIONS
-function applyLensZoom(clientX, clientY) {
-    // Apply 100% zoom but mark as temporary
-    setZoomLevel(1.0);
-    isAt100Percent = false; // Temporary mode
-    
-    // Center on the cursor position
-    centerOnPoint(clientX, clientY);
-}
-
-function updateLensPosition(clientX, clientY) {
-    centerOnPoint(clientX, clientY);
-}
-
-function centerOnPoint(clientX, clientY) {
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    const targetX = (viewportWidth / 2) - clientX;
-    const targetY = (viewportHeight / 2) - clientY;
-    
-    currentTranslateX = targetX;
-    currentTranslateY = targetY;
-    lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-}
 
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.add('zoom-out');
-        updateLightboxCursor();
-    }
-    
     if (lightbox.style.display === 'flex') {
         if (e.key === 'Escape') closeLightbox();
         else if (e.key === '1') toggle100Percent();
@@ -341,13 +286,6 @@ document.addEventListener('keydown', function(e) {
     } else {
         if (e.key === 'ArrowRight') navigateThumbnails(1);
         else if (e.key === 'ArrowLeft') navigateThumbnails(-1);
-    }
-});
-
-document.addEventListener('keyup', function(e) {
-    if (e.key === 'Shift') {
-        lightboxImg.classList.remove('zoom-out');
-        updateLightboxCursor();
     }
 });
 
