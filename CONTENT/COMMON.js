@@ -19,14 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
         firstThumb.classList.add('active');
     }
     
-    // Initialize controls visibility from localStorage
     const savedVisibility = localStorage.getItem('controlsVisible');
-    if (savedVisibility === 'false') {
-        controlsVisible = false;
-    } else {
-        controlsVisible = true;
-        localStorage.setItem('controlsVisible', 'true');
-    }
+    controlsVisible = savedVisibility !== 'false';
+    localStorage.setItem('controlsVisible', controlsVisible);
 });
 
 // Change Featured Image Function
@@ -34,22 +29,18 @@ function changeFeatured(imageSrc, cropPosition = '50% 14%', title = '') {
     const featuredImg = document.getElementById('featuredImg');
     const featuredTitle = document.getElementById('featuredTitle');
     
-    // Create new image to preload
     const newImage = new Image();
     newImage.onload = function() {
-        // Apply crop position BEFORE setting src to prevent animation
         featuredImg.style.objectPosition = cropPosition;
         featuredImg.src = imageSrc;
         featuredTitle.textContent = title;
     };
     newImage.src = imageSrc;
     
-    // Update active thumbnail
     document.querySelectorAll('.thumbnail-item').forEach(item => {
         item.classList.remove('active');
     });
     
-    // Find and activate the matching thumbnail
     const matchingThumb = Array.from(document.querySelectorAll('.thumbnail-item')).find(thumb => 
         thumb.getAttribute('data-image') === imageSrc
     );
@@ -66,7 +57,6 @@ document.querySelectorAll('.thumbnail-item').forEach(thumb => {
     thumb.addEventListener('click', function() {
         if (clickTimer === null) {
             clickTimer = setTimeout(() => {
-                // Single click behavior
                 const imageSrc = this.getAttribute('data-image');
                 const cropPosition = this.getAttribute('data-crop') || '50% 14%';
                 const title = this.getAttribute('data-title') || this.querySelector('img').alt;
@@ -82,15 +72,12 @@ document.querySelectorAll('.thumbnail-item').forEach(thumb => {
         clearTimeout(clickTimer);
         clickTimer = null;
         
-        // Update active thumbnail first
         document.querySelectorAll('.thumbnail-item').forEach(item => {
             item.classList.remove('active');
         });
         this.classList.add('active');
         
-        // Open lightbox
         const highResSrc = this.getAttribute('data-highres') || this.getAttribute('data-image');
-        
         openLightbox(highResSrc);
     });
 });
@@ -108,7 +95,6 @@ function openLightbox(imageSrc) {
     document.body.style.overflow = 'hidden';
     document.body.classList.add('lightbox-open');
     
-    // Show controls in lightbox
     if (controlsVisible) {
         controlsFooter.classList.add('show');
     } else {
@@ -142,7 +128,7 @@ function setZoomLevel(zoomLevel) {
     lightboxImg.style.transform = 'translate(0px, 0px)';
     
     currentZoomLevel = zoomLevel;
-    updateLightboxCursor();
+    lightboxImg.style.cursor = currentZoomLevel === 1.0 ? 'zoom-out' : 'zoom-in';
 }
 
 function getFitToScreenZoom() {
@@ -155,16 +141,6 @@ function getFitToScreenZoom() {
     const horizontalZoom = (viewportWidth * 0.9) / imgNaturalWidth;
     
     return Math.min(verticalZoom, horizontalZoom);
-}
-
-function updateLightboxCursor() {
-    if (isDragging) {
-        lightboxImg.style.cursor = 'grabbing';
-    } else if (currentZoomLevel === 1.0) {
-        lightboxImg.style.cursor = 'zoom-out';
-    } else {
-        lightboxImg.style.cursor = 'zoom-in';
-    }
 }
 
 function closeLightbox() {
@@ -183,11 +159,10 @@ function closeLightbox() {
     currentTranslateX = 0;
     currentTranslateY = 0;
     
-    // Hide controls when closing lightbox
     controlsFooter.classList.remove('show');
 }
 
-// Navigation function - Only for main gallery
+// Navigation function
 function navigateThumbnails(direction) {
     const thumbs = document.querySelectorAll('.thumbnail-item');
     const currentActive = document.querySelector('.thumbnail-item.active');
@@ -221,7 +196,6 @@ lightbox.addEventListener('click', function(e) {
     }
 });
 
-// Navigation arrows - only for main gallery (not in lightbox)
 document.querySelector('.gallery-prev').addEventListener('click', function() {
     navigateThumbnails(-1);
 });
@@ -231,21 +205,13 @@ document.querySelector('.gallery-next').addEventListener('click', function() {
 });
 
 // === SIMPLE LIGHTBOX INTERACTION ===
-lightboxImg.addEventListener('click', function(e) {
-    if (isDragging) {
-        isDragging = false;
-        updateLightboxCursor();
-        return;
-    }
-
-    e.stopPropagation();
-    toggle100Percent();
-});
+// === SIMPLE LIGHTBOX INTERACTION ===
+let hasDragged = false; // Add this flag
 
 lightboxImg.addEventListener('mousedown', function(e) {
-    if (e.button === 0 && currentZoomLevel === 1.0) {
-        // Only allow dragging at 100% zoom
+    if (e.button === 0) {
         isDragging = true;
+        hasDragged = false; // Reset on mousedown
         dragStartX = e.clientX - currentTranslateX;
         dragStartY = e.clientY - currentTranslateY;
         lightboxImg.style.cursor = 'grabbing';
@@ -255,6 +221,7 @@ lightboxImg.addEventListener('mousedown', function(e) {
 
 lightboxImg.addEventListener('mousemove', function(e) {
     if (isDragging) {
+        hasDragged = true; // Mark that actual dragging occurred
         currentTranslateX = e.clientX - dragStartX;
         currentTranslateY = e.clientY - dragStartY;
         lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
@@ -262,31 +229,23 @@ lightboxImg.addEventListener('mousemove', function(e) {
 });
 
 lightboxImg.addEventListener('mouseup', function(e) {
-    if (e.button === 0 && isDragging) {
+    if (e.button === 0) {
         isDragging = false;
-        updateLightboxCursor();
+        lightboxImg.style.cursor = currentZoomLevel === 1.0 ? 'zoom-out' : 'zoom-in';
     }
+});
+
+lightboxImg.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!hasDragged) { // Only toggle zoom if no drag occurred
+        toggle100Percent();
+    }
+    hasDragged = false; // Reset after handling click
 });
 
 lightboxImg.addEventListener('mouseleave', function() {
-    if (isDragging) {
-        isDragging = false;
-        updateLightboxCursor();
-    }
-});
-
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    if (lightbox.style.display === 'flex') {
-        if (e.key === 'Escape') closeLightbox();
-        else if (e.key === '1') toggle100Percent();
-        else if (e.key === '+' || e.key === '=') setZoomLevel(Math.min(currentZoomLevel + 0.2, MAX_ZOOM));
-        else if (e.key === '-' || e.key === '_') setZoomLevel(Math.max(currentZoomLevel - 0.2, MIN_ZOOM));
-        else if (e.key === 'h' || e.key === 'H') toggleControls();
-    } else {
-        if (e.key === 'ArrowRight') navigateThumbnails(1);
-        else if (e.key === 'ArrowLeft') navigateThumbnails(-1);
-    }
+    isDragging = false;
+    lightboxImg.style.cursor = currentZoomLevel === 1.0 ? 'zoom-out' : 'zoom-in';
 });
 
 // Controls footer
