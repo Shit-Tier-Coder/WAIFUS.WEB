@@ -206,8 +206,8 @@ document.querySelector('.gallery-next').addEventListener('click', function() {
 
 // === SIMPLE LIGHTBOX INTERACTION ===
 // === SIMPLE LIGHTBOX INTERACTION ===
-let hasDragged = false; // Add this flag
 
+let hasDragged = false; 
 lightboxImg.addEventListener('mousedown', function(e) {
     if (e.button === 0) {
         isDragging = true;
@@ -260,3 +260,29 @@ function toggleControls() {
     
     localStorage.setItem('controlsVisible', controlsVisible);
 }
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    if (lightbox.style.display === 'flex') {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === '1') {
+            toggle100Percent();
+        } else if (e.key === '+' || e.key === '=') {
+            const newZoom = Math.min(currentZoomLevel + 0.1, MAX_ZOOM);
+            setZoomLevel(newZoom);
+        } else if (e.key === '-' || e.key === '_') {
+            const fitZoom = getFitToScreenZoom();
+            const newZoom = Math.max(currentZoomLevel - 0.1, fitZoom);
+            setZoomLevel(newZoom);
+        } else if (e.key === 'h' || e.key === 'H') {
+            toggleControls();
+        }
+    } else {
+        if (e.key === 'ArrowRight') {
+            navigateThumbnails(1);
+        } else if (e.key === 'ArrowLeft') {
+            navigateThumbnails(-1);
+        }
+    }
+});
