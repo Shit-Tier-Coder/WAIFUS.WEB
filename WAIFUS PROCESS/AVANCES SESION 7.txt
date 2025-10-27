@@ -1,0 +1,15 @@
+-Redimensionado montones de imagenes e incluído nuevas a la galería, incluyendo,
+escanear originales a 600, ajuste de blancos, curvas de color, etc, redimensionar a 3 archivos
+comprimidos AVIF...
+
+-Comportamiento de lightbox mejorado.
+
+-Antes arrastrar imagen (hold mouse) producía un click al soltar (mouse leave) así que 
+tras arrastrar siempre se producía Toggle Zoom.
+
+-Toogle zoom centra la imagen así que intentar arrastrar siempre producía un efecto rebote
+en vez de dejar la imagen donde quieres.
+
+-Añadido meta, palabras clave, descripción que define mi nicho, etc.
+
+*Cambios aplicados a sub-galería STUDIES, las otras sub-galerías utilizan STUDIES como modelo.
