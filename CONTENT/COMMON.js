@@ -286,3 +286,21 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const firstThumb = document.querySelector('.thumbnail-item');
+    if (firstThumb) {
+        firstThumb.classList.add('active');
+        
+        // Apply the first thumbnail's crop position to the featured image
+        const featuredImg = document.getElementById('featuredImg');
+        const cropPosition = firstThumb.getAttribute('data-crop');
+        if (cropPosition && featuredImg) {
+            featuredImg.style.objectPosition = cropPosition;
+        }
+    }
+    
+    const savedVisibility = localStorage.getItem('controlsVisible');
+    controlsVisible = savedVisibility !== 'false';
+    localStorage.setItem('controlsVisible', controlsVisible);
+});
