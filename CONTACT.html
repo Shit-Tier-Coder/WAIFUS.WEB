@@ -1,41 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CONTACT ME</title>
-	<style>
-		*{box-sizing: border-box;}
-		body {display: flex; flex-direction: column; justify-content: space-around; 
-			align-items: space-around; gap: 4rem;}
-		header {color: white; background: darkblue; display: flex;}
-		main {background-color: lightpink; display: flex; flex-direction: column;}
-		.CARD {display: flex;}
-		
-	</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Me - LOTSA WAIFUS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+        
+        .contact-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-top: 5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid #ff6b6b;
+        }
+        
+        .btn-send {
+            background: linear-gradient(45deg, #ff6b6b, #ffa8a8);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-send:hover {
+            transform: scale(1.05);
+        }
+        
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid #ffa8a8;
+            padding: 12px;
+        }
+        
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 0.25rem rgba(255, 107, 107, 0.25);
+        }
+        
+        .fun-title {
+            color: #ff6b6b;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+        }
+    </style>
 </head>
 <body>
-
-
-	<header>
-		<h1>!!!! UNDER CONSTRUCTION UNDER CONSTRUCTION !!!!</h1>
-	</header>
-
-	<main>
-		<div class="CARD">
-			<img src="">
-			<p>filler filler filler</p>
-		</div>
-
-		<div>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		</div>
-	</main>
-
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="contact-container text-center">
+                    <h1 class="fun-title mb-4">🎨 Let's Create Together! 🎨</h1>
+                    <p class="mb-4" style="color: #666;">Love my art? Want a commission? Just wanna chat? Drop me a message!</p>
+                    
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Your Awesome Name" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="your.email@example.com" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <select class="form-control">
+                                <option>Just saying hi! 👋</option>
+                                <option>I want a commission! 💰</option>
+                                <option>Collaboration idea! 🤝</option>
+                                <option>Other cool stuff! ✨</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Tell me all the fun details... 🎯" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-send btn-lg">
+                            Send Magic Message! ✨
+                        </button>
+                    </form>
+                    
+                    <p class="mt-4 small" style="color: #888;">
+                        P.S. I typically reply within 24-48 hours! ⏰
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

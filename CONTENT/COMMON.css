@@ -128,7 +128,7 @@ main {display: flex; flex-direction: column; margin: 0 auto;
     z-index: 10001;
 }
 
-..lightbox-image {
+.lightbox-image {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;

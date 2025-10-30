@@ -38,21 +38,25 @@
 		/*BODY BODY BODY*/
 		/*BODY BODY BODY*/
 
-		body {
+		
     
-    /*background-color: #1a1a1a; */
-    
-    
-    background-image: 
+    body {
+    background: 
+        linear-gradient(-95deg, 
+            transparent 0%,
+            rgba(0,0,0,0.2) 30%,
+            rgba(0,0,0,0.5) 70%,
+            rgba(0,0,0,0.7) 100%),
         
-        /*linear-gradient(135deg, rgba(0,0,0,0.7) 0%, transparent 60%),*/
-        
-        url('CONTENT/g41.png');
+        url('CONTENT/g41.png') right 11% top 74%/auto 40% no-repeat,
+       
+        lavender;
     
-    background-repeat: no-repeat;
-    background-position: right 11% top 74%; /* Adjust positioning */
-    background-size: auto 40%; /* Makes SVG smaller - adjust % as needed */
+    min-height: 100vh;
 }
+    
+    
+ 
 
 		
 
@@ -64,7 +68,7 @@
 		/*NAVBAR NAVBAR NAVBAR*/
 
 		.navbar {
-		    background: linear-gradient(45deg, #37474f, #546e7a) !important;
+		    background: linear-gradient(45deg, black, indianred) !important;
 		}
 
 		.nav-link:hover {
@@ -84,7 +88,6 @@
 			transform: translateX(-50%);
 		}
 
-		.featured-image img {object-position: 50% 14%;}
 	</style>
 </head>
 
