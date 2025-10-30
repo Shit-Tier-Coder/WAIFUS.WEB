@@ -12,7 +12,18 @@ main {display: flex; flex-direction: column; margin: 0 auto;
   font-family: 'Fredoka One';
   font-style: normal;
   font-weight: 400;
-  src: url('CONTENT/FONTS/fredoka.woff2') format('woff2');
+  src: url('FONTS/fredoka-one.one-regular.woff2') format('woff2'),
+       url('FONTS/fredoka-one.one-regular.woff') format('woff');
+  font-display: block; /* Important for performance */
+}
+
+@font-face {
+  font-family: 'Chewy';
+  font-style: normal;
+  font-weight: 400;
+  src: url('CONTENT/FONTS/chewy.woff2') format('woff2'),
+       url('CONTENT/FONTS/chewy.woff') format('woff');
+  font-display: swap;
 }
 
 @font-face {
