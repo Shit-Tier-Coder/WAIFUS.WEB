@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>LOTSA-WAIFUS|DRAWTOBER</title>
 	<meta name="description" content="Illustrations done for Drawtober. Alcohol markers and ink only.">
 	<meta name="keywords" content="Drawtober, Inktober, anime art, alcohol markers, soft boiled art">
-	 
-
-	 <script type="application/ld+json">
+	 	<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ImageGallery",
@@ -23,11 +21,9 @@
       }
     }
     </script>
-
-   
-	<link rel="icon" href="favicon.ico?v=2" sizes="any">
-	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<link rel="manifest" href="manifest.json">
+		<link rel="icon" href="favicon.ico?v=2" sizes="any">
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<link rel="manifest" href="manifest.json">
 
 	<!-- UNDER VIGILANCE -->
 
@@ -89,6 +85,77 @@
 			left: 50%;
 			transform: translateX(-50%);
 		}
+
+		/* 16:9 Media Query */
+@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
+
+		body {
+    background: 
+        linear-gradient(-95deg, 
+            transparent 0%,
+            rgba(0,0,0,0.2) 30%,
+            rgba(0,0,0,0.5) 70%,
+            rgba(0,0,0,0.7) 100%),
+        
+        url('CONTENT/g41.png') right 22% top 74%/auto 40% no-repeat,
+       
+        lavender;
+    
+    min-height: 100vh;
+	}
+    
+
+
+    main {
+        justify-content: space-around;
+        padding-top: 70px;
+        gap: 20px;
+    }
+
+    .featured-image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 600px;
+    }
+    
+    .featured-image {
+        height: 390px;
+        width: 440px;
+        margin: 0 auto;
+    }
+
+    .thumbnail-carousel {
+        margin: 0 auto;
+    }
+
+    .thumbnail-item {
+        height: 100px;
+    }
+
+    .thumbnail-item.active {
+        border-color: #5c6bc0;
+        transform: scale(1.2);
+    }
+
+    .thumbnail-item:hover {
+        transform: scale(1.10);
+        border-color: #90a4ae;
+    }
+
+    .thumbnail-item.active, 
+    .thumbnail-item.active:hover {
+        border-color: #ff6bcd;
+        transform: scale(1.2);
+    }
+
+    .controls-footer {
+        left: 30px;
+        max-width: 280px;
+    }
+}
 
 	</style>
 </head>
