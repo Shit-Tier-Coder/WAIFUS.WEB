@@ -26,46 +26,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Change Featured Image Function
 function changeFeatured(imageSrc, cropPosition = '50% 14%', title = '') {
+    // BATCH READS
     const featuredImg = document.getElementById('featuredImg');
     const featuredTitle = document.getElementById('featuredTitle');
+    const thumbs = document.querySelectorAll('.thumbnail-item');
     
     const newImage = new Image();
     newImage.onload = function() {
-        featuredImg.style.objectPosition = cropPosition;
-        featuredImg.src = imageSrc;
-        featuredTitle.textContent = title;
+        // BATCH WRITES
+        requestAnimationFrame(() => {
+            featuredImg.style.objectPosition = cropPosition;
+            featuredImg.src = imageSrc;
+            featuredTitle.textContent = title;
+            
+            thumbs.forEach(item => item.classList.remove('active'));
+            
+            const matchingThumb = Array.from(thumbs).find(thumb => 
+                thumb.getAttribute('data-image') === imageSrc
+            );
+            
+            if (matchingThumb) {
+                matchingThumb.classList.add('active');
+            }
+        });
     };
     newImage.src = imageSrc;
-    
-    document.querySelectorAll('.thumbnail-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    
-    const matchingThumb = Array.from(document.querySelectorAll('.thumbnail-item')).find(thumb => 
-        thumb.getAttribute('data-image') === imageSrc
-    );
-    
-    if (matchingThumb) {
-        matchingThumb.classList.add('active');
-    }
 }
 
 // Thumbnail click functionality
 document.querySelectorAll('.thumbnail-item').forEach(thumb => {
     let clickTimer = null;
     
-    thumb.addEventListener('click', function() {
-        if (clickTimer === null) {
-            clickTimer = setTimeout(() => {
-                const imageSrc = this.getAttribute('data-image');
-                const cropPosition = this.getAttribute('data-crop') || '50% 14%';
-                const title = this.getAttribute('data-title') || this.querySelector('img').alt;
-                
+   // In thumbnail click handler - batch the DOM writes
+thumb.addEventListener('click', function() {
+    if (clickTimer === null) {
+        clickTimer = setTimeout(() => {
+            // BATCH READS
+            const imageSrc = this.getAttribute('data-image');
+            const cropPosition = this.getAttribute('data-crop') || '50% 14%';
+            const title = this.getAttribute('data-title') || this.querySelector('img').alt;
+            
+            // BATCH WRITES
+            requestAnimationFrame(() => {
                 changeFeatured(imageSrc, cropPosition, title);
-                clickTimer = null;
-            }, 150);
-        }
-    });
+            });
+            
+            clickTimer = null;
+        }, 150);
+    }
+});
     
     thumb.addEventListener('dblclick', function(e) {
         e.preventDefault();
@@ -151,23 +160,27 @@ function toggle100Percent() {
 }
 
 function setZoomLevel(zoomLevel) {
+    // BATCH READS FIRST
     const imgNaturalWidth = lightboxImg.naturalWidth;
     const imgNaturalHeight = lightboxImg.naturalHeight;
     
     const displayWidth = imgNaturalWidth * zoomLevel;
     const displayHeight = imgNaturalHeight * zoomLevel;
     
-    lightboxImg.style.width = displayWidth + 'px';
-    lightboxImg.style.height = displayHeight + 'px';
-    lightboxImg.style.maxWidth = 'none';
-    lightboxImg.style.maxHeight = 'none';
-    
-    currentTranslateX = 0;
-    currentTranslateY = 0;
-    lightboxImg.style.transform = 'translate(0px, 0px)';
-    
+    // Update state immediately
     currentZoomLevel = zoomLevel;
-    lightboxImg.style.cursor = currentZoomLevel === 1.0 ? 'zoom-out' : 'zoom-in';
+    
+    // BATCH STYLE WRITES TOGETHER
+    requestAnimationFrame(() => {
+        lightboxImg.style.cssText = `
+            width: ${displayWidth}px;
+            height: ${displayHeight}px;
+            max-width: none;
+            max-height: none;
+            transform: translate(0px, 0px);
+            cursor: ${currentZoomLevel === 1.0 ? 'zoom-out' : 'zoom-in'};
+        `;
+    });
 }
 
 function getFitToScreenZoom() {
@@ -204,6 +217,7 @@ function closeLightbox() {
 
 // Navigation function
 function navigateThumbnails(direction) {
+    // BATCH ALL DOM READS FIRST
     const thumbs = document.querySelectorAll('.thumbnail-item');
     const currentActive = document.querySelector('.thumbnail-item.active');
     let currentIndex = Array.from(thumbs).indexOf(currentActive);
@@ -217,7 +231,12 @@ function navigateThumbnails(direction) {
     const cropPosition = newThumb.getAttribute('data-crop') || '50% 14%';
     const title = newThumb.getAttribute('data-title') || newThumb.querySelector('img').alt;
     
-    changeFeatured(imageSrc, cropPosition, title);
+    // BATCH ALL DOM WRITES TOGETHER
+    requestAnimationFrame(() => {
+        thumbs.forEach(thumb => thumb.classList.remove('active'));
+        newThumb.classList.add('active');
+        changeFeatured(imageSrc, cropPosition, title);
+    });
 }
 
 // Event Listeners
@@ -260,12 +279,16 @@ lightboxImg.addEventListener('mousedown', function(e) {
 });
 
 lightboxImg.addEventListener('mousemove', function(e) {
-    if (isDragging) {
-        hasDragged = true; // Mark that actual dragging occurred
-        currentTranslateX = e.clientX - dragStartX;
-        currentTranslateY = e.clientY - dragStartY;
+    if (!isDragging) return;
+    
+    hasDragged = true;
+    currentTranslateX = e.clientX - dragStartX;
+    currentTranslateY = e.clientY - dragStartY;
+    
+    // Use requestAnimationFrame for smooth dragging
+    requestAnimationFrame(() => {
         lightboxImg.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px)`;
-    }
+    });
 });
 
 lightboxImg.addEventListener('mouseup', function(e) {
@@ -310,11 +333,11 @@ document.addEventListener('keydown', function(e) {
             toggle100Percent();
         } else if (e.key === '+' || e.key === '=') {
             const newZoom = Math.min(currentZoomLevel + 0.1, MAX_ZOOM);
-            setZoomLevel(newZoom);
+            requestAnimationFrame(() => setZoomLevel(newZoom));
         } else if (e.key === '-' || e.key === '_') {
             const fitZoom = getFitToScreenZoom();
             const newZoom = Math.max(currentZoomLevel - 0.1, fitZoom);
-            setZoomLevel(newZoom);
+            requestAnimationFrame(() => setZoomLevel(newZoom));
         } else if (e.key === 'h' || e.key === 'H') {
             toggleControls();
         }
