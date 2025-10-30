@@ -60,17 +60,20 @@
                     <h1 class="fun-title mb-4">🎨 Let's Create Together! 🎨</h1>
                     <p class="mb-4" style="color: #666;">Love my art? Want a commission? Just wanna chat? Drop me a message!</p>
                     
-                    <form>
+                    <form action="https://formsubmit.co/Shit-Tier-Coder@proton.me" method="POST">
+                        <!-- Name -->
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Your Awesome Name" required>
+                            <input type="text" name="name" class="form-control" placeholder="Your Awesome Name" required>
                         </div>
                         
+                        <!-- Email -->
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="your.email@example.com" required>
+                            <input type="email" name="email" class="form-control" placeholder="your.email@example.com" required>
                         </div>
                         
+                        <!-- Subject Dropdown -->
                         <div class="mb-3">
-                            <select class="form-control">
+                            <select class="form-control" name="subject">
                                 <option>Just saying hi! 👋</option>
                                 <option>I want a commission! 💰</option>
                                 <option>Collaboration idea! 🤝</option>
@@ -78,9 +81,16 @@
                             </select>
                         </div>
                         
+                        <!-- Message -->
                         <div class="mb-3">
-                            <textarea class="form-control" rows="5" placeholder="Tell me all the fun details... 🎯" required></textarea>
+                            <textarea class="form-control" name="message" rows="5" placeholder="Tell me all the fun details... 🎯" required></textarea>
                         </div>
+                        
+                        <!-- FormSubmit Hidden Fields -->
+                        <input type="hidden" name="_subject" value="New message from LOTSA WAIFUS gallery!">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="box">
+                        <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
                         
                         <button type="submit" class="btn btn-send btn-lg">
                             Send Magic Message! ✨
