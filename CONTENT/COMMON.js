@@ -80,16 +80,55 @@ document.querySelectorAll('.thumbnail-item').forEach(thumb => {
         const highResSrc = this.getAttribute('data-highres') || this.getAttribute('data-image');
         openLightbox(highResSrc);
     });
+    
+    // NEW: Preload on hover
+    thumb.addEventListener('mouseenter', function() {
+        const highResSrc = this.getAttribute('data-highres') || this.getAttribute('data-image');
+        if (highResSrc && !isImageCached(highResSrc)) {
+            preloadImage(highResSrc);
+        }
+    });
 });
 
-// Open lightbox function
+// NEW: Helper functions for lazy loading
+function isImageCached(src) {
+    const img = new Image();
+    img.src = src;
+    return img.complete;
+}
+
+function preloadImage(src) {
+    const img = new Image();
+    img.src = src;
+}
+
+// Open lightbox function - MODIFIED WITH LAZY LOADING
 function openLightbox(imageSrc) {
+    // LAZY LOADING: Check if lightbox image is already loaded
+    if (lightboxImg.src !== imageSrc) {
+        // Show loading state
+        lightboxImg.style.opacity = '0.5';
+        
+        lightboxImg.onload = function() {
+            const fitZoom = getFitToScreenZoom();
+            setZoomLevel(fitZoom);
+            lightboxImg.style.opacity = '1'; // Restore opacity
+        };
+        
+        lightboxImg.onerror = function() {
+            console.error('Failed to load lightbox image:', imageSrc);
+            lightboxImg.style.opacity = '1';
+        };
+    } else {
+        // Image already loaded, just set up zoom
+        lightboxImg.onload = function() {
+            const fitZoom = getFitToScreenZoom();
+            setZoomLevel(fitZoom);
+        };
+    }
+
+    // Set src AFTER setting up event handlers
     lightboxImg.src = imageSrc;
-    
-    lightboxImg.onload = function() {
-        const fitZoom = getFitToScreenZoom();
-        setZoomLevel(fitZoom);
-    };
 
     lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -154,6 +193,7 @@ function closeLightbox() {
     lightboxImg.style.maxHeight = '';
     lightboxImg.style.transform = '';
     lightboxImg.style.cursor = 'zoom-in';
+    lightboxImg.style.opacity = '1'; // Reset opacity
     
     isDragging = false;
     currentTranslateX = 0;
@@ -292,12 +332,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (firstThumb) {
         firstThumb.classList.add('active');
         
-        // Apply the first thumbnail's crop position to the featured image
-        const featuredImg = document.getElementById('featuredImg');
-        const cropPosition = firstThumb.getAttribute('data-crop');
-        if (cropPosition && featuredImg) {
-            featuredImg.style.objectPosition = cropPosition;
-        }
+        // Let changeFeatured handle the FIRST image with its proper crop
+        const imageSrc = firstThumb.getAttribute('data-image');
+        const cropPosition = firstThumb.getAttribute('data-crop'); // This image's specific crop
+        const title = firstThumb.getAttribute('data-title');
+        
+        changeFeatured(imageSrc, cropPosition, title);
     }
     
     const savedVisibility = localStorage.getItem('controlsVisible');
