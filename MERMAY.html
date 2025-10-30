@@ -3,39 +3,42 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>LOTSA-WAIFUS|STUDIES</title>
-	
+	<title>LOTSA-WAIFUS|DRAWTOBER</title>
+
 	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-W5EFG094S8"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W5EFG094S8"></script>
 
-	  gtag('config', 'G-W5EFG094S8');
-	</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-		<meta name="description" content="Anime style pieces for Mermay challenge, done with markers">
-		<meta name="keywords" content="Mermay, mermaids, anime art, alcohol markers, soft boiled art">
-	
-	<script type="application/ld+json">
+  gtag('config', 'G-W5EFG094S8');
+</script>
+
+	<meta name="description" content="Illustrations done for Drawtober. Alcohol markers and ink only.">
+	<meta name="keywords" content="Drawtober, Inktober, anime art, alcohol markers, soft boiled art">
+	 	<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ImageGallery",
-      "name": "Mermay - LOTSA WAIFUS",
-      "description": "My entries for the social challenge Mermay",
+      "name": "Drawtober - LOTSA WAIFUS",
+      "description": "Color studies from photo and figure drawings created with Copic markers",
       "about": {
         "@type": "VisualArtwork",
-        "name": "Mermay entries",
+        "name": "Copic marker Drawtober art",
         "artMedium": "Alcohol markers, Copic markers",
         "artform": "Illustration",
-        "description": "Realistic portrait and figure studies done with alcohol markers"
+        "description": "My Drawtober entries done with Copics and Ink"
       }
     }
     </script>
-	<link rel="icon" href="favicon.ico?v=2" sizes="any">
-	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<link rel="manifest" href="manifest.json">
+		<link rel="icon" href="favicon.ico?v=2" sizes="any">
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<link rel="manifest" href="manifest.json">
+
+	<!-- UNDER VIGILANCE -->
+
 	<!-- CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="CONTENT/COMMON.css">
@@ -48,39 +51,128 @@
 		/*BODY BODY BODY*/
 		/*BODY BODY BODY*/
 
-		body {
-    	background: linear-gradient(to right, #e3f2fd, #f3e5f5); 
-		}
+		
+    
+    body {
+    background: 
+        linear-gradient(-95deg, 
+            transparent 0%,
+            rgba(0,0,0,0.2) 30%,
+            rgba(0,0,0,0.5) 70%,
+            rgba(0,0,0,0.7) 100%),
+        
+        url('CONTENT/g41-transplusalfa.png') right 11% top 74%/auto 40% no-repeat,
+       
+        lavender;
+    
+    min-height: 100vh;
+}
 
-		.custom-font { 
-    	font-family: 'Fredoka One';
-		}
+    
+.custom-font { 
+    	font-family: 'Fredoka One', cursive, sans-serif;
+	}
 
 		/*NAVBAR NAVBAR NAVBAR*/
 		/*NAVBAR NAVBAR NAVBAR*/
 
 		.navbar {
-		    background: linear-gradient(45deg, #37474f, #546e7a) !important;
+		    background: linear-gradient(45deg, black, indianred) !important;
 		}
-
-		.nav-link {color: white !important;}
 
 		.nav-link:hover {
 			transform: scale(1.1);
 			transition: transform 0.3s ease;
 		}
 
-		.navbar-brand {color: white !important;}
+		.navbar-brand {color: white;}
+		.navbar-brand:hover {color: lightcoral;}
 
 		/* Navbar H1 Title */
 		.navbar-title {
 			font-size: 1.8rem;
+			color: white;
 			margin: 0;
-			color: white !important;
 			position: absolute;
 			left: 50%;
 			transform: translateX(-50%);
 		}
+
+
+		/*QUERY QUERY QUERY*/ /*QUERY QUERY QUERY*/
+		/*QUERY QUERY QUERY*/ /*QUERY QUERY QUERY*/
+		/*QUERY QUERY QUERY*/ /*QUERY QUERY QUERY*/
+
+		/* 16:9 Media Query */
+@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
+
+		body {
+    background: 
+        linear-gradient(-95deg, 
+            transparent 0%,
+            rgba(0,0,0,0.2) 30%,
+            rgba(0,0,0,0.5) 70%,
+            rgba(0,0,0,0.7) 100%),
+        
+        url('CONTENT/g41-transplusalfa.png') right 22% top 74%/auto 40% no-repeat,
+       
+        lavender;
+    
+    min-height: 100vh;
+	}
+    
+
+
+    main {
+        justify-content: space-around;
+        padding-top: 70px;
+        gap: 20px;
+    }
+
+    .featured-image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 600px;
+    }
+    
+    .featured-image {
+        height: 390px;
+        width: 440px;
+        margin: 0 auto;
+    }
+
+    .thumbnail-carousel {
+        margin: 0 auto;
+    }
+
+    .thumbnail-item {
+        height: 100px;
+    }
+
+    .thumbnail-item.active {
+        border-color: #5c6bc0;
+        transform: scale(1.2);
+    }
+
+    .thumbnail-item:hover {
+        transform: scale(1.10);
+        border-color: #90a4ae;
+    }
+
+    .thumbnail-item.active, 
+    .thumbnail-item.active:hover {
+        border-color: #ff6bcd;
+        transform: scale(1.2);
+    }
+
+    .controls-footer {
+        left: 30px;
+        max-width: 280px;
+    }
+}
 
 	</style>
 </head>
@@ -96,10 +188,10 @@
 				style="background: linear-gradient(45deg, #073B4C, #118AB2);">
 		    <div class="container position-relative">
 		        <a class="navbar-brand custom-font" href="index.html">LOTSA WAIFUS</a>
-		        <h1 class="navbar-title custom-font">STUDIES</h1>
-		        <BUTBUTTon class="navbar-toggler" type="BUTBUTTon" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+		        <h1 class="navbar-title custom-font">DRAWTOBER</h1>
+		        <PETSHARKon class="navbar-toggler" type="PETSHARKon" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 		            <span class="navbar-toggler-icon"></span>
-		        </BUTBUTTon>
+		        </PETSHARKon>
 		        <div class="collapse navbar-collapse" id="navbarNav">
 		            <ul class="navbar-nav ms-auto">
 		                <li class="nav-item">
@@ -118,11 +210,12 @@
 
 		<!-- Featured Image Container with Navigation -->
 		<div class="featured-image-container">
-			<BUTBUTTon class="gallery-nav-arrow gallery-prev" title="Previous image (←)"><img src="WAIFUS-IMG/ICONS/arrow-left.png" alt="Previous"></BUTBUTTon>
-			<BUTBUTTon class="gallery-nav-arrow gallery-next" title="Next image (→)"><img src="WAIFUS-IMG/ICONS/arrow-right.png" alt="Next"></BUTBUTTon>
+			<PETSHARKon class="gallery-nav-arrow gallery-prev" title="Previous image (←)"><img src="WAIFUS-IMG/ICONS/left-red-arrow.png" alt="Previous"></PETSHARKon>
+			<PETSHARKon class="gallery-nav-arrow gallery-next" title="Next image (→)"><img src="WAIFUS-IMG/ICONS/right-arrow.png" alt="Next"></PETSHARKon>
 			
 			<div class="featured-image">
-				<img id="featuredImg" src="WAIFUS-IMG/STUDIES-IMG/PORTRAIT PB-M.avif" alt="Featured Waifu">
+				<img id="featuredImg" src="WAIFUS-IMG/MERMAY-IMG/SIREN-M.avif" 
+				alt="Realistic study in markers" fetchpriority="high">
 				<div class="featured-title" id="featuredTitle">Copic markers portrait study 1</div>
 			</div>
 		</div>
@@ -134,46 +227,53 @@
 		<div class="thumbnail-carousel">
 			<div class="d-flex justify-content-center flex-wrap gap-3">
 				<div class="thumbnail-item active" 
-				     data-image="WAIFUS-IMG/STUDIES-IMG/PORTRAIT PB-M.avif"
+				     data-image="WAIFUS-IMG/MERMAY-IMG/SIREN-M.avif"
 				     data-crop="50% 14%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/PORTRAIT PB.avif"
+				     data-highres="WAIFUS-IMG/MERMAY-IMG/SIREN.avif"
 				     data-title="Copic markers portrait study 1">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/PORTRAIT PB-S.avif" alt="Copic markers portrait study 1">
+				    <img src="WAIFUS-IMG/MERMAY-IMG/SIREN-S.avif" alt="Guro girl with brain exposed">
 				</div>
 				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/STUDIES-IMG/PORTRAIT-M.avif"
+				     data-image="WAIFUS-IMG/MERMAY-IMG/MERANN-M.avif"
 				     data-crop="50% 6%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/PORTRAIT.avif"
+				     data-highres="WAIFUS-IMG/MERMAY-IMG/MERANN.avif"
 				     data-title="Copic markers portrait study 2">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/PORTRAIT-S.avif" alt="Copic markers portrait study 2">
+				    <img src="WAIFUS-IMG/MERMAY-IMG/MERANN-S.avif" alt="Kemono Batgirl done in Copics">
 				</div>
 				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/STUDIES-IMG/WORANGE-M.avif"
+				     data-image="WAIFUS-IMG/MERMAY-IMG/SHY-M.avif"
 				     data-crop="50% 4%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/WORANGE.avif"
-				     data-title="Copic markers portrait study 3">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/WORANGE-S.avif" alt="Copic markers portrait study 3">
-				</div>
-				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/STUDIES-IMG/HAT-M.avif"
-				     data-crop="50% 4%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/HAT.avif"
+				     data-highres="WAIFUS-IMG/MERMAY-IMG/SHY.avif"
 				     data-title="Copic markers portrait study 4">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/HAT-S.avif" alt="Copic markers portrait study 4">
+				    <img src="WAIFUS-IMG/MERMAY-IMG/SHY-S.avif" alt="Marker art of girl in wrong/right themed costume">
 				</div>
 				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/STUDIES-IMG/SDY6-M.avif"
+				     data-image="WAIFUS-IMG/MERMAY-IMG/OCTOPUSSY-M.avif"
 				     data-crop="50% 8%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/SDY6.avif"
+				     data-highres="WAIFUS-IMG/MERMAY-IMG/OCTOPUSSY.avif"
 				     data-title="Copic markers figure study 1">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/SDY6-S.avif" alt="Copic markers figure study 1">
+				    <img src="WAIFUS-IMG/MERMAY-IMG/OCTOPUSSY-S.avif" alt="Ink drawing of girl in lemon cosplay">
 				</div>
 				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/STUDIES-IMG/BUTBUTT-M.avif"
-				     data-crop="50% 4%"
-				     data-highres="WAIFUS-IMG/STUDIES-IMG/BUTBUTT.avif"
+				     data-image="WAIFUS-IMG/MERMAY-IMG/PETSHARK-M.avif"
+				     data-crop="50% 24%"
+				     data-highres="WAIFUS-IMG/MERMAY-IMG/PETSHARK.avif"
 				     data-title="Copic markers figure study 2">
-				    <img src="WAIFUS-IMG/STUDIES-IMG/BUTBUTT-S.avif" alt="Copic markers figure study 2">
+				    <img src="WAIFUS-IMG/MERMAY-IMG/PETSHARK-S.avif" alt="Girl being PETSHARKged. Done with Copics.">
+				</div>
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/MERMAY-IMG/ARIEL-M.avif"
+				     data-crop="50% 64%"
+				     data-highres="WAIFUS-IMG/MERMAY-IMG/ARIEL.avif"
+				     data-title="Copic markers figure study 2">
+				    <img src="WAIFUS-IMG/MERMAY-IMG/ARIEL-S.avif" alt="Woman growing plants. On her body.">
+				</div>
+				<div class="thumbnail-item" 
+				     data-image="WAIFUS-IMG/MERMAY-IMG/FRACTALDRINK-M.avif"
+				     data-crop="50% 4%"
+				     data-highres="WAIFUS-IMG/MERMAY-IMG/FRACTALDRINK.avif"
+				     data-title="Copic markers figure study 2">
+				    <img src="WAIFUS-IMG/MERMAY-IMG/FRACTALDRINK-S.avif" alt="Ink + Markers drawing of Mermaid Geisha">
 				</div>
 			</div>
 		</div>
