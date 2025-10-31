@@ -21,8 +21,8 @@ main {display: flex; flex-direction: column; margin: 0 auto;
   font-family: 'Chewy';
   font-style: normal;
   font-weight: 400;
-  src: url('CONTENT/FONTS/chewy.woff2') format('woff2'),
-       url('CONTENT/FONTS/chewy.woff') format('woff');
+  src: url('FONTS/chewy.woff2') format('woff2'),
+       url('FONTS/chewy.woff') format('woff');
   font-display: swap;
 }
 
