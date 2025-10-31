@@ -53,17 +53,15 @@
 
 		
     
-    body {
+	
+   body {
     background: 
-        linear-gradient(-95deg, 
-            transparent 0%,
-            rgba(0,0,0,0.2) 30%,
-            rgba(0,0,0,0.5) 70%,
-            rgba(0,0,0,0.7) 100%),
+        linear-gradient(15deg,  /* Slight incline from bottom */
+            rgba(250,250,255,0.95) 0%,    
+            rgba(245,245,255,0.7) 50%,    
+            rgba(240,240,255,0.3) 100%),  
         
-        url('WAIFUS-IMG/BACKGROUNDS/WATERGATED') 
-    
-    min-height: 100vh;
+        url('WAIFUS-IMG/BACKGROUNDS/OCAnn.jpg') center/cover no-repeat;
 }
 
     
@@ -75,7 +73,7 @@
 		/*NAVBAR NAVBAR NAVBAR*/
 
 		.navbar {
-		    background: linear-gradient(45deg, black, indianred) !important;
+		    background: linear-gradient(45deg, #25A18E, #7AE582) !important;
 		}
 
 		.nav-link:hover {
@@ -83,13 +81,12 @@
 			transition: transform 0.3s ease;
 		}
 
-		.navbar-brand {color: white;}
-		.navbar-brand:hover {color: lightcoral;}
+		
+		.navbar-brand:hover {color: white;}
 
 		/* Navbar H1 Title */
 		.navbar-title {
 			font-size: 1.8rem;
-			color: white;
 			margin: 0;
 			position: absolute;
 			left: 50%;
@@ -104,21 +101,17 @@
 		/* 16:9 Media Query */
 @media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
 
-		body {
+		
+  body {
     background: 
-        linear-gradient(-95deg, 
-            transparent 0%,
-            rgba(0,0,0,0.2) 30%,
-            rgba(0,0,0,0.5) 70%,
-            rgba(0,0,0,0.7) 100%),
+        linear-gradient(15deg,  /* Slight incline from bottom */
+            rgba(250,250,255,0.95) 0%,    
+            rgba(245,245,255,0.7) 50%,    
+            rgba(240,240,255,0.3) 100%),  
         
-        url('CONTENT/g41-transplusalfa.png') right 22% top 74%/auto 40% no-repeat,
-       
-        lavender;
-    
-    min-height: 100vh;
-	}
-    
+        url('WAIFUS-IMG/BACKGROUNDS/OCAnn.jpg') center/cover no-repeat;
+}
+
 
 
     main {
