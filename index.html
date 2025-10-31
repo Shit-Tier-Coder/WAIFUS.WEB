@@ -214,6 +214,12 @@
         border: 0.6rem solid #FFD166;
     }
     
+    .tall-container  img {
+    	 width: 100%;
+	    height: 100%;
+	    object-fit: cover;
+    }
+
     .HEADR {
         width: 25rem;
         padding: 15px 40px;
@@ -339,7 +345,7 @@
 		<div class="row justify-content-center align-items-center">
 			<div class="col-auto">
 				<a href="MERMAY.html">
-					<div class="tall-container">
+					<div class="tall-container" data-crop="36% 22%">
 						<img src="WAIFUS-IMG/MERMAY-IMG/ARIEL-M.avif" alt="Waifu 1">
 						<div class="image-overlay">
 	        				<div class="overlay-text">MERMAY</div>
@@ -349,7 +355,7 @@
 			</div>
 			<div class="col-auto">
 				<a href="DRAWTOBER.html">
-					<div class="tall-container">
+					<div class="tall-container" data-crop="50% 50%">
 						<img src="WAIFUS-IMG/DRAWTOBR-IMG/CIRCULARLOGIC-M.avif" alt="Waifu 2">
 						<div class="image-overlay">
 	        				<div class="overlay-text">DRAWTOBER</div>
@@ -359,7 +365,7 @@
 			</div>
 			<div class="col-auto">
 				<a href="CREATUANARY.html">
-					<div class="tall-container">
+					<div class="tall-container" data-crop="50% 50%">
 						<img src="WAIFUS-IMG/CREATUANARY-IMG/MOTH-M.avif" alt="Waifu 3">
 						<div class="image-overlay">
 	        				<div class="overlay-text">CREATUANARY</div>
@@ -369,7 +375,7 @@
 			</div>
 			<div class="col-auto">
 				<a href="PERSONAL.html">
-					<div class="tall-container">
+					<div class="tall-container" data-crop="28% 50%">
 						<img src="WAIFUS-IMG/PERSONAL-IMG/DIMI2-M.avif" alt="Waifu 4">
 						<div class="image-overlay">
 	        				<div class="overlay-text">PERSONAL</div>
@@ -379,7 +385,7 @@
 			</div>
 			<div class="col-auto">
 				<a href="STUDIES.html">
-					<div class="tall-container">
+					<div class="tall-container" data-crop="50% 50%">
 						<img src="WAIFUS-IMG/STUDIES-IMG/PORTRAIT PB-M.avif" alt="Waifu 5">
 						<div class="image-overlay">
 	        				<div class="overlay-text">STUDIES</div>
@@ -389,7 +395,7 @@
 			</div>
 			<div class="col-auto">
 				<a href="SKETCH.html">
-					<div class="tall-container">
+					<div class="tall-container" data-crop="50% 50%">
 						<img src="WAIFUS-IMG/PERSONAL-IMG/BRAINPOWER 1200x900.avif" alt="Waifu 6">
 						<div class="image-overlay">
 	        				<div class="overlay-text">SKETCH</div>
@@ -404,6 +410,25 @@
 
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+	</script>
+
+	<script>
+		
+// Apply cropping to tall container images based on data-crop attributes
+document.addEventListener('DOMContentLoaded', function() {
+    const tallContainers = document.querySelectorAll('.tall-container');
+    
+    tallContainers.forEach(container => {
+        const cropValue = container.getAttribute('data-crop');
+        const img = container.querySelector('img');
+        
+        if (cropValue && img) {
+            // Apply the crop positioning directly to the image
+            img.style.objectPosition = cropValue;
+        }
+    });
+});
+
 	</script>
 
 	
