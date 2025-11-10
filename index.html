@@ -29,6 +29,8 @@
 
 		* {box-sizing: border-box;}
 
+		body {display: flex; flex-direction: column; align-items: center;}
+
 		main {display: flex; flex-direction: column; margin: 0 auto;}
 
 		.custom-font {
@@ -149,21 +151,60 @@
 		/*+18 MODAL*/ /*+18 MODAL*/
 		/*+18 MODAL*/ /*+18 MODAL*/
 
-		#eighTeen {display: flex; flex-direction: column; background: blueviolet;
-			border-radius: 44px; max-width: 500px; padding: 32px; gap: 1rem;}
 
-		#clickOut {display: flex; background: red; border-radius: 44px;}
+		#eighTeen {
+		    display: none; /* Hidden initially */
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: rgba(0, 0, 0, 0.7); /* Backdrop color */
+		    z-index: 10000;
+		    justify-content: center;
+		    align-items: center;
+		}
+
+		#eighTeen > *:not(script) {
+		    display: flex;
+		    flex-direction: column;
+		    background: red;
+		    border-radius: 44px;
+		    max-width: 500px;
+		    padding: 32px;
+		    gap: 0.4rem;
+		    text-align: center;
+		    margin: 20px; /* Prevents touching screen edges */
+		}
+
+
+		#eighTeen h2, #eighTeen h5, #eighTeen p {
+    	margin: 0;
+		}
+
+		#eighTeen {
+    	transition: opacity 0.3s ease;
+		}
+
+		#clickOut {display: flex; justify-content: center; color: red;
+			align-items: center; gap: 0.5rem; background: white; border-radius: 44px; padding: 12px;}
+
+		#clickOut button {border: none; border-radius: 34px; background-color: red;}
 
 		#areYou {display: flex; flex-direction: column; justify-content: center;
 			align-items: center;}
 
-		#eighTeen img {width: 75px; border-radius: 44px;}
+		#eighTeen img {width: 90px; border-radius: 44px;}
 
-		#adultOrbb {display: flex; background: pink; justify-content: center; 
-			align-items: center; gap: 1.4rem; font-size: 0.2rem; border-radius: 44px;}
+		#adultOrbb {display: flex; background: red; justify-content: center; 
+			justify-content: space-evenly;align-items: center; align-items: stretch; gap: 1.4rem; 
+			font-size: 0.2rem; border-radius: 44px; padding: 22px;}
 
-		#imAdult, #imBb {display: flex; flex-direction: column; justify-content: center;
-			align-items: center; text-align: center;}
+		#imAdult, #imBb {display: flex; flex-direction: column; flex: 1; min-width: 0; 
+			justify-content: center; align-items: center; text-align: center; 
+			border: none; border-radius: 44px; padding: 22px; color: red; transition: transform 0.2s ease;}
+
+		#imAdult:hover, #imBb:hover {transform: scale(1.06);}	
 
 		/* === LARGE DESKTOPS (1920px and up) === */
 @media (min-width: 1920px) {
@@ -428,10 +469,13 @@
 
 </main>
 
+<!-- MODAL MODAL MODAL -->
+<!-- MODAL MODAL MODAL -->
+
 <div id="eighTeen">
 
 	<div id="clickOut">
-		Press <button>X</button> or <div>ESC</div> to close.
+		Press <button>X</button>  or <button id="escButt">ESC</button>  to close.
 	</div>
 
 	<div id="areYou">
@@ -441,28 +485,28 @@
 		</h2>
 	</div>
 
-	<div id="adultOrbb">
+		<div id="adultOrbb">
 
-			<div id="imAdult">
+			<button id="imAdult">
 				<img src="CONTENT/MODAL-ICONS/GIGAHEAD.webp">
-				<h2>
+				<h5>
 					I'M AN ADULT
-				</h2>
-			</div>
+				</h5>
+			</button>
 
-			<div id="imBb">
+			<button id="imBb">
 				<img src="CONTENT/MODAL-ICONS/feelsgoodman.webp">
-				<h2>
+				<h5>
 					I WANT MOMMY!
-				</h2>
-			</div>
+				</h5>
+			</button>
 
 		</div>
 		
 		<div>
 			<p>Disclaimer. Might contain mild nudity, mild violence, or sexual allegories</p>
 		</div>
-	</div>
+</div>
 
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
