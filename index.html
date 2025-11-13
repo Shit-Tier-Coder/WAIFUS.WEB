@@ -529,6 +529,72 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+// MODAL FUNCTION
+
+document.addEventListener('DOMContentLoaded', function() {
+	// document calls whole document. addEventListener waits for an event
+	// DOMContentLoaded is the document being loaded and in this case the event we wait for
+	// fucntion, callback function, runs when event HAPPENS
+	const modal = document.getElementById('eighTeen');
+	// const is constant variable, can't be reasigned.
+	// modal, were naming the const as modal, not actual JS lang
+	// documnent, on the entire HTML
+	// getElementById a way to find elements by their ID
+	// eighTeen < your custom ID name
+	// What does, finds element eighTeen and uses it on a var we named modal
+	const closeButton = document.querySelector('clickOut button');
+	// const is constant variable, can't be reasigned.
+	// closeButton, were naming the const as closeButton, not actual JS lang
+	// querySelector can find CSS elements
+	// returns first matching element
+	// clickOut < custom name we gave to clicking out of modal
+	// button < selects the button inside the element with clickOut Id
+	// What does, finds the first button inside element with custom Id clickOut
+	const escButton = document.getElementById('escButt');
+	// Same anatomy as const modal
+	const imAdultButton = document.getElementById('imAdult');
+	// Same
+	const imBbButton = document.getElementById('imBb');
+	// Same
+	// In short, CONSTantly, when using modal/closeButton/etc were calling the element searched by Id
+	function showModal() {
+		modal.style.display = 'flex';
+		document.body.style.overflow = 'hidden';
+	}
+	// function, basically reusable code
+	// showModal, name we give to the function, could as well be named eatDirt
+	// () No additional imput data
+	// { We start defining the functions function
+	// modal, in this case we have a const linking modal to the element with Id eighTeen
+	// .style, calling the CSS on that element
+	// .display, the property we want to change, classic CSS display
+	// .flex, turns display from hidden, I assume, to flex, making it show
+	// document.body, calling the body element of the whole doc
+	// .style.overflow, selecting the CSS overflow property
+	// 'hidden' hiddens any scrollbar
+	// RESULT: calling showModal now turns ele from hidden to flex and locks scroll :)
+
+	function hideModal() {
+		modal.style.display = 'none';
+		document.body.style.overflow = 'auto';
+	}
+
+	// This is basically the reverse of the above but oveall just the same. Just rename showModal
+	// as closeModal and display 'none' to hide and overflow 'auto' to allow scrolling
+	// RESULT, hideModal now when called hides element and allows scrolling
+
+	closeButton.addEventListener('click', hideModal)
+	// closeButton, our var/const calling the button ele
+	// addEventListener, waits for a trigger on the button ele
+	// 'click' < this is the event we waiting, a mouse click!!
+	// hideModal < the function we just designed above to close the modal
+
+	escButton.addEventListener('click', hideModal)
+	// It's the same only calling a different element, the esc button
+
+})
+
 	</script>
 
 	
