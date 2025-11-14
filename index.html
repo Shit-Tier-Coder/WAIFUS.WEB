@@ -163,9 +163,9 @@
 		    z-index: 10000;
 		    justify-content: center;
 		    align-items: center;
-		}
+			}
 
-		#eighTeen > *:not(script) {
+		.modal-content {
 		    display: flex;
 		    flex-direction: column;
 		    background: red;
@@ -174,7 +174,7 @@
 		    padding: 32px;
 		    gap: 0.4rem;
 		    text-align: center;
-		    margin: 20px; /* Prevents touching screen edges */
+		    margin: 20px;
 		}
 
 
@@ -185,6 +185,7 @@
 		#eighTeen {
     	transition: opacity 0.3s ease;
 		}
+
 
 		#clickOut {display: flex; justify-content: center; color: red;
 			align-items: center; gap: 0.5rem; background: white; border-radius: 44px; padding: 12px;}
@@ -472,41 +473,44 @@
 <!-- MODAL MODAL MODAL -->
 <!-- MODAL MODAL MODAL -->
 
-<div id="eighTeen">
+	<div id="eighTeen">
 
-	<div id="clickOut">
-		Press <button>X</button>  or <button id="escButt">ESC</button>  to close.
-	</div>
+		<div class="modal-content">
 
-	<div id="areYou">
-		<img src="CONTENT/MODAL-ICONS/images.jpeg">
-		<h2>
-			ARE YOU OVER 18?
-		</h2>
-	</div>
+			<div id="clickOut">
+				Press <button>X</button>  or <button id="escButt">ESC</button>  to close.
+			</div>
 
-		<div id="adultOrbb">
+			<div id="areYou">
+				<img src="CONTENT/MODAL-ICONS/images.jpeg">
+				<h2>
+					ARE YOU OVER 18?
+				</h2>
+			</div>
 
-			<button id="imAdult">
-				<img src="CONTENT/MODAL-ICONS/GIGAHEAD.webp">
-				<h5>
-					I'M AN ADULT
-				</h5>
-			</button>
+				<div id="adultOrbb">
 
-			<button id="imBb">
-				<img src="CONTENT/MODAL-ICONS/feelsgoodman.webp">
-				<h5>
-					I WANT MOMMY!
-				</h5>
-			</button>
+					<button id="imAdult">
+						<img src="CONTENT/MODAL-ICONS/GIGAHEAD.webp">
+						<h5>
+							I'M AN ADULT
+						</h5>
+					</button>
 
+					<button id="imBb">
+						<img src="CONTENT/MODAL-ICONS/feelsgoodman.webp">
+						<h5>
+							I WANT MOMMY!
+						</h5>
+					</button>
+
+				</div>
+			
+			<div>
+				<p>Disclaimer. Might contain mild nudity, mild violence, or sexual allegories</p>
+			</div>
 		</div>
-		
-		<div>
-			<p>Disclaimer. Might contain mild nudity, mild violence, or sexual allegories</p>
-		</div>
-</div>
+	</div>
 
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
@@ -532,68 +536,118 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // MODAL FUNCTION
 
+// COMBINED: Image cropping + Modal functionality
 document.addEventListener('DOMContentLoaded', function() {
-	// document calls whole document. addEventListener waits for an event
-	// DOMContentLoaded is the document being loaded and in this case the event we wait for
-	// fucntion, callback function, runs when event HAPPENS
-	const modal = document.getElementById('eighTeen');
-	// const is constant variable, can't be reasigned.
-	// modal, were naming the const as modal, not actual JS lang
-	// documnent, on the entire HTML
-	// getElementById a way to find elements by their ID
-	// eighTeen < your custom ID name
-	// What does, finds element eighTeen and uses it on a var we named modal
-	const closeButton = document.querySelector('clickOut button');
-	// const is constant variable, can't be reasigned.
-	// closeButton, were naming the const as closeButton, not actual JS lang
-	// querySelector can find CSS elements
-	// returns first matching element
-	// clickOut < custom name we gave to clicking out of modal
-	// button < selects the button inside the element with clickOut Id
-	// What does, finds the first button inside element with custom Id clickOut
-	const escButton = document.getElementById('escButt');
-	// Same anatomy as const modal
-	const imAdultButton = document.getElementById('imAdult');
-	// Same
-	const imBbButton = document.getElementById('imBb');
-	// Same
-	// In short, CONSTantly, when using modal/closeButton/etc were calling the element searched by Id
-	function showModal() {
-		modal.style.display = 'flex';
-		document.body.style.overflow = 'hidden';
-	}
-	// function, basically reusable code
-	// showModal, name we give to the function, could as well be named eatDirt
-	// () No additional imput data
-	// { We start defining the functions function
-	// modal, in this case we have a const linking modal to the element with Id eighTeen
-	// .style, calling the CSS on that element
-	// .display, the property we want to change, classic CSS display
-	// .flex, turns display from hidden, I assume, to flex, making it show
-	// document.body, calling the body element of the whole doc
-	// .style.overflow, selecting the CSS overflow property
-	// 'hidden' hiddens any scrollbar
-	// RESULT: calling showModal now turns ele from hidden to flex and locks scroll :)
+    // === IMAGE CROPPING PART ===
+    const tallContainers = document.querySelectorAll('.tall-container');
+    
+    tallContainers.forEach(container => {
+        const cropValue = container.getAttribute('data-crop');
+        const img = container.querySelector('img');
+        
+        if (cropValue && img) {
+            // Apply the crop positioning directly to the image
+            img.style.objectPosition = cropValue;
+        }
+    });
 
-	function hideModal() {
-		modal.style.display = 'none';
-		document.body.style.overflow = 'auto';
-	}
+    // === MODAL FUNCTIONALITY PART ===
+    // document calls whole document. addEventListener waits for an event
+    // DOMContentLoaded is the document being loaded and in this case the event we wait for
+    // fucntion, callback function, runs when event HAPPENS
+    const modal = document.getElementById('eighTeen');
+    // const is constant variable, can't be reasigned.
+    // modal, were naming the const as modal, not actual JS lang
+    // documnent, on the entire HTML
+    // getElementById a way to find elements by their ID
+    // eighTeen < your custom ID name
+    // What does, finds element eighTeen and uses it on a var we named modal
+    const closeButton = document.querySelector('#clickOut button'); // ✅ FIXED: Added #
+    // const is constant variable, can't be reasigned.
+    // closeButton, were naming the const as closeButton, not actual JS lang
+    // querySelector can find CSS elements
+    // returns first matching element
+    // #clickOut < custom name we gave to clicking out of modal (WITH #)
+    // button < selects the button inside the element with clickOut Id
+    // What does, finds the first button inside element with custom Id clickOut
+    const escButton = document.getElementById('escButt');
+    // Same anatomy as const modal
+    const imAdultButton = document.getElementById('imAdult');
+    // Same
+    const imBbButton = document.getElementById('imBb');
+    // Same
+    // In short, CONSTantly, when using modal/closeButton/etc were calling the element searched by Id
+    
+    function showModal() {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    // function, basically reusable code
+    // showModal, name we give to the function, could as well be named eatDirt
+    // () No additional imput data
+    // { We start defining the functions function
+    // modal, in this case we have a const linking modal to the element with Id eighTeen
+    // .style, calling the CSS on that element
+    // .display, the property we want to change, classic CSS display
+    // .flex, turns display from hidden, I assume, to flex, making it show
+    // document.body, calling the body element of the whole doc
+    // .style.overflow, selecting the CSS overflow property
+    // 'hidden' hiddens any scrollbar
+    // RESULT: calling showModal now turns ele from hidden to flex and locks scroll :)
 
-	// This is basically the reverse of the above but oveall just the same. Just rename showModal
-	// as closeModal and display 'none' to hide and overflow 'auto' to allow scrolling
-	// RESULT, hideModal now when called hides element and allows scrolling
+    function hideModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    // This is basically the reverse of the above but oveall just the same. Just rename showModal
+    // as closeModal and display 'none' to hide and overflow 'auto' to allow scrolling
+    // RESULT, hideModal now when called hides element and allows scrolling
 
-	closeButton.addEventListener('click', hideModal)
-	// closeButton, our var/const calling the button ele
-	// addEventListener, waits for a trigger on the button ele
-	// 'click' < this is the event we waiting, a mouse click!!
-	// hideModal < the function we just designed above to close the modal
+    closeButton.addEventListener('click', hideModal);
+    // closeButton, our var/const calling the button ele
+    // addEventListener, waits for a trigger on the button ele
+    // 'click' < this is the event we waiting, a mouse click!!
+    // hideModal < the function we just designed above to close the modal
 
-	escButton.addEventListener('click', hideModal)
-	// It's the same only calling a different element, the esc button
+    escButton.addEventListener('click', hideModal);
+    // It's the same only calling a different element, the esc button
 
-})
+    modal.addEventListener('click', function(e) {
+    // modal.addEventListener('click') is searching for any click inside the modal ele
+    // function gets its own name (e) to call it
+    // e.target is whatever element was clicked
+        if (e.target === modal) {hideModal();
+    // if
+    // checks if the targeted ele is the modal not child ele
+    // summons hideModal func
+    }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            hideModal();
+    // calls the hideModal func if there's key press ('keydown') and checks that the keydown is
+    // escape specifically
+        }
+    });
+
+    imAdultButton.addEventListener('click', function() {
+        hideModal();
+    //Calls imAdultButton which is how we called an existing html ele, adds a trigger (eventListener)
+    // to start a function with a click.
+    // calls function hideModal defined before
+    console.log('User says he big');
+    });
+    // just shows custom message on console
+
+    imBbButton.addEventListener('click', function() {  // ✅ FIXED: Added comma
+        window.location.href = 'https://www.google.com';
+    });
+    // same but function just kicks you the fuck out of the site
+    
+    showModal();
+    // auto modal on load
+});
 
 	</script>
 
