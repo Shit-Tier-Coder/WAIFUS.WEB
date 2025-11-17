@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>LOTSA-WAIFUS|MERMAY</title>
+	<title>LOTSA-WAIFUS|SKETCH</title>
 
 	<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W5EFG094S8"></script>
@@ -16,20 +16,21 @@
   gtag('config', 'G-W5EFG094S8');
 </script>
 
-	<meta name="description" content="Entries for the social challenge Mermay. Done in Copics">
-	<meta name="keywords" content="Mermay, anime art, alcohol markers, copic markers, soft boiled art">
-	 	<script type="application/ld+json">
+	<meta name="description" content="Sketches and finished pencils of my works">
+	<meta name="keywords" content="Sketch, finished pencil, anime art, copic markers, soft boiled art">
+
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ImageGallery",
-      "name": "MERMAY - LOTSA WAIFUS",
-      "description": "My marker illustrations for the Mermay art challenge",
+      "name": "SKETCH - LOTSA WAIFUS",
+      "description": "A lot of my sketches and pencil art",
       "about": {
         "@type": "VisualArtwork",
-        "name": "Copic marker mermay art",
-        "artMedium": "Alcohol markers, Copic markers",
-        "artform": "Illustration",
-        "description": "My mermay entries done with Copics and Staedler fineliners"
+        "name": "Pencil art sketches",
+        "artMedium": "Pencil, colored pencil",
+        "artform": "Drawing",
+        "description": "Sketches and finished pencil art"
       }
     }
     </script>
@@ -41,140 +42,44 @@
 
 	<!-- CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="CONTENT/COMMON.css">
 	<!-- JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
 	<style>
+		* {box-sizing: border-box;}
 
-		/*BODY BODY BODY*/
-		/*BODY BODY BODY*/
+		body {display: flex; flex-direction: column;}
 
-		
-    
-    body {
-    background: 
-        linear-gradient(-95deg, 
-            transparent 0%,
-            rgba(0,0,0,0.2) 30%,
-            rgba(0,0,0,0.5) 70%,
-            rgba(0,0,0,0.7) 100%),
-        
-        url('CONTENT/g41-transplusalfa.png') right 11% top 74%/auto 40% no-repeat,
-       
-        lavender;
-    
-    min-height: 100vh;
-}
+		main {display: grid; grid-template-columns: 1fr 1fr; margin-top: 6rem; 
+			padding: 1rem; gap: 2rem;}
 
-    
-.custom-font { 
-    	font-family: 'Chewy', cursive, sans-serif;
-	}
+		.LEFT {background-color: darkred;
+			min-height: 70vh;}
 
-		/*NAVBAR NAVBAR NAVBAR*/
-		/*NAVBAR NAVBAR NAVBAR*/
+		.RIGHT {display: grid; grid-template-columns: repeat(3, 1fr); flex-wrap: wrap; 
+			align-content: start; gap: 1rem; overflow-y: auto; padding: 22px; 
+			border-radius: 34px; max-height: 80vh;}
 
-		.navbar {
-		    background: linear-gradient(45deg, black, indianred) !important;
+		.RIGHT > div {
+			flex: 0 0 calc(33.333% - 10px);
+			aspect-ratio: 1;
 		}
-
-		.nav-link:hover {
-			transform: scale(1.1);
-			transition: transform 0.3s ease;
-		}
-
-		.navbar-brand {color: white;}
-		.navbar-brand:hover {color: lightcoral;}
-
-		/* Navbar H1 Title */
-		.navbar-title {
-			font-size: 1.8rem;
-			color: white;
-			margin: 0;
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-		}
-
-
-		/*QUERY QUERY QUERY*/ /*QUERY QUERY QUERY*/
-		/*QUERY QUERY QUERY*/ /*QUERY QUERY QUERY*/
-		/*QUERY QUERY QUERY*/ /*QUERY QUERY QUERY*/
-
-		/* 16:9 Media Query */
-@media screen and (min-device-width: 1366px) and (min-aspect-ratio: 16/9) {
-
-		body {
-    background: 
-        linear-gradient(-95deg, 
-            transparent 0%,
-            rgba(0,0,0,0.2) 30%,
-            rgba(0,0,0,0.5) 70%,
-            rgba(0,0,0,0.7) 100%),
-        
-        url('CONTENT/g41-transplusalfa.png') right 22% top 74%/auto 40% no-repeat,
-       
-        lavender;
-    
-    min-height: 100vh;
-	}
-    
-
-
-    main {
-        justify-content: space-around;
-        padding-top: 70px;
-        gap: 20px;
-    }
-
-    .featured-image-container {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        max-width: 600px;
+		 .RIGHT img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Crop to fill square */
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.2s;
     }
     
-    .featured-image {
-        height: 390px;
-        width: 440px;
-        margin: 0 auto;
+    .RIGHT img:hover {
+        transform: scale(1.05);
     }
-
-    .thumbnail-carousel {
-        margin: 0 auto;
-    }
-
-    .thumbnail-item {
-        height: 100px;
-    }
-
-    .thumbnail-item.active {
-        border-color: #5c6bc0;
-        transform: scale(1.2);
-    }
-
-    .thumbnail-item:hover {
-        transform: scale(1.10);
-        border-color: #90a4ae;
-    }
-
-    .thumbnail-item.active, 
-    .thumbnail-item.active:hover {
-        border-color: #ff6bcd;
-        transform: scale(1.2);
-    }
-
-    .controls-footer {
-        left: 30px;
-        max-width: 280px;
-    }
-}
-
 	</style>
+
+
+	
 </head>
 
 <!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
@@ -182,13 +87,13 @@
 <!-- BODYBODYBODY BODYBODYBODY BODYBODYBODY-->
 
 <body>
-	<main>
-		<!-- NAVBAR WITH INTEGRATED H1 -->
+	
+	<!-- NAVBAR WITH INTEGRATED H1 -->
 		<nav class="navbar navbar-expand-lg fixed-top" 
 				style="background: linear-gradient(45deg, #073B4C, #118AB2);">
 		    <div class="container position-relative">
 		        <a class="navbar-brand custom-font" href="index.html">LOTSA WAIFUS</a>
-		        <h1 class="navbar-title custom-font">MERMAY</h1>
+		        <h1 class="navbar-title custom-font">SKETCHES</h1>
 		        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 		            <span class="navbar-toggler-icon"></span>
 		        </button>
@@ -205,79 +110,70 @@
 		    </div>
 		</nav>
 
-		<!-- FEATURE FEATURE FEATURE -->
-		<!-- FEATURE FEATURE FEATURE -->
+		<main>
+			<div class="LEFT">
 
-		<!-- Featured Image Container with Navigation -->
-		<div class="featured-image-container">
-			<button class="gallery-nav-arrow gallery-prev" title="Previous image (←)"><img src="WAIFUS-IMG/ICONS/left.png" alt="Previous"></button>
-			<button class="gallery-nav-arrow gallery-next" title="Next image (→)"><img src="WAIFUS-IMG/ICONS/right.png" alt="Next"></button>
-			
-			<div class="featured-image">
-				<img id="featuredImg" src="WAIFUS-IMG/MERMAY-IMG/SIREN-M.avif" 
-				alt="Realistic study in markers" fetchpriority="high">
-				<div class="featured-title" id="featuredTitle">Copic markers portrait study 1</div>
+				display display display
+				
 			</div>
-		</div>
+			<div class="RIGHT">
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
+				</div>
 
-		<!-- CARRO CARRO CARRO -->
-		<!-- CARRO CARRO CARRO -->
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
+				</div>
 
-		<!-- Thumbnail Carousel -->
-		<div class="thumbnail-carousel">
-			<div class="d-flex justify-content-center flex-wrap gap-3">
-				<div class="thumbnail-item active" 
-				     data-image="WAIFUS-IMG/MERMAY-IMG/SIREN-M.avif"
-				     data-crop="50% 32%"
-				     data-highres="WAIFUS-IMG/MERMAY-IMG/SIREN.avif"
-				     data-title="Actual Police Siren">
-				    <img src="WAIFUS-IMG/MERMAY-IMG/SIREN-S.avif" alt="Actual Police Siren">
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
 				</div>
-				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/MERMAY-IMG/MERANN-M.avif"
-				     data-crop="50% 10%"
-				     data-highres="WAIFUS-IMG/MERMAY-IMG/MERANN.avif"
-				     data-title="Mermaid Ann">
-				    <img src="WAIFUS-IMG/MERMAY-IMG/MERANN-S.avif" alt="Ann from Persona as a Mermaid">
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
 				</div>
-				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/MERMAY-IMG/SHY-M.avif"
-				     data-crop="50% 4%"
-				     data-highres="WAIFUS-IMG/MERMAY-IMG/SHY.avif"
-				     data-title="MerShy">
-				    <img src="WAIFUS-IMG/MERMAY-IMG/SHY-S.avif" alt="Shy mermaid on Copic markers">
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
 				</div>
-				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/MERMAY-IMG/OCTOPUSSY-M.avif"
-				     data-crop="50% 8%"
-				     data-highres="WAIFUS-IMG/MERMAY-IMG/OCTOPUSSY.avif"
-				     data-title="Octopussy">
-				    <img src="WAIFUS-IMG/MERMAY-IMG/OCTOPUSSY-S.avif" alt="Octopus mermaid, monster girl maybe">
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
 				</div>
-				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/MERMAY-IMG/PETSHARK-M.avif"
-				     data-crop="50% 32%"
-				     data-highres="WAIFUS-IMG/MERMAY-IMG/PETSHARK.avif"
-				     data-title="Aqua girl and pet Shark">
-				    <img src="WAIFUS-IMG/MERMAY-IMG/PETSHARK-S.avif" alt="Marker illustration of girl with pet shark">
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
 				</div>
-				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/MERMAY-IMG/ARIEL-M.avif"
-				     data-crop="50% 22%"
-				     data-highres="WAIFUS-IMG/MERMAY-IMG/ARIEL.avif"
-				     data-title="CEO Ariel">
-				    <img src="WAIFUS-IMG/MERMAY-IMG/ARIEL-S.avif" alt="Business Ariel from Little Mermaid DLC">
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
 				</div>
-				<div class="thumbnail-item" 
-				     data-image="WAIFUS-IMG/MERMAY-IMG/FRACTALDRINK-M.avif"
-				     data-crop="50% 34%"
-				     data-highres="WAIFUS-IMG/MERMAY-IMG/FRACTALDRINK.avif"
-				     data-title="Girl Drinking Herself">
-				    <img src="WAIFUS-IMG/MERMAY-IMG/FRACTALDRINK-S.avif" alt="Fractal illustration, self drinking girl">
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
 				</div>
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
+				</div>
+
+				<div>
+					<img src="WAIFUS-IMG/CREATUANARY-IMG/BACK-M.avif">
+					
+				</div>
+				
 			</div>
-		</div>
-	</main>
+		</main>
 
 	<!-- Lightbox Modal -->
 	<div id="lightbox" class="lightbox">
